@@ -55,4 +55,4 @@ RUN apk add --no-cache \
 # mounted volume! For more info read dockerfile "VOLUME" documentation.
 VOLUME ["/rpc"]
 
-ENTRYPOINT: ["/start-btcd.sh"]
+ENTRYPOINT ["/start-btcd.sh"]
