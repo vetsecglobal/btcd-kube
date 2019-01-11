@@ -22,6 +22,14 @@ spec:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
+
+        env:
+          - name: MINING_ADDRESS
+            valueFrom:
+              secretKeyRef:
+                name: lightning-kube-secrets
+                key: mining-address
+
         ports:
         - containerPort: {{ .Values.service.internalPort }}
         livenessProbe:
