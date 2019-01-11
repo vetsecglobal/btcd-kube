@@ -159,8 +159,10 @@ def release(branch) {
   }
 
   dir ('./charts/lightning-kube-btcd') {
-    container('go') {
-      sh "make tag"
+    if (kubeEnv?.trim() != 'local') {
+      container('go') {
+        sh "make tag"
+      }
     }
   }
 
