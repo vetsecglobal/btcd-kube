@@ -60,6 +60,7 @@ PARAMS=$(echo \
 #    "--rpccert=/shared/rpc/rpc.cert" \
 #    "--rpckey=/shared/rpc/rpc.key" \
 
+
 # Set the mining flag only if address is non empty.
 if [[ -n "$MINING_ADDRESS" ]]; then
     PARAMS="$PARAMS --miningaddr=$MINING_ADDRESS"
