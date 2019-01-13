@@ -52,7 +52,7 @@ spec:
 {{ toYaml .Values.resources | indent 12 }}
 
         volumeMounts:
-        - mountPath: /shared/
+        - mountPath: /shared
           name: lightning-shared
       volumes:
           - name: lightning-shared
