@@ -45,9 +45,9 @@ RUN apk add --no-cache \
 &&  chmod +x start-btcd.sh \
 # Manually generate certificate and add all domains, it is needed to connect
 # "btcctl" and "lnd" to "btcd" over docker links.
-&&  mkdir "/shared/rpc" \
-#&& "/bin/gencerts" --host="*" --directory="/rpc" --force
-&& "/bin/gencerts" --host="*" --directory="/shared/rpc" --force
+#&&  mkdir "/shared/rpc" \
+&& "/bin/gencerts" --host="*" --directory="/rpc" --force
+#&& "/bin/gencerts" --host="*" --directory="/shared/rpc" --force
 
 # Create a volume to house pregenerated RPC credentials. This will be
 # shared with any lnd, btcctl containers so they can securely query btcd's RPC
