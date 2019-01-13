@@ -5,11 +5,11 @@ metadata:
   labels:
     type: local
 spec:
-  storageClassName: slow
+  storageClassName: standard
   capacity:
     storage: 8Gi
   accessModes:
     - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Recycle
+  persistentVolumeReclaimPolicy: Delete
   hostPath:
     path: "/shared/"

@@ -54,6 +54,7 @@ spec:
         volumeMounts:
         - mountPath: /shared
           name: lightning-shared
+          subPath: rpc
       volumes:
           - name: lightning-shared
             persistentVolumeClaim:
