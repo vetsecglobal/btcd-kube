@@ -53,11 +53,12 @@ PARAMS=$(echo \
     "--logdir=/data" \
     "--rpccert=/rpc/rpc.cert" \
     "--rpckey=/rpc/rpc.key" \
-#    "--rpccert=/shared/rpc/rpc.cert" \
-#    "--rpckey=/shared/rpc/rpc.key" \
     "--rpclisten=0.0.0.0" \
     "--txindex"
 )
+
+#    "--rpccert=/shared/rpc/rpc.cert" \
+#    "--rpckey=/shared/rpc/rpc.key" \
 
 # Set the mining flag only if address is non empty.
 if [[ -n "$MINING_ADDRESS" ]]; then
