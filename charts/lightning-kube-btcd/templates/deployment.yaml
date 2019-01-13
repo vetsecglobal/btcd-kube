@@ -52,7 +52,7 @@ spec:
 {{ toYaml .Values.resources | indent 12 }}
 
         volumeMounts:
-        - mountPath: /shared
+        - mountPath: /shared/rpc
           name: lightning-shared
           subPath: rpc
       volumes:
