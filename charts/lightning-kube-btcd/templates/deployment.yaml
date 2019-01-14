@@ -23,12 +23,12 @@ spec:
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
 
-#        env:
-#          - name: MINING_ADDRESS
-#            valueFrom:
-#              secretKeyRef:
-#                name: lightning-kube-secrets
-#                key: mining-address
+        env:
+          - name: MINING_ADDRESS
+            valueFrom:
+              secretKeyRef:
+                name: lightning-kube-secrets
+                key: mining-address
 
 
         ports:

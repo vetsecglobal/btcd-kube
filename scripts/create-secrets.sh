@@ -12,4 +12,4 @@ echo "encrypted miningAddress: ${miningAddress}"
 cat ./secrets.yml | sed "s/\X_MINING_ADDRESS_X/$miningAddress/" | kubectl --context=${context} --namespace ${namespace} create -f -
 
 
-#./create-secrets.sh minikube lightning-kube rfnEWVnypYfLRHKeommEENAjSSTkgejMB3
+#./create-secrets.sh minikube lightning-kube rcbBivXApy8g2HvSru5VyaWF3mn3Ewwmjr
