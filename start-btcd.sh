@@ -51,12 +51,13 @@ PARAMS=$(echo \
     "--rpcpass=$RPCPASS" \
     "--datadir=/data" \
     "--logdir=/data" \
+    "--rpccert=/shared/rpc/rpc.cert" \
+    "--rpckey=/shared/rpc/rpc.key" \
     "--rpclisten=0.0.0.0" \
     "--txindex"
 )
 
-#    "--rpccert=/shared/rpc/rpc.cert" \
-#    "--rpckey=/shared/rpc/rpc.key" \
+
 
 #    "--rpccert=/rpc/rpc.cert" \
 #    "--rpckey=/rpc/rpc.key" \
