@@ -10,6 +10,6 @@ spec:
     storage: 8Gi
   accessModes:
     - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Delete
+  persistentVolumeReclaimPolicy: Retain
   hostPath:
     path: "/shared/"
