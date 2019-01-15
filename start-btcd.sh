@@ -49,10 +49,10 @@ PARAMS=$(echo \
     "--debuglevel=$DEBUG" \
     "--rpcuser=$RPCUSER" \
     "--rpcpass=$RPCPASS" \
-    "--datadir=/data" \
-    "--logdir=/data" \
-    "--rpccert=/shared/rpc/rpc.cert" \
-    "--rpckey=/shared/rpc/rpc.key" \
+    "--datadir=/mnt/lk/btcd/data" \
+    "--logdir=/mnt/lk/btcd/log" \
+    "--rpccert=/mnt/lk/shared/rpc/rpc.cert" \
+    "--rpckey=/mnt/lk/shared/rpc/rpc.key" \
     "--rpclisten=0.0.0.0" \
     "--txindex"
 )
