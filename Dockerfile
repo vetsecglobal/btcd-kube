@@ -59,5 +59,7 @@ RUN apk add --no-cache \
 VOLUME ["/rpc"]
 
 #COPY "docker/btcd.conf" /root/.btcd/
+RUN mkdir -p /root/scripts
+COPY "docker/setup-node.sh" /root/scripts/
 
 ENTRYPOINT ["/start-btcd.sh"]

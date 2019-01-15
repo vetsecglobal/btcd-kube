@@ -1,7 +1,7 @@
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: lightning-shared
+  name: lightning-kube-drive
   labels:
     type: local
 spec:
@@ -12,4 +12,4 @@ spec:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   hostPath:
-    path: "/shared/"
+    path: "/lk-drive/"
