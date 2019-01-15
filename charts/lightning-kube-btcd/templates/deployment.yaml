@@ -52,15 +52,15 @@ spec:
 {{ toYaml .Values.resources | indent 12 }}
 
         volumeMounts:
-        - mountPath: /mnt/lk/shared/rpc
+        - mountPath: /mnt
           name: lightning-kube-drive
-          subPath: rpc
-        - mountPath: /mnt/lk/btcd/data
+          subPath: lk/shared/rpc
+        - mountPath: /mnt
           name: lightning-kube-drive
-          subPath: data
-        - mountPath: /mnt/lk/btcd/log
+          subPath: lk/btcd/data
+        - mountPath: /mnt
           name: lightning-kube-drive
-          subPath: log
+          subPath: lk/btcd/log
       volumes:
           - name: lightning-kube-drive
             persistentVolumeClaim:

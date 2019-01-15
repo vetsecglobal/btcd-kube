@@ -46,7 +46,7 @@ RUN apk add --no-cache \
 # Manually generate certificate and add all domains, it is needed to connect
 # "btcctl" and "lnd" to "btcd" over docker links.
 #&&  mkdir -p "/shared/rpc" \
-&&  mkdir -p "/mnt/lk"
+#&&  mkdir -p "/mnt/lk"
 #&& "/bin/gencerts" --host="*" --directory="/rpc" --force
 #&& "/bin/gencerts" --host="*" --directory="/shared/rpc" --force
 
