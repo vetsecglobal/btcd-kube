@@ -52,10 +52,10 @@ spec:
 {{ toYaml .Values.resources | indent 12 }}
 
         volumeMounts:
-        - mountPath: /lk-drive/rpc
+        - mountPath: /mnt/lk/rpc
           name: lightning-kube-drive
           subPath: rpc
-        - mountPath: /lk-drive/data-btcd
+        - mountPath: /mnt/lk/data-btcd
           name: lightning-kube-drive
           subPath: data-btcd
       volumes:
