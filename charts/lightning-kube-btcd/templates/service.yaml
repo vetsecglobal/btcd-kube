@@ -19,8 +19,6 @@ spec:
     targetPort: 18556
     protocol: TCP
     name: rpc
-  selector:
-    app: {{ template "fullname" . }}
   - port: 18555
     targetPort: 18555
     protocol: TCP
