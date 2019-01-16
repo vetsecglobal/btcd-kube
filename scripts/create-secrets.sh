@@ -15,3 +15,4 @@ cat ./secrets.yml | sed "s/\X_MINING_ADDRESS_X/${miningAddress}/" | kubectl --co
 
 
 #./create-secrets.sh minikube lightning-kube rh3dEKMc1E9bLUdHqH8XRh5xps6R9cwXra
+#./create-secrets.sh minikube lightning-kube empty
