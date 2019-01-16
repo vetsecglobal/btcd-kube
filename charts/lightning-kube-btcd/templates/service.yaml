@@ -15,13 +15,13 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
-  - port: 18556
-    targetPort: 18556
-    protocol: TCP
-    name: rpc
   - port: 18555
     targetPort: 18555
     protocol: TCP
     name: http
+  - port: 18556
+    targetPort: 18556
+    protocol: TCP
+    name: rpc
   selector:
     app: {{ template "fullname" . }}
