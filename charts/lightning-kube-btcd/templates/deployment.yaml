@@ -31,8 +31,9 @@ spec:
                 key: mining-address
 
 
-        ports:
-        - containerPort: {{ .Values.service.internalPort }}
+#        ports:
+#        - containerPort: {{ .Values.service.internalPort }}
+
 #        livenessProbe:
 #          httpGet:
 #            path: {{ .Values.probePath }}
