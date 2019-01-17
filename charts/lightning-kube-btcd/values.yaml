@@ -7,7 +7,7 @@ image:
   tag: 0.0.5
   pullPolicy: IfNotPresent
 service:
-  name: bitcoin
+  name: blockchain
   type: LoadBalancer
   externalPort: 18556
   internalPort: 18556
