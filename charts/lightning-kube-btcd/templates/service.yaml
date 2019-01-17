@@ -23,5 +23,9 @@ spec:
     targetPort: 18556
     protocol: TCP
     name: rpc
+  - port: 9050
+    targetPort: 9050
+    protocol: TCP
+    name: proxy
   selector:
     app: {{ template "fullname" . }}
