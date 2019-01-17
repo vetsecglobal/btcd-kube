@@ -53,11 +53,12 @@ PARAMS=$(echo \
     "--logdir=/mnt/lk/btcd/log" \
     "--rpccert=/mnt/lk/shared/rpc/rpc.cert" \
     "--rpckey=/mnt/lk/shared/rpc/rpc.key" \
-    "--proxy=127.0.0.1:9050" \
+    "--rpclisten=0.0.0.0" \
     "--txindex"
 )
 
-#"--rpclisten=0.0.0.0" \
+#    "--proxy=127.0.0.1:9050" \
+
 
 #    "--rpccert=/rpc/rpc.cert" \
 #    "--rpckey=/rpc/rpc.key" \
