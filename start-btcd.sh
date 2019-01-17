@@ -60,7 +60,7 @@ PARAMS=$(echo \
 
 
 #    "--notls" \
-    "--rpclisten=127.0.0.1" \
+#    "--rpclisten=127.0.0.1" \
 #    "--proxy=127.0.0.1:9050" \
 
 
