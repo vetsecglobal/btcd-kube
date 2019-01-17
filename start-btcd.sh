@@ -54,10 +54,12 @@ PARAMS=$(echo \
     "--rpccert=/mnt/lk/shared/rpc/rpc.cert" \
     "--rpckey=/mnt/lk/shared/rpc/rpc.key" \
     "--rpclisten=127.0.0.1" \
-    "--notls" \
     "--txindex"
 )
 
+
+
+#    "--notls" \
 #    "--rpclisten=0.0.0.0" \
 #    "--proxy=127.0.0.1:9050" \
 
