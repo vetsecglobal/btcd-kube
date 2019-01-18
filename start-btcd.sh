@@ -50,15 +50,16 @@ PARAMS=$(echo \
     "--debuglevel=$DEBUG" \
     "--rpcuser=$RPCUSER" \
     "--rpcpass=$RPCPASS" \
-    "--datadir=/mnt/lk/btcd/data" \
-    "--logdir=/mnt/lk/btcd/log" \
+    "--datadir=/mnt/lk/shared/data" \
+    "--logdir=/mnt/lk/shared/data" \
     "--rpccert=/mnt/lk/shared/rpc/rpc.cert" \
     "--rpckey=/mnt/lk/shared/rpc/rpc.key" \
-    "--rpclisten=`hostname -i`" \
+    "--rpclisten=0.0.0.0" \
     "--txindex"
 )
 
 
+#    "--rpclisten=`hostname -i`" \
 
 #    "--notls" \
 #    "--rpclisten=127.0.0.1" \
