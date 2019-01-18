@@ -48,7 +48,7 @@ RUN apk add --no-cache \
 #&&  mkdir -p "/shared/rpc" \
 &&  mkdir -p "/mnt/lk/shared/rpc" \
 #&& "/bin/gencerts" --host="*" --directory="/rpc" --force
-&& "/bin/gencerts" --host="0.0.0.0" --directory="/mnt/lk/shared/rpc" --force
+&& "/bin/gencerts" --host="lightning-kube-btcd.lightning-kube" --directory="/mnt/lk/shared/rpc" --force
 
 # Create a volume to house pregenerated RPC credentials. This will be
 # shared with any lnd, btcctl containers so they can securely query btcd's RPC
