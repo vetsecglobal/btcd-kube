@@ -54,7 +54,7 @@ PARAMS=$(echo \
     "--logdir=/mnt/lk/btcd/log" \
     "--rpccert=/mnt/lk/shared/rpc/rpc.cert" \
     "--rpckey=/mnt/lk/shared/rpc/rpc.key" \
-    "--rpclisten=lightning-kube-btcd.lightning-kube" \
+    "--rpclisten=`hostname -i`" \
     "--txindex"
 )
 
