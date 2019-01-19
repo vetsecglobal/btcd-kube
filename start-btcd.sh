@@ -54,7 +54,7 @@ PARAMS=$(echo \
     "--logdir=/mnt/lk/shared/data" \
     "--rpccert=/mnt/lk/shared/rpc/rpc.cert" \
     "--rpckey=/mnt/lk/shared/rpc/rpc.key" \
-    "--rpclisten=0.0.0.0" \
+    "--rpclisten=127.0.0.1" \
     "--txindex"
 )
 
