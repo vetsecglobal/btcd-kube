@@ -83,6 +83,8 @@ fi
 # Add user parameters to command.
 PARAMS="$PARAMS $@"
 
+/bin/gencerts --host="*" --directory="/mnt/lk/shared/rpc" --force
+
 # Print command and start bitcoin node.
 echo "Command: btcd $PARAMS"
 exec btcd $PARAMS
