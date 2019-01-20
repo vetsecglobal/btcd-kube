@@ -42,13 +42,11 @@ RUN apk add --no-cache \
 &&  mkdir "/rpc" "/root/.btcd" "/root/.btcctl" \
 &&  touch "/root/.btcd/btcd.conf" \
 &&  chmod +x start-btcctl.sh \
-&&  chmod +x start-btcd.sh
+&&  chmod +x start-btcd.sh \
 # Manually generate certificate and add all domains, it is needed to connect
 # "btcctl" and "lnd" to "btcd" over docker links.
-#&&  mkdir -p "/shared/rpc" \
-#&&  mkdir -p "/mnt/lk/shared/rpc"
 #&& "/bin/gencerts" --host="*" --directory="/rpc" --force
-#&& "/bin/gencerts" --host="*" --directory="/mnt/lk/shared/rpc" --force
+&& "/bin/gencerts" --host="*" --directory="/mnt/lk/shared/rpc" --force
 
 # Create a volume to house pregenerated RPC credentials. This will be
 # shared with any lnd, btcctl containers so they can securely query btcd's RPC
@@ -56,11 +54,6 @@ RUN apk add --no-cache \
 # You should NOT do this before certificate generation!
 # Otherwise manually generated certificate will be overridden with shared
 # mounted volume! For more info read dockerfile "VOLUME" documentation.
-#VOLUME ["/rpc"]
-#VOLUME ["/mnt/lk/shared/rpc"]
-
-#COPY "docker/btcd.conf" /root/.btcd/
-RUN mkdir -p /root/scripts
-COPY "docker/setup-node.sh" /root/scripts/
+VOLUME ["/rpc"]
 
 ENTRYPOINT ["/start-btcd.sh"]

@@ -41,8 +41,7 @@ set_default() {
 # Set default variables if needed.
 RPCUSER=$(set_default "$RPCUSER" "devuser")
 RPCPASS=$(set_default "$RPCPASS" "devpass")
-#DEBUG=$(set_default "$DEBUG" "info")
-DEBUG=$(set_default "$DEBUG" "trace")
+DEBUG=$(set_default "$DEBUG" "info")
 NETWORK=$(set_default "$NETWORK" "simnet")
 
 PARAMS=$(echo \
@@ -50,39 +49,27 @@ PARAMS=$(echo \
     "--debuglevel=$DEBUG" \
     "--rpcuser=$RPCUSER" \
     "--rpcpass=$RPCPASS" \
-    "--datadir=/mnt/lk/shared/data" \
-    "--logdir=/mnt/lk/shared/data" \
+    "--datadir=/mnt/lk/btcd/data" \
+    "--logdir=/mnt/lk/btcd/log" \
     "--rpccert=/mnt/lk/shared/rpc/rpc.cert" \
     "--rpckey=/mnt/lk/shared/rpc/rpc.key" \
     "--rpclisten=0.0.0.0" \
     "--txindex"
 )
 
-
-#    "--rpclisten=127.0.0.1" \
-
-#    "--rpclisten=`hostname -i`" \
-
-#    "--notls" \
-#    "--rpclisten=127.0.0.1" \
-#    "--proxy=127.0.0.1:9050" \
-
-
+#    "--datadir=/data" \
+#    "--logdir=/data" \
 #    "--rpccert=/rpc/rpc.cert" \
 #    "--rpckey=/rpc/rpc.key" \
 
-
-
 # Set the mining flag only if address is non empty.
-if [ ! -z "${MINING_ADDRESS}" ] && [ "${MINING_ADDRESS}" != "empty" ]
-then
+if [[ -n "$MINING_ADDRESS" ]]; then
     PARAMS="$PARAMS --miningaddr=$MINING_ADDRESS"
 fi
 
 # Add user parameters to command.
 PARAMS="$PARAMS $@"
 
-/bin/gencerts --host="*" --directory="/mnt/lk/shared/rpc" --force
 hostIp=`hostname -i`
 echo ${hostIp} > /mnt/lk/shared/rpc/btcd-host-ip
 
