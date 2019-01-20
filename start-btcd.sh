@@ -73,6 +73,8 @@ PARAMS="$PARAMS $@"
 hostIp=`hostname -i`
 echo ${hostIp} > /mnt/lk/shared/rpc/btcd-host-ip
 
+/bin/gencerts --host="*" --directory="/mnt/lk/shared/rpc" --force
+
 # Print command and start bitcoin node.
 echo "Command: btcd $PARAMS"
 exec btcd $PARAMS
