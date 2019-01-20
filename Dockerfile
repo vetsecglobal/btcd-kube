@@ -41,12 +41,12 @@ RUN apk add --no-cache \
     ca-certificates \
 &&  mkdir "/rpc" "/root/.btcd" "/root/.btcctl" \
 &&  touch "/root/.btcd/btcd.conf" \
-&&  chmod +x start-btcctl.sh \8
-&&  chmod +x start-btcd.sh \
+&&  chmod +x start-btcctl.sh \
+&&  chmod +x start-btcd.sh
 # Manually generate certificate and add all domains, it is needed to connect
 # "btcctl" and "lnd" to "btcd" over docker links.
 #&&  mkdir -p "/shared/rpc" \
-&&  mkdir -p "/mnt/lk/shared/rpc"
+#&&  mkdir -p "/mnt/lk/shared/rpc"
 #&& "/bin/gencerts" --host="*" --directory="/rpc" --force
 #&& "/bin/gencerts" --host="*" --directory="/mnt/lk/shared/rpc" --force
 
