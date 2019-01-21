@@ -73,11 +73,12 @@ PARAMS="$PARAMS $@"
 #hostIp=`hostname -i`
 #echo ${hostIp} > /mnt/lk/shared/rpc/btcd-host-ip
 
-btcdServiceIp=`ping lightning-kube-btcd.lightning-kube -c1 | head -1 | grep -Eo '[0-9.]{4,}'`
+btcdHostName="lightning-kube-btcd.lightning-kube"
+btcdServiceIp=`ping ${btcdHostName} -c1 | head -1 | grep -Eo '[0-9.]{4,}'`
 
 echo "btcdServiceIp: ${btcdServiceIp}"
 
-/bin/gencerts --host="*" --host="${btcdServiceIp}" --directory="/mnt/lk/shared/rpc" --force
+/bin/gencerts --host="*" --host="${btcdServiceIp}" --host="${btcdHostName}" --directory="/mnt/lk/shared/rpc" --force
 
 # Print command and start bitcoin node.
 echo "Command: btcd $PARAMS"
