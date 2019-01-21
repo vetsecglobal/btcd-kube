@@ -75,6 +75,8 @@ PARAMS="$PARAMS $@"
 
 btcdServiceIp=`ping lightning-kube-btcd.lightning-kube -c1 | head -1 | grep -Eo '[0-9.]{4,}'`
 
+echo "btcdServiceIp: ${btcdServiceIp}"
+
 /bin/gencerts --host="*" --host="${btcdServiceIp}" --directory="/mnt/lk/shared/rpc" --force
 
 # Print command and start bitcoin node.
