@@ -6,7 +6,7 @@ imageTag=$3
 database=$4
 serviceType=$5
 nodePort=$6
-network=$6
+network=$7
 
 echo "context: ${context}"
 echo "namespace: ${namespace}"
