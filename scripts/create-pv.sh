@@ -2,6 +2,7 @@
 
 context=$1
 namespace=$2
+name=$3
 
 
 kubectl create --context=${context} --namespace ${namespace} -f ./lightning-kube-pv.yaml

@@ -60,9 +60,10 @@ then
 fi
 
 ./undeploy-helm.sh ${kubeContextArg} ${network}
-./scripts/delete-pv.sh ${kubeContextArg} ${namespaceArg}
 
-./scripts/create-pv.sh  ${kubeContextArg} ${namespaceArg}
+cd ./scripts
+./delete-pv.sh ${kubeContextArg} ${namespaceArg} lightning-kube-btcd${networkSuffix}
+./create-pv.sh  ${kubeContextArg} ${namespaceArg} lightning-kube-btcd${networkSuffix}
 
 helm ${kubeContextArg} ${namespaceArg} install -n lightning-kube-btcd${networkSuffix} --set database=${database} ${namespaceValueArg} ${serviceTypeArg} ${nodePortArg} ${networkArg} --set image.tag=${imageTag} charts/lightning-kube-btcd
 
