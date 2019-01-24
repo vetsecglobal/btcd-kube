@@ -59,7 +59,7 @@ then
     nodePortArg="--set service.nodePort=${nodePort}"
 fi
 
-./undeploy-helm.sh ${kubeContextArg} ${network}
+./undeploy-helm.sh "${context}" ${network}
 
 cd ./scripts
 ./delete-pv.sh "${context}" "${namespace}" lightning-kube-btcd${networkSuffix}
