@@ -1,8 +1,7 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: lightning-kube-pvc
-  namespace: lightning-kube
+  name: X_NAME_X
 spec:
   accessModes:
     - ReadWriteOnce
