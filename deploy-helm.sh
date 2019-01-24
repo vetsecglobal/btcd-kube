@@ -62,10 +62,10 @@ fi
 ./undeploy-helm.sh ${kubeContextArg} ${network}
 
 cd ./scripts
-./delete-pv.sh ${kubeContextArg} ${namespaceArg} lightning-kube-btcd${networkSuffix}
-./create-pv.sh  ${kubeContextArg} ${namespaceArg} lightning-kube-btcd${networkSuffix}
+./delete-pv.sh ${context} ${namespace} lightning-kube-btcd${networkSuffix}
+./create-pv.sh  ${context} ${namespace} lightning-kube-btcd${networkSuffix}
 
-helm ${context} ${namespace} install -n lightning-kube-btcd${networkSuffix} --set database=${database} ${namespaceValueArg} ${serviceTypeArg} ${nodePortArg} ${networkArg} --set image.tag=${imageTag} charts/lightning-kube-btcd
+helm ${kubeContextArg} ${namespaceArg} install -n lightning-kube-btcd${networkSuffix} --set database=${database} ${namespaceValueArg} ${serviceTypeArg} ${nodePortArg} ${networkArg} --set image.tag=${imageTag} charts/lightning-kube-btcd
 
 
 if [ $? -eq 0 ]
