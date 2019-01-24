@@ -7,9 +7,9 @@ pipeline {
     ORG               = 'kevinstl'
     APP_NAME          = 'lightning-kube-btcd'
     CHARTMUSEUM_CREDS = credentials('jenkins-x-chartmuseum')
-    DEPLOY_SIMNET     = true;
-    DEPLOY_TESTNET    = false;
-    DEPLOY_MAINNET    = false;
+    DEPLOY_SIMNET     = 'true'
+    DEPLOY_TESTNET    = 'false'
+    DEPLOY_MAINNET    = 'false'
   }
   stages {
 
@@ -110,19 +110,19 @@ pipeline {
             sh 'echo  DEPLOY_SIMNET: ${DEPLOY_SIMNET}'
             sh 'echo  DEPLOY_TESTNET: ${DEPLOY_TESTNET}'
             sh 'echo  DEPLOY_MAINNET: ${DEPLOY_MAINNET}'
-            if (DEPLOY_SIMNET == true) {
+            if (DEPLOY_SIMNET == 'true') {
               container('go') {
                 sh './undeploy-helm.sh "" simnet || true'
                 sh './deploy-helm.sh "" lightning-kube \$(cat VERSION) lightning-kube-btcd-local LoadBalancer 30080 simnet'
               }
             }
-            if (DEPLOY_TESTNET == true) {
+            if (DEPLOY_TESTNET == 'true') {
               container('go') {
                 sh './undeploy-helm.sh "" testnet || true'
                 sh './deploy-helm.sh "" lightning-kube \$(cat VERSION) lightning-kube-btcd-local LoadBalancer 30080 testnet'
               }
             }
-            if (DEPLOY_MAINNET == true) {
+            if (DEPLOY_MAINNET == 'true') {
               container('go') {
                 sh './undeploy-helm.sh "" mainnet || true'
                 sh './deploy-helm.sh "" lightning-kube \$(cat VERSION) lightning-kube-btcd-local LoadBalancer 30080 mainnet'
