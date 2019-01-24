@@ -59,7 +59,10 @@ then
     nodePortArg="--set service.nodePort=${nodePort}"
 fi
 
+./undeploy-helm.sh ${kubeContextArg} ${network}
+./scripts/delete-pv.sh ${kubeContextArg} ${namespaceArg}
 
+./scripts/create-pv.sh  ${kubeContextArg} ${namespaceArg}
 
 helm ${kubeContextArg} ${namespaceArg} install -n lightning-kube-btcd${networkSuffix} --set database=${database} ${namespaceValueArg} ${serviceTypeArg} ${nodePortArg} ${networkArg} --set image.tag=${imageTag} charts/lightning-kube-btcd
 
