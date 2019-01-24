@@ -65,7 +65,7 @@ cd ./scripts
 ./delete-pv.sh ${context} ${namespace} lightning-kube-btcd${networkSuffix}
 ./create-pv.sh  ${context} ${namespace} lightning-kube-btcd${networkSuffix}
 
-helm ${kubeContextArg} ${namespaceArg} install -n lightning-kube-btcd${networkSuffix} --set database=${database} ${namespaceValueArg} ${serviceTypeArg} ${nodePortArg} ${networkArg} --set image.tag=${imageTag} charts/lightning-kube-btcd
+helm "${kubeContextArg}" "${namespaceArg}" install -n lightning-kube-btcd${networkSuffix} --set database=${database} ${namespaceValueArg} ${serviceTypeArg} ${nodePortArg} ${networkArg} --set image.tag=${imageTag} charts/lightning-kube-btcd
 
 
 if [ $? -eq 0 ]
