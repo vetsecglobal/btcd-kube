@@ -3,10 +3,12 @@
 context=$1
 namespace=$2
 name=$3
+networkSuffix=$4
 
 echo "context: ${context}"
 echo "namespace: ${namespace}"
 echo "name: ${name}"
+echo "networkSuffix: ${networkSuffix}"
 
 kubeContextArg=""
 if [[ ${context} != "" ]]
@@ -18,7 +20,7 @@ fi
 #kubectl create --context=${context} --namespace ${namespace} -f ./lightning-kube-pvc.yaml
 
 
-cat ./lightning-kube-pv.yaml | sed "s/\X_NETWORK_SUFFIX_X/${name}/" | kubectl ${kubeContextArg} --namespace ${namespace} create -f -
-cat ./lightning-kube-pvc.yaml | sed "s/\X_NETWORK_SUFFIX_X/${name}/" | kubectl ${kubeContextArg} --namespace ${namespace} create -f -
+cat ./lightning-kube-pv.yaml | sed "s/\X_NETWORK_SUFFIX_X/${networkSuffix}/" | kubectl ${kubeContextArg} --namespace ${namespace} create -f -
+cat ./lightning-kube-pvc.yaml | sed "s/\X_NETWORK_SUFFIX_X/${networkSuffix}/" | kubectl ${kubeContextArg} --namespace ${namespace} create -f -
 
 #./create-pv.sh minikube lightning-kube
