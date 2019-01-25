@@ -68,8 +68,8 @@ fi
 ./undeploy-helm.sh "${context}" ${network}
 
 cd ./scripts
-./delete-pv.sh "${context}" "${namespace}" lightning-kube-btcd${networkSuffix} ${networkSuffix}
-./create-pv.sh  "${context}" "${namespace}" lightning-kube-btcd${networkSuffix} ${networkSuffix}
+./delete-pv.sh "${context}" "${namespace}"${networkSuffix} lightning-kube-btcd${networkSuffix} ${networkSuffix}
+./create-pv.sh  "${context}" "${namespace}"${networkSuffix} lightning-kube-btcd${networkSuffix} ${networkSuffix}
 
 
 cd ..
