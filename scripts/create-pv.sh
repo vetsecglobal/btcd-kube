@@ -18,7 +18,7 @@ fi
 #kubectl create --context=${context} --namespace ${namespace} -f ./lightning-kube-pvc.yaml
 
 
-cat ./lightning-kube-pv.yaml | sed "s/\X_NAME_X/${name}/" | kubectl ${kubeContextArg} --namespace ${namespace} create -f -
-cat ./lightning-kube-pvc.yaml | sed "s/\X_NAME_X/${name}/" | kubectl ${kubeContextArg} --namespace ${namespace} create -f -
+cat ./lightning-kube-pv.yaml | sed "s/\X_NETWORK_SUFFIX_X/${name}/" | kubectl ${kubeContextArg} --namespace ${namespace} create -f -
+cat ./lightning-kube-pvc.yaml | sed "s/\X_NETWORK_SUFFIX_X/${name}/" | kubectl ${kubeContextArg} --namespace ${namespace} create -f -
 
 #./create-pv.sh minikube lightning-kube
