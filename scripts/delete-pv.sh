@@ -15,7 +15,7 @@ fi
 #kubectl delete --context=${context} --namespace ${namespace} -f ./lightning-kube-pv.yaml
 #kubectl delete --context=${context} --namespace ${namespace} -f ./lightning-kube-pvc.yaml
 
-cat ./lightning-kube-pv.yaml | sed "s/\X_NAME_X/${name}/" | kubectl ${kubeContextArg} --namespace ${namespace} delete -f -
-cat ./lightning-kube-pvc.yaml | sed "s/\X_NAME_X/${name}/" | kubectl ${kubeContextArg} --namespace ${namespace} delete -f -
+cat ./lightning-kube-pv.yaml | sed "s/\X_NETWORK_SUFFIX_X/${name}/" | kubectl ${kubeContextArg} --namespace ${namespace} delete -f -
+cat ./lightning-kube-pvc.yaml | sed "s/\X_NETWORK_SUFFIX_X/${name}/" | kubectl ${kubeContextArg} --namespace ${namespace} delete -f -
 
 #./delete-pv.sh minikube lightning-kube
