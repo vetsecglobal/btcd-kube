@@ -71,7 +71,6 @@ cd ./scripts
 ./delete-pv.sh "${context}" "${namespace}" lightning-kube-btcd${networkSuffix} ${networkSuffix}
 ./create-pv.sh  "${context}" "${namespace}" lightning-kube-btcd${networkSuffix} ${networkSuffix}
 
-sleep 10
 
 cd ..
 helm ${kubeContextArg} ${namespaceArg} install -n lightning-kube-btcd${networkSuffix} --set database=${database} ${namespaceValueArg} ${serviceTypeArg} ${nodePortArg} ${networkArg} ${networkSuffixArg} --set image.tag=${imageTag} charts/lightning-kube-btcd
