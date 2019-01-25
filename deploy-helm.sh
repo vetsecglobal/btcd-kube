@@ -35,6 +35,12 @@ then
     networkSuffix="-${network}"
 fi
 
+networkSuffixArg=""
+if [[ ${network} != "" ]]
+then
+    networkSuffixArg="--set project.networkSuffix=${networkSuffix}"
+fi
+
 namespaceArg=""
 if [[ ${namespace} != "" ]]
 then

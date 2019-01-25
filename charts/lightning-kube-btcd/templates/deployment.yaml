@@ -68,6 +68,6 @@ spec:
       volumes:
           - name: lightning-kube-drive
             persistentVolumeClaim:
-              claimName: lightning-kube-pvc
+              claimName: lightning-kube-pvc{{ .Values.project.networkSuffix }}
 
       terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
