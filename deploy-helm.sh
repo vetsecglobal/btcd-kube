@@ -69,6 +69,12 @@ fi
 
 #./undeploy-helm.sh "${context}" ${network}
 
+if [[ ${deployPvc} == "true" ]]
+then
+    cd ./scripts
+    ./create-pv.sh  "${context}" "${namespace}"${networkSuffix} lightning-kube-btcd${networkSuffix} ${networkSuffix}
+    cd ..
+fi
 
 helm ${kubeContextArg} ${namespaceArg} install -n lightning-kube-btcd${networkSuffix} --set database=${database} ${namespaceValueArg} ${serviceTypeArg} ${nodePortArg} ${networkArg} ${networkSuffixArg} --set image.tag=${imageTag} charts/lightning-kube-btcd
 
