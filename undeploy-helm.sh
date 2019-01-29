@@ -17,6 +17,12 @@ fi
 
 helm ${kubeContextArg} del --purge lightning-kube-btcd${networkSuffix}
 
+cd ./scripts
+./delete-pv.sh "${context}" "${namespace}"${networkSuffix} lightning-kube-btcd${networkSuffix} ${networkSuffix}
+./create-pv.sh  "${context}" "${namespace}"${networkSuffix} lightning-kube-btcd${networkSuffix} ${networkSuffix}
+
+cd ..
+
 #if [ $? -eq 0 ]
 #then
 #  echo "Undeploy Success"

@@ -73,7 +73,7 @@ PARAMS="$PARAMS $@"
 #hostIp=`hostname -i`
 #echo ${hostIp} > /mnt/lk/shared/rpc/btcd-host-ip
 
-btcdHostName="lightning-kube-btcd.lightning-kube"
+btcdHostName="lightning-kube-btcd.lightning-kube-$NETWORK"
 btcdServiceIp=`ping ${btcdHostName} -c1 | head -1 | grep -Eo '[0-9.]{4,}'`
 
 echo "btcdServiceIp: ${btcdServiceIp}"
