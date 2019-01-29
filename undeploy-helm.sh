@@ -2,6 +2,11 @@
 
 context=$1
 network=$2
+deployPvc=$3
+
+echo "context: ${context}"
+echo "network: ${network}"
+echo "deployPvc: ${deployPvc}"
 
 kubeContextArg=""
 if [[ ${context} != "" ]]
@@ -17,11 +22,13 @@ fi
 
 helm ${kubeContextArg} del --purge lightning-kube-btcd${networkSuffix}
 
-cd ./scripts
-./delete-pv.sh "${context}" "${namespace}"${networkSuffix} lightning-kube-btcd${networkSuffix} ${networkSuffix}
-./create-pv.sh  "${context}" "${namespace}"${networkSuffix} lightning-kube-btcd${networkSuffix} ${networkSuffix}
-
-cd ..
+if [[ ${deployPvc} == "true" ]]
+then
+    cd ./scripts
+    ./delete-pv.sh "${context}" "${namespace}"${networkSuffix} lightning-kube-btcd${networkSuffix} ${networkSuffix}
+    ./create-pv.sh  "${context}" "${namespace}"${networkSuffix} lightning-kube-btcd${networkSuffix} ${networkSuffix}
+    cd ..
+fi
 
 #if [ $? -eq 0 ]
 #then
