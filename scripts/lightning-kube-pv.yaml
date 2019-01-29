@@ -1,7 +1,7 @@
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: lightning-kube-pvcX_NETWORK_SUFFIX_X
+  name: lightning-kube-pvX_NETWORK_SUFFIX_X
   labels:
     type: local
 spec:
