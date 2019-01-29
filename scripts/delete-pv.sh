@@ -22,19 +22,19 @@ fi
 #kubectl delete --context=${context} --namespace ${namespace} -f ./lightning-kube-pvc.yaml
 
 echo "debug1"
-kubectl --namespace ${namespace} get pv lightning-kube-pvc${networkSuffix}
+kubectl --namespace ${namespace} get pv lightning-kube-pv${networkSuffix}
 kubectl --namespace ${namespace} get pvc lightning-kube-pvc${networkSuffix}
 
 cat ./lightning-kube-pvc.yaml | sed "s/\X_NETWORK_SUFFIX_X/${networkSuffix}/" | kubectl ${kubeContextArg} --namespace ${namespace} delete -f -
 
 echo "debug2"
-kubectl --namespace ${namespace} get pv lightning-kube-pvc${networkSuffix}
+kubectl --namespace ${namespace} get pv lightning-kube-pv${networkSuffix}
 kubectl --namespace ${namespace} get pvc lightning-kube-pvc${networkSuffix}
 
 cat ./lightning-kube-pv.yaml | sed "s/\X_NETWORK_SUFFIX_X/${networkSuffix}/" | kubectl ${kubeContextArg} --namespace ${namespace} delete -f -
 
 echo "debug3"
-kubectl --namespace ${namespace} get pv lightning-kube-pvc${networkSuffix}
+kubectl --namespace ${namespace} get pv lightning-kube-pv${networkSuffix}
 kubectl --namespace ${namespace} get pvc lightning-kube-pvc${networkSuffix}
 
 #./delete-pv.sh minikube lightning-kube
