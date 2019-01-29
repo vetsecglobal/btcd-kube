@@ -1,10 +1,12 @@
 #!/bin/bash
 
 context=$1
-network=$2
-deployPvc=$3
+namespace=$2
+network=$3
+deployPvc=$4
 
 echo "context: ${context}"
+echo "namespace: ${namespace}"
 echo "network: ${network}"
 echo "deployPvc: ${deployPvc}"
 

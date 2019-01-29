@@ -115,19 +115,19 @@ pipeline {
 
             if (DEPLOY_SIMNET == 'true') {
               container('go') {
-                sh './undeploy-helm.sh "" simnet ${DEPLOY_PVC} || true'
+                sh './undeploy-helm.sh "" lightning-kube simnet ${DEPLOY_PVC} || true'
                 sh './deploy-helm.sh "" lightning-kube \$(cat VERSION) lightning-kube-btcd-local LoadBalancer 30080 simnet ${DEPLOY_PVC}'
               }
             }
             if (DEPLOY_TESTNET == 'true') {
               container('go') {
-                sh './undeploy-helm.sh "" testnet ${DEPLOY_PVC} || true'
+                sh './undeploy-helm.sh "" lightning-kube testnet ${DEPLOY_PVC} || true'
                 sh './deploy-helm.sh "" lightning-kube \$(cat VERSION) lightning-kube-btcd-local LoadBalancer 30080 testnet ${DEPLOY_PVC}'
               }
             }
             if (DEPLOY_MAINNET == 'true') {
               container('go') {
-                sh './undeploy-helm.sh "" mainnet ${DEPLOY_PVC} || true'
+                sh './undeploy-helm.sh "" lightning-kube mainnet ${DEPLOY_PVC} || true'
                 sh './deploy-helm.sh "" lightning-kube \$(cat VERSION) lightning-kube-btcd-local LoadBalancer 30080 mainnet ${DEPLOY_PVC}'
               }
             }

@@ -7,6 +7,8 @@ networkSuffix=$4
 
 echo "context: ${context}"
 echo "namespace: ${namespace}"
+echo "name: ${name}"
+echo "networkSuffix: ${networkSuffix}"
 
 kubeContextArg=""
 if [[ ${context} != "" ]]
