@@ -44,23 +44,22 @@ RPCPASS=$(set_default "$RPCPASS" "devpass")
 DEBUG=$(set_default "$DEBUG" "info")
 NETWORK=$(set_default "$NETWORK" "simnet")
 
+baseDir="/mnt/lk/${NETWORK}"
+baseBtcdDir=${baseDir}/btcd
+baseRpcDir=${baseDir}/shared/rpc
+
 PARAMS=$(echo \
     "--$NETWORK" \
     "--debuglevel=$DEBUG" \
     "--rpcuser=$RPCUSER" \
     "--rpcpass=$RPCPASS" \
-    "--datadir=/mnt/lk/btcd/data" \
-    "--logdir=/mnt/lk/btcd/log" \
-    "--rpccert=/mnt/lk/shared/rpc/rpc.cert" \
-    "--rpckey=/mnt/lk/shared/rpc/rpc.key" \
+    "--datadir=${baseBtcdDir}/data" \
+    "--logdir=${baseBtcdDir}/log" \
+    "--rpccert=${baseRpcDir}/rpc.cert" \
+    "--rpckey=${baseRpcDir}/rpc.key" \
     "--rpclisten=0.0.0.0" \
     "--txindex"
 )
-
-#    "--datadir=/data" \
-#    "--logdir=/data" \
-#    "--rpccert=/rpc/rpc.cert" \
-#    "--rpckey=/rpc/rpc.key" \
 
 # Set the mining flag only if address is non empty.
 if [[ -n "$MINING_ADDRESS" ]]; then
@@ -70,15 +69,14 @@ fi
 # Add user parameters to command.
 PARAMS="$PARAMS $@"
 
-#hostIp=`hostname -i`
-#echo ${hostIp} > /mnt/lk/shared/rpc/btcd-host-ip
-
 btcdHostName="lightning-kube-btcd.lightning-kube-$NETWORK"
 btcdServiceIp=`ping ${btcdHostName} -c1 | head -1 | grep -Eo '[0-9.]{4,}'`
 
 echo "btcdServiceIp: ${btcdServiceIp}"
 
-/bin/gencerts --host="*" --host="${btcdServiceIp}" --host="${btcdHostName}" --directory="/mnt/lk/shared/rpc" --force
+mkdir -p "${baseRpcDir}
+
+/bin/gencerts --host="*" --host="${btcdServiceIp}" --host="${btcdHostName}" --directory="${baseRpcDir}" --force
 
 # Print command and start bitcoin node.
 echo "Command: btcd $PARAMS"
