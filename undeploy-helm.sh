@@ -22,13 +22,18 @@ then
     networkSuffix="-${network}"
 fi
 
+namespaceValueArg=""
+if [[ ${namespace} != "" ]]
+then
+    namespaceValueArg="--set project.namespace=${namespace}${networkSuffix}"
+fi
+
 helm ${kubeContextArg} del --purge lightning-kube-btcd${networkSuffix}
 
 if [[ ${deployPvc} == "true" ]]
 then
     cd ./scripts
-    ./delete-pv.sh "${context}" "${namespace}"${networkSuffix} lightning-kube-btcd${networkSuffix} ${networkSuffix}
-    ./create-pv.sh  "${context}" "${namespace}"${networkSuffix} lightning-kube-btcd${networkSuffix} ${networkSuffix}
+    ./delete-pv.sh "${context}" "${namespaceValueArg}" ${networkSuffix}
     cd ..
 fi
 

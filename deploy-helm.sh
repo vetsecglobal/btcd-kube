@@ -72,7 +72,7 @@ fi
 if [[ ${deployPvc} == "true" ]]
 then
     cd ./scripts
-    ./create-pv.sh  "${context}" "${namespace}"${networkSuffix} lightning-kube-btcd${networkSuffix} ${networkSuffix}
+    ./create-pv.sh  "${context}" "${namespace}"${networkSuffix} ${networkSuffix}
     cd ..
 fi
 
