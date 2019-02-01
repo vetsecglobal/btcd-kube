@@ -8,5 +8,5 @@ spec:
   volumeMode: Filesystem
   resources:
     requests:
-      storage: 8Gi
+      storage: 50Gi
   storageClassName: standard

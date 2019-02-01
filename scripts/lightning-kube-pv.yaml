@@ -7,9 +7,9 @@ metadata:
 spec:
   storageClassName: standard
   capacity:
-    storage: 8Gi
+    storage: 50Gi
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   hostPath:
-    path: "/mnt"
+    path: "/host-home"
