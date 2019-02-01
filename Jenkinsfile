@@ -8,7 +8,7 @@ pipeline {
     APP_NAME          = 'lightning-kube-btcd'
     CHARTMUSEUM_CREDS = credentials('jenkins-x-chartmuseum')
     DEPLOY_PVC        = 'true'
-    DEPLOY_SIMNET     = 'true'
+    DEPLOY_SIMNET     = 'false'
     DEPLOY_TESTNET    = 'true'
     DEPLOY_MAINNET    = 'false'
   }
