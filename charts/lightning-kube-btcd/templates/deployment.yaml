@@ -69,7 +69,7 @@ spec:
       volumes:
       - name: lightning-kube-drive
         hostPath:
-          path: /network-drive
+          path: /network-drive/btcd
           type: DirectoryOrCreate
 
 
