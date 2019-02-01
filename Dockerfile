@@ -59,4 +59,11 @@ RUN apk add --no-cache \
 # mounted volume! For more info read dockerfile "VOLUME" documentation.
 VOLUME ["/rpc"]
 
+ARG UNAME=kevin
+ARG UID=501
+ARG GID=20
+RUN groupadd -g $GID -o $UNAME
+RUN useradd -m -u $UID -g $GID -o -s /bin/bash $UNAME
+USER $UNAME
+
 ENTRYPOINT ["/start-btcd.sh"]
