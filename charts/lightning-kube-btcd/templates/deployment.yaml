@@ -69,9 +69,16 @@ spec:
       volumes:
       - name: lightning-kube-drive
         hostPath:
-          path: /network-drive/btcd
+          path: /host-home/minikube/btcd
           type: DirectoryOrCreate
 
+
+#      volumes:
+#      - name: lightning-kube-drive
+#        hostPath:
+#          path: /network-drive/btcd
+#          type: DirectoryOrCreate
+#
 
 #      volumes:
 #          - name: lightning-kube-drive
