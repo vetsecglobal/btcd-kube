@@ -19,7 +19,7 @@ fi
 namespaceArg=""
 if [[ ${namespace} != "" ]]
 then
-    namespaceArg="--namespace ${namespace}${networkSuffix}"
+    namespaceArg="--namespace ${namespace}"
 fi
 
 

@@ -19,7 +19,7 @@ fi
 namespaceArg=""
 if [[ ${namespace} != "" ]]
 then
-    namespaceArg="--namespace ${namespace}${networkSuffix}"
+    namespaceArg="--namespace ${namespace}"
 fi
 
 cat ./lightning-kube-pvc.yaml | sed "s/\X_NETWORK_SUFFIX_X/${networkSuffix}/" | kubectl ${kubeContextArg} ${namespaceArg} delete -f -

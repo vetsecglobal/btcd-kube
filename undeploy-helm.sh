@@ -33,7 +33,7 @@ helm ${kubeContextArg} del --purge lightning-kube-btcd${networkSuffix}
 if [[ ${deployPvc} == "true" ]]
 then
     cd ./scripts
-    ./delete-pv.sh "${context}" "${namespaceValueArg}" ${networkSuffix}
+    ./delete-pv.sh "${context}" "${namespace}${networkSuffix}" ${networkSuffix}
     cd ..
 fi
 
