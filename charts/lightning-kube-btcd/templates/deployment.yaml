@@ -83,7 +83,7 @@ spec:
       initContainers:
       - name: volume-mount-hack-mkdir
         image: busybox
-        command: ["sh", "-c", "mkdir p /mnt/lk"]
+        command: ["sh", "-c", "mkdir -p /mnt/lk"]
       - name: volume-mount-hack-chmod
         image: busybox
         command: ["sh", "-c", "chmod -R 777 /mnt/lk"]
