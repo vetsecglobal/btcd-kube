@@ -66,16 +66,30 @@ spec:
       volumes:
       - name: lightning-kube-drive-shared-rpc
         hostPath:
-          path: /network-drive/lk/{{ .Values.project.network }}/shared/rpc
+          path: /host-home/lk/{{ .Values.project.network }}/shared/rpc
           type: DirectoryOrCreate
       - name: lightning-kube-drive-btcd-data
         hostPath:
-          path: /network-drive/lk/{{ .Values.project.network }}/btcd/data
+          path: /host-home/lk/{{ .Values.project.network }}/btcd/data
           type: DirectoryOrCreate
       - name: lightning-kube-drive-btcd-log
         hostPath:
-          path: /network-drive/lk/{{ .Values.project.network }}/btcd/log
+          path: /host-home/lk/{{ .Values.project.network }}/btcd/log
           type: DirectoryOrCreate
+#
+#      volumes:
+#      - name: lightning-kube-drive-shared-rpc
+#        hostPath:
+#          path: /network-drive/lk/{{ .Values.project.network }}/shared/rpc
+#          type: DirectoryOrCreate
+#      - name: lightning-kube-drive-btcd-data
+#        hostPath:
+#          path: /network-drive/lk/{{ .Values.project.network }}/btcd/data
+#          type: DirectoryOrCreate
+#      - name: lightning-kube-drive-btcd-log
+#        hostPath:
+#          path: /network-drive/lk/{{ .Values.project.network }}/btcd/log
+#          type: DirectoryOrCreate
 
 
 
