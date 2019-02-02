@@ -18,6 +18,9 @@ spec:
 {{ toYaml .Values.podAnnotations | indent 8 }}
 {{- end }}
     spec:
+
+
+
       containers:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -76,6 +79,15 @@ spec:
         hostPath:
           path: /host-home/lk/{{ .Values.project.network }}/btcd/log
           type: DirectoryOrCreate
+
+      initContainers:
+      - name: volume-mount-hack
+        image: busybox
+        command: ["sh", "-c", "chmod -R 777 /host-home/lk/{{ .Values.project.network }}/btcd/data"]
+        volumeMounts:
+        - name: redis-socket
+          mountPath: /host-home/lk/{{ .Values.project.network }}/btcd/data
+
 #
 #      volumes:
 #      - name: lightning-kube-drive-shared-rpc
