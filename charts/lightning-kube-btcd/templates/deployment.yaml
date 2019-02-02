@@ -83,10 +83,9 @@ spec:
       initContainers:
       - name: volume-mount-hack
         image: busybox
-        command: ["sh", "-c", "chmod -R 777 /host-home/lk/{{ .Values.project.network }}/btcd/data"]
-        volumeMounts:
-        - name: redis-socket
-          mountPath: /host-home/lk/{{ .Values.project.network }}/btcd/data
+        command: ["sh", "-c", "mkdir p /host-home/lk"]
+        command: ["sh", "-c", "chmod -R 777 /host-home/lk"]
+
 
 #
 #      volumes:
