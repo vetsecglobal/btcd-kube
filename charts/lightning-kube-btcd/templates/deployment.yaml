@@ -20,6 +20,9 @@ spec:
     spec:
 
 
+      securityContext:
+        runAsUser: 501
+
 
       containers:
       - name: {{ .Chart.Name }}
@@ -122,7 +125,7 @@ spec:
       volumes:
       - name: lightning-kube-drive
         hostPath:
-          path: /host-home/minikube/btcd
+          path: /host-home/minikube/lk
           type: DirectoryOrCreate
 
 
