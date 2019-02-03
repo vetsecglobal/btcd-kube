@@ -77,9 +77,14 @@ echo "btcdServiceIp: ${btcdServiceIp}"
 #mkdir -p ${baseRpcDir}
 
 umask 000
-chmod -R 777 /mnt/lk
 
+ls -al /mnt
+chmod -R 777 /mnt/lk
+ls -al /mnt
+
+ls ${baseRpcDir}
 /bin/gencerts --host="*" --host="${btcdServiceIp}" --host="${btcdHostName}" --directory="${baseRpcDir}" --force
+ls ${baseRpcDir}
 
 # Print command and start bitcoin node.
 echo "Command: btcd $PARAMS"
