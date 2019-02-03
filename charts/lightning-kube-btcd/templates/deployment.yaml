@@ -128,7 +128,7 @@ spec:
       volumes:
       - name: lightning-kube-drive
         hostPath:
-          path: /host-home/minikube/lk
+          path: /host-home/minikube
           type: DirectoryOrCreate
 
 
