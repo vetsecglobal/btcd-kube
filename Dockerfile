@@ -59,7 +59,7 @@ RUN apk add --no-cache \
 # mounted volume! For more info read dockerfile "VOLUME" documentation.
 VOLUME ["/rpc"]
 
-RUN sleep 100000
+
 
 #ARG UNAME=kevin
 #ARG UID=501
