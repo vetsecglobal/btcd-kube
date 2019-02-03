@@ -109,10 +109,10 @@ spec:
 #          path: /network-drive/lk/{{ .Values.project.network }}/btcd/log
 #          type: DirectoryOrCreate
 
-      initContainers:
-      - name: volume-mount-hack-umask
-        image: busybox
-        command: ["sh", "-c", "umask 000"]
+#      initContainers:
+#      - name: volume-mount-hack-umask
+#        image: busybox
+#        command: ["sh", "-c", "umask 000"]
 
         volumeMounts:
         - mountPath: /mnt/lk/{{ .Values.project.network }}/shared/rpc

@@ -76,7 +76,7 @@ echo "btcdServiceIp: ${btcdServiceIp}"
 
 #mkdir -p ${baseRpcDir}
 
-#umask 000
+umask 000
 
 /bin/gencerts --host="*" --host="${btcdServiceIp}" --host="${btcdHostName}" --directory="${baseRpcDir}" --force
 
