@@ -76,7 +76,10 @@ echo "btcdServiceIp: ${btcdServiceIp}"
 
 #mkdir -p ${baseRpcDir}
 
+
 umask 000
+
+echo "whoami: `whoami`"
 
 ls -Ral /mnt
 chmod -R 777 /mnt/lk
