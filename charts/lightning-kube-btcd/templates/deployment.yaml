@@ -89,13 +89,13 @@ spec:
 
 
 
-#      initContainers:
-#      - name: volume-mount-hack-mkdir
-#        image: busybox
-#        command: ["sh", "-c", "mkdir -p /mnt/lk"]
-#      - name: volume-mount-hack-chmod
-#        image: busybox
-#        command: ["sh", "-c", "chmod -R 777 /mnt/lk"]
+      initContainers:
+      - name: volume-mount-hack-chown
+        image: busybox
+        command: ["sh", "-c", "chown -R btcd /mnt/lk"]
+      - name: volume-mount-hack-chmod
+        image: busybox
+        command: ["sh", "-c", "chmod -R 777 /mnt/lk"]
 
 
 #
