@@ -83,8 +83,9 @@ echo "whoami: `whoami`"
 
 #ls -Ral /mnt/lk
 #sudo chmod -R 777 /mnt/lk
-#ls -Ral /mnt/lk
-#sudo chown -R btcd /mnt/lk
+ls -Ral /mnt/lk
+#sudo chown -R root:root /mnt/lk
+sudo chown -R root:root /mnt/lk
 
 ls -Ral /mnt/lk
 
