@@ -68,6 +68,9 @@ VOLUME ["/rpc"]
 #RUN adduser -m -u $UID -g $GID -o -s /bin/bash $UNAME
 #USER $UNAME
 
+RUN adduser -u 501 -S btcd
+USER btcd
+
 ENTRYPOINT ["/start-btcd.sh"]
 
 
