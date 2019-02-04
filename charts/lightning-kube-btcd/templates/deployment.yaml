@@ -20,8 +20,8 @@ spec:
     spec:
 
 
-#      securityContext:
-#        runAsUser: 501
+      securityContext:
+        runAsUser: 501
 
 
       containers:
