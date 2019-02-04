@@ -11,5 +11,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  hostPath:
-    path: "/mnt"
+#  hostPath:
+#    path: "/mnt"
+  local:
+    path: /host-home/minikube

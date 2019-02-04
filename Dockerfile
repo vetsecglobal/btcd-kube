@@ -60,24 +60,11 @@ RUN apk add --no-cache \
 VOLUME ["/rpc"]
 
 
-#RUN mkdir /mnt/lk
-#RUN chmod -R 777 /mnt/lk
-#RUN chown -R btcd /mnt/lk
+#RUN apk add --no-cache sudo
+#RUN adduser -u 501 -S btcd
+#RUN echo 'btcd ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+#USER btcd
 
-RUN apk add --no-cache sudo
-
-RUN adduser -u 501 -S btcd
-#RUN adduser btcd sudo
-RUN echo 'btcd ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
-
-USER btcd
-
-#ARG UNAME=kevin
-#ARG UID=501
-#ARG GID=20
-##RUN addgroup -g $GID -o $UNAME
-#RUN adduser -m -u $UID -g $GID -o -s /bin/bash $UNAME
-#USER $UNAME
 
 
 
