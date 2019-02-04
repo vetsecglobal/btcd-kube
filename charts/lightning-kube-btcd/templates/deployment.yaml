@@ -65,27 +65,27 @@ spec:
         resources:
 {{ toYaml .Values.resources | indent 12 }}
 
-        volumeMounts:
-        - mountPath: /mnt/lk/{{ .Values.project.network }}/shared/rpc
-          name: lightning-kube-drive-shared-rpc
-        - mountPath: /mnt/lk/{{ .Values.project.network }}/btcd/data
-          name: lightning-kube-drive-btcd-data
-        - mountPath: /mnt/lk/{{ .Values.project.network }}/btcd/log
-          name: lightning-kube-drive-btcd-log
-
-      volumes:
-      - name: lightning-kube-drive-shared-rpc
-        hostPath:
-          path: /host-home/minikube/lk/{{ .Values.project.network }}/shared/rpc
-          type: DirectoryOrCreate
-      - name: lightning-kube-drive-btcd-data
-        hostPath:
-          path: /host-home/minikube/lk/{{ .Values.project.network }}/btcd/data
-          type: DirectoryOrCreate
-      - name: lightning-kube-drive-btcd-log
-        hostPath:
-          path: /host-home/minikube/lk/{{ .Values.project.network }}/btcd/log
-          type: DirectoryOrCreate
+#        volumeMounts:
+#        - mountPath: /mnt/lk/{{ .Values.project.network }}/shared/rpc
+#          name: lightning-kube-drive-shared-rpc
+#        - mountPath: /mnt/lk/{{ .Values.project.network }}/btcd/data
+#          name: lightning-kube-drive-btcd-data
+#        - mountPath: /mnt/lk/{{ .Values.project.network }}/btcd/log
+#          name: lightning-kube-drive-btcd-log
+#
+#      volumes:
+#      - name: lightning-kube-drive-shared-rpc
+#        hostPath:
+#          path: /host-home/minikube/lk/{{ .Values.project.network }}/shared/rpc
+#          type: DirectoryOrCreate
+#      - name: lightning-kube-drive-btcd-data
+#        hostPath:
+#          path: /host-home/minikube/lk/{{ .Values.project.network }}/btcd/data
+#          type: DirectoryOrCreate
+#      - name: lightning-kube-drive-btcd-log
+#        hostPath:
+#          path: /host-home/minikube/lk/{{ .Values.project.network }}/btcd/log
+#          type: DirectoryOrCreate
 
 
 
@@ -121,22 +121,22 @@ spec:
 
 
 
-#        volumeMounts:
-#        - mountPath: /mnt/lk/{{ .Values.project.network }}/shared/rpc
-#          name: lightning-kube-drive
-#          subPath: lk/{{ .Values.project.network }}/shared/rpc
-#        - mountPath: /mnt/lk/{{ .Values.project.network }}/btcd/data
-#          name: lightning-kube-drive
-#          subPath: lk/{{ .Values.project.network }}/btcd/data
-#        - mountPath: /mnt/lk/{{ .Values.project.network }}/btcd/log
-#          name: lightning-kube-drive
-#          subPath: lk/{{ .Values.project.network }}/btcd/log
-#
-#      volumes:
-#      - name: lightning-kube-drive
-#        hostPath:
-#          path: /host-home/minikube
-#          type: DirectoryOrCreate
+        volumeMounts:
+        - mountPath: /mnt/lk/{{ .Values.project.network }}/shared/rpc
+          name: lightning-kube-drive
+          subPath: lk/{{ .Values.project.network }}/shared/rpc
+        - mountPath: /mnt/lk/{{ .Values.project.network }}/btcd/data
+          name: lightning-kube-drive
+          subPath: lk/{{ .Values.project.network }}/btcd/data
+        - mountPath: /mnt/lk/{{ .Values.project.network }}/btcd/log
+          name: lightning-kube-drive
+          subPath: lk/{{ .Values.project.network }}/btcd/log
+
+      volumes:
+      - name: lightning-kube-drive
+        hostPath:
+          path: /host-home/minikube
+          type: DirectoryOrCreate
 
 
 
