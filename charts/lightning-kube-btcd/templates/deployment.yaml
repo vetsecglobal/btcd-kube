@@ -20,15 +20,15 @@ spec:
     spec:
 
 
-#      securityContext:
-#        runAsUser: 501
+      securityContext:
+        runAsUser: 501
 
 
       containers:
       - name: {{ .Chart.Name }}
 
-#        securityContext:
-#          runAsUser: 501
+        securityContext:
+          runAsUser: 501
 
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
