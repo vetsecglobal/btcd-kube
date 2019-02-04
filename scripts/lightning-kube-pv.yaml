@@ -8,11 +8,12 @@ spec:
   storageClassName: standard
   capacity:
     storage: 50Gi
+    volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  hostPath:
-    path: "/host-home/minikube"
+#  hostPath:
+#    path: "/host-home/minikube"
 #    path: "/mnt"
-#  local:
-#    path: /host-home/minikube
+  local:
+    path: /host-home/minikube
