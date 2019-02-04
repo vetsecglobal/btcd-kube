@@ -2,9 +2,6 @@ FROM golang:1.11-alpine as builder
 
 MAINTAINER Olaoluwa Osuntokun <laolu@lightning.network>
 
-RUN adduser -u 501 -S btcd
-USER btcd
-
 # Install build dependencies such as git and glide.
 RUN apk add --no-cache git gcc musl-dev
 
@@ -62,7 +59,8 @@ RUN apk add --no-cache \
 # mounted volume! For more info read dockerfile "VOLUME" documentation.
 VOLUME ["/rpc"]
 
-
+RUN adduser -u 501 -S btcd
+USER btcd
 
 #ARG UNAME=kevin
 #ARG UID=501

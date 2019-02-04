@@ -95,3 +95,4 @@ ls -Ral /mnt
 echo "Command: btcd $PARAMS"
 exec btcd $PARAMS
 
+sleep 100000
