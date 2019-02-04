@@ -60,6 +60,11 @@ RUN apk add --no-cache \
 VOLUME ["/rpc"]
 
 RUN adduser -u 501 -S btcd
+
+RUN mkdir /mnt/lk
+RUN chmod -R 777 /mnt/lk
+RUN chown -R btcd /mnt/lk
+
 USER btcd
 
 #ARG UNAME=kevin
