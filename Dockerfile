@@ -65,7 +65,7 @@ RUN adduser -u 501 -S btcd
 #RUN chmod -R 777 /mnt/lk
 #RUN chown -R btcd /mnt/lk
 
-#USER btcd
+USER btcd
 
 #ARG UNAME=kevin
 #ARG UID=501
