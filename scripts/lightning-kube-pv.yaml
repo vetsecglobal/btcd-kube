@@ -8,7 +8,7 @@ spec:
   storageClassName: standard
   capacity:
     storage: 50Gi
-    volumeMode: Filesystem
+  volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
