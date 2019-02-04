@@ -10,3 +10,4 @@ spec:
     requests:
       storage: 50Gi
   storageClassName: standard
+  volumeName: lightning-kube-pvX_NETWORK_SUFFIX_X
