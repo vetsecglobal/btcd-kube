@@ -2,6 +2,9 @@ FROM golang:1.11-alpine as builder
 
 MAINTAINER Olaoluwa Osuntokun <laolu@lightning.network>
 
+RUN adduser -u 501 -S btcd
+USER btcd
+
 # Install build dependencies such as git and glide.
 RUN apk add --no-cache git gcc musl-dev
 
@@ -68,8 +71,7 @@ VOLUME ["/rpc"]
 #RUN adduser -m -u $UID -g $GID -o -s /bin/bash $UNAME
 #USER $UNAME
 
-RUN adduser -u 501 -S btcd
-USER btcd
+
 
 ENTRYPOINT ["/start-btcd.sh"]
 
