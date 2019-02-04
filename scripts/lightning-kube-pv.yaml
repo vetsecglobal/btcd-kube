@@ -11,7 +11,8 @@ spec:
   capacity:
     storage: 50Gi
   hostPath:
-    path: "/host-home/minikube"
+#    path: "/host-home/minikube"
+    path: "/tmp"
     type: ''
   accessModes:
   - ReadWriteOnce
