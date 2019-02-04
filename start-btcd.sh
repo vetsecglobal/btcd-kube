@@ -83,9 +83,9 @@ echo "whoami: `whoami`"
 
 #ls -Ral /mnt/lk
 #sudo chmod -R 777 /mnt/lk
-ls -Ral /mnt/lk
+#ls -Ral /mnt/lk
 #sudo chown -R root:root /mnt/lk
-chown -R root:root /mnt/lk
+#chown -R root:root /mnt/lk
 
 ls -Ral /mnt/lk
 
@@ -99,4 +99,4 @@ ls -Ral /mnt/lk
 echo "Command: btcd $PARAMS"
 exec btcd $PARAMS || true
 
-sleep 100000
+#sleep 100000
