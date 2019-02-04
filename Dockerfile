@@ -67,8 +67,8 @@ VOLUME ["/rpc"]
 RUN apk add --no-cache sudo
 
 RUN adduser -u 501 -S btcd
-RUN adduser btcd sudo
-RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+#RUN adduser btcd sudo
+RUN echo 'btcd ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 USER btcd
 
