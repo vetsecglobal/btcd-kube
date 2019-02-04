@@ -64,8 +64,7 @@ VOLUME ["/rpc"]
 #RUN chmod -R 777 /mnt/lk
 #RUN chown -R btcd /mnt/lk
 
-RUN apt-get update && \
-    apt-get -y install sudo
+RUN apk add --no-cache sudo
 
 RUN adduser -u 501 -S btcd
 RUN adduser btcd sudo
