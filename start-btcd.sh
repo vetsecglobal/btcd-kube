@@ -81,12 +81,14 @@ umask 000
 
 echo "whoami: `whoami`"
 
-#ls -Ral /mnt
-#chmod -R 777 /mnt/lk
-ls -Ral /mnt
+ls -Ral /mnt/lk
+sudo chmod -R 777 /mnt/lk
+ls -Ral /mnt/lk
+sudo chown -R btcd /mnt/lk
+ls -Ral /mnt/lk
 
 /bin/gencerts --host="*" --host="${btcdServiceIp}" --host="${btcdHostName}" --directory="${baseRpcDir}" --force
-ls -Ral /mnt
+ls -Ral /mnt/lk
 
 
 #sleep 100000
