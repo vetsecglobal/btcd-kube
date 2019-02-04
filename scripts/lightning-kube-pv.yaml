@@ -17,3 +17,11 @@ spec:
 #    path: "/mnt"
   local:
     path: /host-home/minikube
+  nodeAffinity:
+      required:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/hostname
+            operator: In
+            values:
+            - minikube
