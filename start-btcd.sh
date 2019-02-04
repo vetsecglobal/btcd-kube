@@ -81,8 +81,8 @@ umask 000
 
 echo "whoami: `whoami`"
 
-ls -Ral /mnt
-chmod -R 777 /mnt/lk
+#ls -Ral /mnt
+#chmod -R 777 /mnt/lk
 ls -Ral /mnt
 
 /bin/gencerts --host="*" --host="${btcdServiceIp}" --host="${btcdHostName}" --directory="${baseRpcDir}" --force
