@@ -1,0 +1,27 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: lightning-kube-pvX_NETWORK_SUFFIX_X
+  labels:
+    type: local
+spec:
+  storageClassName: standard
+  capacity:
+    storage: 50Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Delete
+#  hostPath:
+#    path: "/host-home/minikube"
+#    path: "/mnt"
+  local:
+    path: /host-home/minikube
+  nodeAffinity:
+      required:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/hostname
+            operator: In
+            values:
+            - minikube
