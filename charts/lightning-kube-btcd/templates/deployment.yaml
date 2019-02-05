@@ -29,6 +29,7 @@ spec:
       - name: {{ .Chart.Name }}
 
         terminationMessagePath: "/tmp/{{ template "fullname" . }}.log"
+        terminationMessagePolicy: FallbackToLogsOnError
 
 #        securityContext:
 #          runAsUser: 501
