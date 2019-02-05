@@ -97,6 +97,6 @@ ls -Ral /mnt/lk
 
 # Print command and start bitcoin node.
 echo "Command: btcd $PARAMS"
-exec btcd $PARAMS || true
+exec btcd $PARAMS
 
 #sleep 100000
