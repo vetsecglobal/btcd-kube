@@ -77,7 +77,7 @@ echo "btcdServiceIp: ${btcdServiceIp}"
 #mkdir -p ${baseRpcDir}
 
 
-umask 000
+#umask 000
 
 echo "whoami: `whoami`"
 
