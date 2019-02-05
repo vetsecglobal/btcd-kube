@@ -28,6 +28,8 @@ spec:
       containers:
       - name: {{ .Chart.Name }}
 
+      terminationMessagePath: "/tmp/"{{ template "fullname" . }}".log"
+
 #        securityContext:
 #          runAsUser: 501
 
