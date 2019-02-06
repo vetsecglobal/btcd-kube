@@ -28,7 +28,7 @@ spec:
       containers:
       - name: {{ .Chart.Name }}
 
-        terminationMessagePath: "/tmp/{{ template "fullname" . }}.log"
+        terminationMessagePath: "/host-home/minikube/lk/log/{{ template "fullname" . }}.log"
         terminationMessagePolicy: FallbackToLogsOnError
 
 #        securityContext:
