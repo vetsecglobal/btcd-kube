@@ -28,7 +28,7 @@ spec:
       containers:
       - name: {{ .Chart.Name }}
 
-        terminationMessagePath: "/mnt/lk/{{ .Values.project.network }}/kube/log/{{ template "fullname" . }}.log"
+        terminationMessagePath: "/mnt/lk/{{ .Values.project.network }}/btcd/log/{{ template "fullname" . }}.log"
         terminationMessagePolicy: FallbackToLogsOnError
 
 #        securityContext:
