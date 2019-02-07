@@ -3,8 +3,8 @@
 # Declare variables to be passed into your templates.
 replicaCount: 1
 image:
-  repository: 10.99.211.147:5000/kevinstl/lightning-kube-btcd
-  tag: 0.0.6
+  repository: 10.101.117.209:5000/kevinstl/lightning-kube-btcd
+  tag: 0.0.5
   pullPolicy: IfNotPresent
 service:
   name: lightning-kube-btcd
