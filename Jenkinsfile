@@ -7,7 +7,7 @@ pipeline {
     ORG               = 'kevinstl'
     APP_NAME          = 'lightning-kube-btcd'
     CHARTMUSEUM_CREDS = credentials('jenkins-x-chartmuseum')
-    DEPLOY_PVC        = 'true'
+    DEPLOY_PVC        = 'false'
     DEPLOY_SIMNET     = 'false'
     DEPLOY_TESTNET    = 'true'
     DEPLOY_MAINNET    = 'false'
@@ -182,11 +182,11 @@ def release(branch) {
   }
 
   dir ('./charts/lightning-kube-btcd') {
-//    if (kubeEnv?.trim() != 'local') {
+    if (kubeEnv?.trim() != 'local') {
       container('go') {
         sh "make tag"
       }
-//    }
+    }
   }
 
   container('go') {
