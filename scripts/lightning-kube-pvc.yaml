@@ -8,6 +8,6 @@ spec:
   volumeMode: Filesystem
   resources:
     requests:
-      storage: 250Gi
+      storage: 25Gi
   storageClassName: standard
 #  volumeName: lightning-kube-pvX_NETWORK_SUFFIX_X

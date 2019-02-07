@@ -7,11 +7,11 @@ metadata:
 spec:
   storageClassName: standard
   capacity:
-    storage: 250Gi
+    storage: 25Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   hostPath:
 #    path: "/host-home/minikube"
-    path: "/tmp"
+    path: "/mnt"
