@@ -69,6 +69,8 @@ fi
 
 #./undeploy-helm.sh "${context}" ${network}
 
+kubectl create namespace ${namespace}${networkSuffix}
+
 if [[ ${deployPvc} == "true" ]]
 then
     cd ./scripts
