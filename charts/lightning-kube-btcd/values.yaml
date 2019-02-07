@@ -17,10 +17,10 @@ service:
 resources:
   limits:
     cpu: 1000m
-    memory: 2560Mi
+    memory: 2048Mi
   requests:
-    cpu: 200m
-    memory: 256Mi
+    cpu: 50m
+    memory: 64Mi
 probePath: /
 livenessProbe:
   initialDelaySeconds: 60
