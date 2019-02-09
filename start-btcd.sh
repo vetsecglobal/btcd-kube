@@ -45,7 +45,7 @@ DEBUG=$(set_default "$DEBUG" "info")
 NETWORK=$(set_default "$NETWORK" "simnet")
 
 baseDir="/mnt/${NETWORK}"
-baseBtcdDir=${baseDir}/btcd
+baseBtcdDir=${baseDir}
 baseRpcDir=${baseDir}/shared/rpc
 
 PARAMS=$(echo \

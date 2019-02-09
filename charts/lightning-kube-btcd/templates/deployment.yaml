@@ -119,12 +119,12 @@ spec:
         - mountPath: /mnt/{{ .Values.project.network }}/shared/rpc
           name: lightning-kube-drive
           subPath: {{ .Values.project.network }}/shared/rpc
-        - mountPath: /mnt/{{ .Values.project.network }}/btcd/data
+        - mountPath: /mnt/{{ .Values.project.network }}/data
           name: lightning-kube-drive
-          subPath: {{ .Values.project.network }}/btcd/data
-        - mountPath: /mnt/{{ .Values.project.network }}/btcd/log
+          subPath: {{ .Values.project.network }}/data
+        - mountPath: /mnt/{{ .Values.project.network }}/log
           name: lightning-kube-drive
-          subPath: {{ .Values.project.network }}/btcd/log
+          subPath: {{ .Values.project.network }}/log
 
 #      volumes:
 #      - name: lightning-kube-drive
