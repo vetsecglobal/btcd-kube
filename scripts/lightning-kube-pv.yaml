@@ -13,5 +13,5 @@ spec:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   hostPath:
-#    path: "/host-home/minikube"
-    path: "/mnt"
+    path: "/mnt/lk/btcd"
+    type: DirectoryOrCreate
