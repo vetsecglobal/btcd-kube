@@ -44,7 +44,7 @@ RPCPASS=$(set_default "$RPCPASS" "devpass")
 DEBUG=$(set_default "$DEBUG" "info")
 NETWORK=$(set_default "$NETWORK" "simnet")
 
-baseDir="/mnt/lk/${NETWORK}"
+baseDir="/mnt/${NETWORK}"
 baseBtcdDir=${baseDir}/btcd
 baseRpcDir=${baseDir}/shared/rpc
 
