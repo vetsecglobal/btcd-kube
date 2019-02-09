@@ -87,10 +87,10 @@ echo "whoami: `whoami`"
 #sudo chown -R root:root /mnt/lk
 #chown -R root:root /mnt/lk
 
-ls -Ral /mnt/lk
+ls -Ral /mnt
 
 /bin/gencerts --host="*" --host="${btcdServiceIp}" --host="${btcdHostName}" --directory="${baseRpcDir}" --force
-ls -Ral /mnt/lk
+ls -Ral /mnt
 
 
 #sleep 100000
