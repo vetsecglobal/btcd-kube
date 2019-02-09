@@ -10,4 +10,4 @@ spec:
     requests:
       storage: 25Gi
   storageClassName: standard
-#  volumeName: lightning-kube-pvX_NETWORK_SUFFIX_X
+  volumeName: lightning-kube-pvX_NETWORK_SUFFIX_X
