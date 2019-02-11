@@ -58,9 +58,10 @@ PARAMS=$(echo \
     "--rpccert=${baseRpcDir}/rpc.cert" \
     "--rpckey=${baseRpcDir}/rpc.key" \
     "--rpclisten=0.0.0.0" \
-    "--blocksonly" \
     "--txindex"
 )
+
+#    "--blocksonly" \
 
 # Set the mining flag only if address is non empty.
 if [[ -n "$MINING_ADDRESS" ]]; then

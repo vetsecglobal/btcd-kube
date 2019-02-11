@@ -13,5 +13,5 @@ spec:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   hostPath:
-    path: "/mnt/lk/btcd"
+    path: "/mnt/vda1/lk/btcd"
     type: DirectoryOrCreate
