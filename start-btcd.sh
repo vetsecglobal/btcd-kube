@@ -39,8 +39,8 @@ set_default() {
 }
 
 # Set default variables if needed.
-RPCUSER=$(set_default "$RPCUSER" "devuser")
-RPCPASS=$(set_default "$RPCPASS" "devpass")
+RPCUSER=$(set_default "$RPCUSER" "devuser_change")
+RPCPASS=$(set_default "$RPCPASS" "devpass_change")
 DEBUG=$(set_default "$DEBUG" "info")
 NETWORK=$(set_default "$NETWORK" "simnet")
 
@@ -58,6 +58,7 @@ PARAMS=$(echo \
     "--rpccert=${baseRpcDir}/rpc.cert" \
     "--rpckey=${baseRpcDir}/rpc.key" \
     "--rpclisten=0.0.0.0" \
+    "--blocksonly=1" \
     "--txindex"
 )
 
