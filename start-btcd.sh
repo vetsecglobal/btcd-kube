@@ -58,6 +58,7 @@ PARAMS=$(echo \
     "--rpccert=${baseRpcDir}/rpc.cert" \
     "--rpckey=${baseRpcDir}/rpc.key" \
     "--rpclisten=0.0.0.0" \
+    "--addpeer==185.36.237.188" \
     "--txindex"
 )
 
