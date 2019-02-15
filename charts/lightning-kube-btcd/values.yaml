@@ -16,11 +16,15 @@ service:
     fabric8.io/ingress.annotations: "kubernetes.io/ingress.class: nginx"
 resources:
   limits:
-    cpu: 500m
-    memory: 2560Mi
+#    cpu: 500m - These are values used to download entire blockchain
+    cpu: 100m
+#    memory: 2560Mi
+    memory: 256Mi
   requests:
-    cpu: 500m
-    memory: 2560Mi
+#    cpu: 500m
+    cpu: 100m
+#    memory: 2560Mi
+    memory: 256Mi
 probePath: /
 livenessProbe:
   initialDelaySeconds: 60
