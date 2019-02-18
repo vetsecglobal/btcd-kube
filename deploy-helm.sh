@@ -8,6 +8,8 @@ serviceType=$5
 nodePort=$6
 network=$7
 deployPvc=$8
+httpPort=$9
+rpcPort=${10}
 
 echo "context: ${context}"
 echo "namespace: ${namespace}"
@@ -17,6 +19,8 @@ echo "serviceType: ${serviceType}"
 echo "nodePort: ${nodePort}"
 echo "network: ${network}"
 echo "deployPvc: ${deployPvc}"
+echo "httpPort: ${httpPort}"
+echo "rpcPort: ${rpcPort}"
 
 
 kubeContextArg=""
