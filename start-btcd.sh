@@ -39,13 +39,13 @@ set_default() {
 }
 
 # Set default variables if needed.
-RPCUSER=$(set_default "$RPCUSER" "devuser")
-RPCPASS=$(set_default "$RPCPASS" "devpass")
+RPCUSER=$(set_default "$RPCUSER" "devuser_change")
+RPCPASS=$(set_default "$RPCPASS" "devpass_change")
 DEBUG=$(set_default "$DEBUG" "info")
 NETWORK=$(set_default "$NETWORK" "simnet")
 
-baseDir="/mnt/lk/${NETWORK}"
-baseBtcdDir=${baseDir}/btcd
+baseDir="/mnt/${NETWORK}"
+baseBtcdDir=${baseDir}
 baseRpcDir=${baseDir}/shared/rpc
 
 PARAMS=$(echo \
@@ -60,6 +60,9 @@ PARAMS=$(echo \
     "--rpclisten=0.0.0.0" \
     "--txindex"
 )
+
+#    "--addpeer==185.36.237.188" \
+#    "--blocksonly" \
 
 # Set the mining flag only if address is non empty.
 if [[ -n "$MINING_ADDRESS" ]]; then
@@ -87,10 +90,10 @@ echo "whoami: `whoami`"
 #sudo chown -R root:root /mnt/lk
 #chown -R root:root /mnt/lk
 
-ls -Ral /mnt/lk
+ls -Ral /mnt
 
 /bin/gencerts --host="*" --host="${btcdServiceIp}" --host="${btcdHostName}" --directory="${baseRpcDir}" --force
-ls -Ral /mnt/lk
+ls -Ral /mnt
 
 
 #sleep 100000

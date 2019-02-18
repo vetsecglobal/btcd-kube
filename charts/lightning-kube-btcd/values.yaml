@@ -3,24 +3,30 @@
 # Declare variables to be passed into your templates.
 replicaCount: 1
 image:
-  repository: 10.99.211.147:5000/kevinstl/lightning-kube-btcd
-  tag: 0.0.5
+  repository: 10.104.188.17:5000/kevinstl/lightning-kube-btcd
+  tag: 0.0.9
   pullPolicy: IfNotPresent
 service:
   name: lightning-kube-btcd
   type: LoadBalancer
-  externalPort: 18556
-  internalPort: 18556
+#  externalPort: 18556
+  externalPort: 18334
+#  internalPort: 18556
+  internalPort: 18334
   annotations:
     fabric8.io/expose: "true"
     fabric8.io/ingress.annotations: "kubernetes.io/ingress.class: nginx"
 resources:
   limits:
-    cpu: 1000m
-    memory: 2560Mi
+#    cpu: 500m - These are values used to download entire blockchain
+    cpu: 100m
+#    memory: 2560Mi
+    memory: 1024Mi
   requests:
-    cpu: 200m
-    memory: 256Mi
+#    cpu: 500m
+    cpu: 100m
+#    memory: 2560Mi
+    memory: 1024Mi
 probePath: /
 livenessProbe:
   initialDelaySeconds: 60

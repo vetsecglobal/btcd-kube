@@ -7,9 +7,9 @@ pipeline {
     ORG               = 'kevinstl'
     APP_NAME          = 'lightning-kube-btcd'
     CHARTMUSEUM_CREDS = credentials('jenkins-x-chartmuseum')
-    DEPLOY_PVC        = 'true'
+    DEPLOY_PVC        = 'false'
     DEPLOY_SIMNET     = 'false'
-    DEPLOY_TESTNET    = 'true'
+    DEPLOY_TESTNET    = 'false'
     DEPLOY_MAINNET    = 'false'
   }
   stages {
@@ -142,7 +142,7 @@ pipeline {
           if (kubeEnv?.trim() == 'local') {
             container('go') {
               sh "echo branch: ${env.BRANCH_NAME}"
-//              sh "./push.sh ${env.BRANCH_NAME}"
+              sh "./push.sh ${env.BRANCH_NAME}"
             }
           }
         }
@@ -235,4 +235,5 @@ def postBuild() {
     }
   }
 }
+
 

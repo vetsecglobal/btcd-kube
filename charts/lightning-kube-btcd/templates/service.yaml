@@ -16,12 +16,16 @@ spec:
   type: {{ .Values.service.type }}
   externalTrafficPolicy: Local
   ports:
-  - port: 18555
-    targetPort: 18555
+#  - port: 18555
+#    targetPort: 18555
+  - port: 18333
+    targetPort: 18333
     protocol: TCP
     name: http
-  - port: 18556
-    targetPort: 18556
+#  - port: 18556
+#    targetPort: 18556
+  - port: 18334
+    targetPort: 18334
     protocol: TCP
     name: rpc
   selector:
