@@ -4,8 +4,21 @@
 
 context=$1
 namespace=$2
+network=$3
 
-kubectl --context=${context} --namespace ${namespace} delete -f ./secrets.yml
+networkSuffix=""
+if [[ ${network} != "" ]]
+then
+    networkSuffix="-${network}"
+fi
+
+namespaceArg=""
+if [[ ${namespace} != "" ]]
+then
+    namespaceArg="--namespace ${namespace}${networkSuffix}"
+fi
+
+kubectl --context=${context} ${namespaceArg} delete -f ./secrets.yml
 
 
-#./delete-secrets.sh minikube lightning-kube
+#./delete-secrets.sh minikube lightning-kube mainnet

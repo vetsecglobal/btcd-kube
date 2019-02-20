@@ -51,11 +51,11 @@ baseRpcDir=${baseDir}/shared/rpc
 networkArg=""
 if [[ ${NETWORK} != "" && ${NETWORK} != "mainnet" ]]
 then
-    networkArg=${network}
+    networkArg="--${network}"
 fi
 
 PARAMS=$(echo \
-    "--$networkArg" \
+    "$networkArg" \
     "--debuglevel=$DEBUG" \
     "--rpcuser=$RPCUSER" \
     "--rpcpass=$RPCPASS" \
