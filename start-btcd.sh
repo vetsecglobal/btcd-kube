@@ -48,8 +48,14 @@ baseDir="/mnt/${NETWORK}"
 baseBtcdDir=${baseDir}
 baseRpcDir=${baseDir}/shared/rpc
 
+networkArg=""
+if [[ ${NETWORK} != "" && ${NETWORK} != "mainnet" ]]
+then
+    networkArg=${network}
+fi
+
 PARAMS=$(echo \
-    "--$NETWORK" \
+    "--$networkArg" \
     "--debuglevel=$DEBUG" \
     "--rpcuser=$RPCUSER" \
     "--rpcpass=$RPCPASS" \
