@@ -1,10 +1,10 @@
-# Lightning Kube BTCD
+# BTCD Kube
 
-Lightning Kube BTCD provides a simple way to deploy a full bitcoin node with BTCD into Kubernetes.           
+BTCD Kube provides a simple way to deploy a full bitcoin node with BTCD into Kubernetes.           
 
 [<img src="https://raw.githubusercontent.com/kubernetes/kubernetes/master/logo/logo.png" width="100px">](https://kubernetes.io/docs/home "Kubernetes")  [<img src="https://avatars3.githubusercontent.com/u/10235229?s=200&v=4" width="100px">](https://github.com/btcsuite/btcd "BTCD")  [<img src="https://jenkins.io/images/logos/jenkins-x/jenkins-x-256.png" width="100px">](https://jenkins-x.io "Jenkins X")
 
-This project is confirmed to work for simnet on a minikube instance. **It has not been tested or hardened for security on testnet or mainnet.**
+This project is confirmed to work for simnet and testnet on a minikube instance. **It has not been tested or hardened for security on mainnet.**
 
 This project implements a full bitcoin node running in Kubernetes using https://github.com/btcsuite/btcd deployed by Jenkins X. 
 

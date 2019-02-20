@@ -44,7 +44,6 @@ spec:
                 name: lightning-kube-secrets
                 key: mining-address
 
-        env:
           - name: NETWORK
             value: {{ .Values.project.network }}
 
