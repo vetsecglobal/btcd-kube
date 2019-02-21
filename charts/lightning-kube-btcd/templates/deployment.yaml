@@ -43,16 +43,13 @@ spec:
               secretKeyRef:
                 name: lightning-kube-secrets
                 key: mining-address
-
           - name: NETWORK
             value: {{ .Values.project.network }}
-
           - name: RPCUSER
             valueFrom:
               secretKeyRef:
                 name: lightning-kube-secrets
                 key: rpcuser
-
           - name: RPCPASS
             valueFrom:
               secretKeyRef:

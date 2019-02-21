@@ -7,10 +7,10 @@ pipeline {
     ORG               = 'kevinstl'
     APP_NAME          = 'lightning-kube-btcd'
     CHARTMUSEUM_CREDS = credentials('jenkins-x-chartmuseum')
-    DEPLOY_PVC        = 'false'
-    DEPLOY_SIMNET     = 'false'
+    DEPLOY_PVC        = 'true'
+    DEPLOY_SIMNET     = 'true'
     DEPLOY_TESTNET    = 'false'
-    DEPLOY_MAINNET    = 'true'
+    DEPLOY_MAINNET    = 'false'
   }
   stages {
 
@@ -107,28 +107,49 @@ pipeline {
     stage('Deploy Local') {
       steps {
         script {
+
+
+
+
           if (kubeEnv?.trim() == 'local') {
             sh 'echo  DEPLOY_PVC: ${DEPLOY_PVC}'
             sh 'echo  DEPLOY_SIMNET: ${DEPLOY_SIMNET}'
             sh 'echo  DEPLOY_TESTNET: ${DEPLOY_TESTNET}'
             sh 'echo  DEPLOY_MAINNET: ${DEPLOY_MAINNET}'
 
+
+//            # Expose mainnet ports (server, rpc)
+//            EXPOSE 8333 8334
+//
+//            # Expose testnet ports (server, rpc)
+//            EXPOSE 18333 18334
+//
+//            # Expose simnet ports (server, rpc)
+//            EXPOSE 18555 18556
+//
+//            # Expose segnet ports (server, rpc)
+//            EXPOSE 28901 28902
+
+
             if (DEPLOY_SIMNET == 'true') {
               container('go') {
                 sh './undeploy-helm.sh "" lightning-kube simnet ${DEPLOY_PVC} || true'
-                sh './deploy-helm.sh "" lightning-kube \$(cat VERSION) lightning-kube-btcd-local LoadBalancer 30080 simnet ${DEPLOY_PVC}'
+                sh './deploy-helm.sh "" lightning-kube \$(cat VERSION) lightning-kube-btcd-local LoadBalancer' \
+                    '30080 simnet ${DEPLOY_PVC} 18555 18556'
               }
             }
             if (DEPLOY_TESTNET == 'true') {
               container('go') {
                 sh './undeploy-helm.sh "" lightning-kube testnet ${DEPLOY_PVC} || true'
-                sh './deploy-helm.sh "" lightning-kube \$(cat VERSION) lightning-kube-btcd-local LoadBalancer 30080 testnet ${DEPLOY_PVC}'
+                sh './deploy-helm.sh "" lightning-kube \$(cat VERSION) lightning-kube-btcd-local LoadBalancer' \
+                    '30080 testnet ${DEPLOY_PVC} 18333 18334'
               }
             }
             if (DEPLOY_MAINNET == 'true') {
               container('go') {
                 sh './undeploy-helm.sh "" lightning-kube mainnet ${DEPLOY_PVC} || true'
-                sh './deploy-helm.sh "" lightning-kube \$(cat VERSION) lightning-kube-btcd-local LoadBalancer 30080 mainnet ${DEPLOY_PVC}'
+                sh './deploy-helm.sh "" lightning-kube \$(cat VERSION) lightning-kube-btcd-local LoadBalancer' \
+                    '30080 mainnet ${DEPLOY_PVC} 8333 8334'
               }
             }
           }

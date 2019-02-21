@@ -82,7 +82,14 @@ then
     cd ..
 fi
 
-helm ${kubeContextArg} ${namespaceArg} install -n lightning-kube-btcd${networkSuffix} --set database=${database} ${namespaceValueArg} ${serviceTypeArg} ${nodePortArg} ${networkArg} ${networkSuffixArg} --set image.tag=${imageTag} charts/lightning-kube-btcd
+rpcPortArg=""
+if [[ ${rpcPort} != "" ]]
+then
+    rpcPortArg="--set service.externalPort=${rpcPort} --set service.internalPort=${rpcPort}"
+fi
+
+
+helm ${kubeContextArg} ${namespaceArg} install -n lightning-kube-btcd${networkSuffix} --set database=${database} ${namespaceValueArg} ${serviceTypeArg} ${nodePortArg} ${networkArg} ${networkSuffixArg} ${rpcPortArg} --set image.tag=${imageTag} charts/lightning-kube-btcd
 
 
 if [ $? -eq 0 ]
