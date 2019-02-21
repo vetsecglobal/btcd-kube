@@ -219,6 +219,8 @@ def release(branch) {
 
     sh "ls -al"
 
+    sh "docker version"
+
     //sh "./build.sh container prod package -DskipTests"
 
 //    sh "./build.sh container prod package"
