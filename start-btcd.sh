@@ -72,7 +72,7 @@ PARAMS=$(echo \
 
 #MINING_ADDRESS="empty"
 
-echo "MINING_ADDRESS: ${MINING_ADDRESS}"
+echo "MINING_ADDRESS: |${MINING_ADDRESS}|"
 
 echo "debug1"
 
