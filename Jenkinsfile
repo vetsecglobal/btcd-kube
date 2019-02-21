@@ -202,7 +202,7 @@ def release(branch) {
 //    sh "mvn versions:set -DnewVersion=\$(cat VERSION)"
   }
 
-  dir ('./charts/lightning-kube-btcd') {
+  dir ('./charts/btcd-kube') {
     if (kubeEnv?.trim() != 'local') {
       container('go') {
         sh "pwd"
