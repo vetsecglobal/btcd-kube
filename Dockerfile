@@ -1,4 +1,5 @@
-FROM golang:1.11-alpine as builder
+#FROM golang:1.11-alpine as builder
+FROM golang:1.11-alpine
 
 MAINTAINER Olaoluwa Osuntokun <laolu@lightning.network>
 
@@ -27,11 +28,17 @@ EXPOSE 18555 18556
 EXPOSE 28901 28902
 
 # Copy the compiled binaries from the builder image.
-COPY --from=builder /go/bin/addblock /bin/
-COPY --from=builder /go/bin/btcctl /bin/
-COPY --from=builder /go/bin/btcd /bin/
-COPY --from=builder /go/bin/findcheckpoint /bin/
-COPY --from=builder /go/bin/gencerts /bin/
+#COPY --from=builder /go/bin/addblock /bin/
+#COPY --from=builder /go/bin/btcctl /bin/
+#COPY --from=builder /go/bin/btcd /bin/
+#COPY --from=builder /go/bin/findcheckpoint /bin/
+#COPY --from=builder /go/bin/gencerts /bin/
+
+COPY /go/bin/addblock /bin/
+COPY /go/bin/btcctl /bin/
+COPY /go/bin/btcd /bin/
+COPY /go/bin/findcheckpoint /bin/
+COPY /go/bin/gencerts /bin/
 
 COPY "start-btcctl.sh" .
 COPY "start-btcd.sh" .
