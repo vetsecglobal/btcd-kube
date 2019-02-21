@@ -70,10 +70,21 @@ PARAMS=$(echo \
 #    "--addpeer==185.36.237.188" \
 #    "--blocksonly" \
 
+#MINING_ADDRESS="empty"
+
+echo "MINING_ADDRESS: ${MINING_ADDRESS}"
+
+echo "debug1"
+
 # Set the mining flag only if address is non empty.
 if [[ -n "$MINING_ADDRESS" && ${MINING_ADDRESS} != "empty" ]]; then
+    echo "debug2"
     PARAMS="$PARAMS --miningaddr=$MINING_ADDRESS"
 fi
+
+echo "PARAMS: ${PARAMS}"
+
+echo "debug3"
 
 # Add user parameters to command.
 PARAMS="$PARAMS $@"
