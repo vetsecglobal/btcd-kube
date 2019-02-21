@@ -51,7 +51,7 @@ baseRpcDir=${baseDir}/shared/rpc
 networkArg=""
 if [[ ${NETWORK} != "" && ${NETWORK} != "mainnet" ]]
 then
-    networkArg="--${network}"
+    networkArg="--${NETWORK}"
 fi
 
 PARAMS=$(echo \

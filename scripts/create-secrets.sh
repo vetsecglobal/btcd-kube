@@ -36,3 +36,4 @@ cat ./secrets.yml | sed "s/\X_MINING_ADDRESS_X/${miningAddress}/" | \
 
 #./create-secrets.sh minikube lightning-kube rb6CBeh9F2z149iDP19xNV4Mgr8SQFbkFc
 #./create-secrets.sh minikube lightning-kube mainnet empty devuser_change devpass_change
+#./create-secrets.sh minikube lightning-kube simnet empty devuser_change devpass_change
