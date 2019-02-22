@@ -1,4 +1,4 @@
-#FROM golang:1.11-alpine as builder
+#FROM golang:1.11-alpine as builder #gke has docker 17.03.2-ce. support for multistage docker began in version 17.05, so we had to stop using multistage docker
 FROM golang:1.11-alpine
 
 MAINTAINER Olaoluwa Osuntokun <laolu@lightning.network>
@@ -34,11 +34,11 @@ EXPOSE 28901 28902
 #COPY --from=builder /go/bin/findcheckpoint /bin/
 #COPY --from=builder /go/bin/gencerts /bin/
 
-COPY /go/bin/addblock /bin/
-COPY /go/bin/btcctl /bin/
-COPY /go/bin/btcd /bin/
-COPY /go/bin/findcheckpoint /bin/
-COPY /go/bin/gencerts /bin/
+RUN cp /go/bin/addblock /bin/
+RUN cp /go/bin/btcctl /bin/
+RUN cp /go/bin/btcd /bin/
+RUN cp /go/bin/findcheckpoint /bin/
+RUN cp /go/bin/gencerts /bin/
 
 COPY "start-btcctl.sh" .
 COPY "start-btcd.sh" .
