@@ -5,7 +5,7 @@ pipeline {
   }
   environment {
     ORG               = 'kevinstl'
-    APP_NAME          = 'lightning-kube-btcd'
+    APP_NAME          = 'btcd-kube'
     CHARTMUSEUM_CREDS = credentials('jenkins-x-chartmuseum')
     DEPLOY_PVC        = 'false'
     DEPLOY_SIMNET     = 'false'
@@ -134,21 +134,21 @@ pipeline {
             if (DEPLOY_SIMNET == 'true') {
               container('go') {
                 sh './undeploy-helm.sh "" lightning-kube simnet ${DEPLOY_PVC} || true'
-                sh './deploy-helm.sh "" lightning-kube \$(cat VERSION) lightning-kube-btcd-local LoadBalancer \
+                sh './deploy-helm.sh "" lightning-kube \$(cat VERSION) btcd-kube-local LoadBalancer \
                     30080 simnet ${DEPLOY_PVC} 18555 18556'
               }
             }
             if (DEPLOY_TESTNET == 'true') {
               container('go') {
                 sh './undeploy-helm.sh "" lightning-kube testnet ${DEPLOY_PVC} || true'
-                sh './deploy-helm.sh "" lightning-kube \$(cat VERSION) lightning-kube-btcd-local LoadBalancer \
+                sh './deploy-helm.sh "" lightning-kube \$(cat VERSION) btcd-kube-local LoadBalancer \
                     30080 testnet ${DEPLOY_PVC} 18333 18334'
               }
             }
             if (DEPLOY_MAINNET == 'true') {
               container('go') {
                 sh './undeploy-helm.sh "" lightning-kube mainnet ${DEPLOY_PVC} || true'
-                sh './deploy-helm.sh "" lightning-kube \$(cat VERSION) lightning-kube-btcd-local LoadBalancer \
+                sh './deploy-helm.sh "" lightning-kube \$(cat VERSION) btcd-kube-local LoadBalancer \
                     30080 mainnet ${DEPLOY_PVC} 8333 8334'
               }
             }

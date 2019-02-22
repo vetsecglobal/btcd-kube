@@ -28,7 +28,7 @@ then
     namespaceValueArg="--set project.namespace=${namespace}${networkSuffix}"
 fi
 
-helm ${kubeContextArg} del --purge lightning-kube-btcd${networkSuffix}
+helm ${kubeContextArg} del --purge btcd-kube${networkSuffix}
 
 if [[ ${deployPvc} == "true" ]]
 then

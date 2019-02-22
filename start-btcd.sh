@@ -89,7 +89,7 @@ echo "debug3"
 # Add user parameters to command.
 PARAMS="$PARAMS $@"
 
-btcdHostName="lightning-kube-btcd.lightning-kube-$NETWORK"
+btcdHostName="btcd-kube.lightning-kube-$NETWORK"
 btcdServiceIp=`ping ${btcdHostName} -c1 | head -1 | grep -Eo '[0-9.]{4,}'`
 
 echo "btcdServiceIp: ${btcdServiceIp}"

@@ -89,7 +89,7 @@ then
 fi
 
 
-helm ${kubeContextArg} ${namespaceArg} install -n lightning-kube-btcd${networkSuffix} --set database=${database} ${namespaceValueArg} ${serviceTypeArg} ${nodePortArg} ${networkArg} ${networkSuffixArg} ${rpcPortArg} --set image.tag=${imageTag} charts/lightning-kube-btcd
+helm ${kubeContextArg} ${namespaceArg} install -n btcd-kube${networkSuffix} --set database=${database} ${namespaceValueArg} ${serviceTypeArg} ${nodePortArg} ${networkArg} ${networkSuffixArg} ${rpcPortArg} --set image.tag=${imageTag} charts/btcd-kube
 
 
 if [ $? -eq 0 ]

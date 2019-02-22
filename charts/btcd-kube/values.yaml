@@ -3,11 +3,11 @@
 # Declare variables to be passed into your templates.
 replicaCount: 1
 image:
-  repository: 10.104.188.17:5000/kevinstl/lightning-kube-btcd
+  repository: 10.104.188.17:5000/kevinstl/btcd-kube
   tag: 0.0.11
   pullPolicy: IfNotPresent
 service:
-  name: lightning-kube-btcd
+  name: btcd-kube
   type: LoadBalancer
 #  externalPort: 18556
   externalPort: 18334

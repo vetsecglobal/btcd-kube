@@ -9,5 +9,5 @@ dependencies:
   repository: https://chartmuseum.build.cd.jenkins-x.io
   version: 2.3.56
 - alias: preview
-  name: lightning-kube-btcd
-  repository: file://../lightning-kube-btcd
+  name: btcd-kube
+  repository: file://../btcd-kube
