@@ -34,6 +34,11 @@ EXPOSE 28901 28902
 #COPY --from=builder /go/bin/findcheckpoint /bin/
 #COPY --from=builder /go/bin/gencerts /bin/
 
+RUN ls -al /
+RUN ls -al /go
+RUN ls -al /go/bin
+
+
 RUN cp /go/bin/addblock /bin/
 RUN cp /go/bin/btcctl /bin/
 RUN cp /go/bin/btcd /bin/
