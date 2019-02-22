@@ -240,7 +240,7 @@ def release(branch) {
 
 def promote() {
 
-  dir ('./charts/lightning-kube-btcd') {
+  dir ('./charts/btcd-kube') {
     container('go') {
 
 //      sh 'jx version'
