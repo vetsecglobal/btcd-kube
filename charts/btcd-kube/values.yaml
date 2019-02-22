@@ -38,3 +38,7 @@ readinessProbe:
   successThreshold: 1
   timeoutSeconds: 1
 terminationGracePeriodSeconds: 10
+project:    #TODO: Should clean this up. Remove redundancy of network & networkSuffix
+  namespace: btcd-kube
+  network: simnet
+  networkSuffix: -simnet

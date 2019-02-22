@@ -111,7 +111,7 @@ pipeline {
 
 
 
-//          if (kubeEnv?.trim() == 'local') {
+          if (kubeEnv?.trim() == 'local') {
             sh 'echo  DEPLOY_PVC: ${DEPLOY_PVC}'
             sh 'echo  DEPLOY_SIMNET: ${DEPLOY_SIMNET}'
             sh 'echo  DEPLOY_TESTNET: ${DEPLOY_TESTNET}'
@@ -152,7 +152,7 @@ pipeline {
                     30080 mainnet ${DEPLOY_PVC} 8333 8334'
               }
             }
-//          }
+          }
         }
       }
     }
