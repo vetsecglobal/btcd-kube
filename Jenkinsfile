@@ -243,7 +243,7 @@ def promote() {
   dir ('./charts/lightning-kube-btcd') {
     container('go') {
 
-      sh 'jx version'
+//      sh 'jx version'
 
       sh 'jx step changelog --version v\$(cat ../../VERSION)'
 
