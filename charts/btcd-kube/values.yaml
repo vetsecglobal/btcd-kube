@@ -39,6 +39,6 @@ readinessProbe:
   timeoutSeconds: 1
 terminationGracePeriodSeconds: 10
 project:    #TODO: Should clean this up. Remove redundancy of network & networkSuffix
-  namespace: btcd-kube
+  namespace: lightning-kube-simnet
   network: simnet
   networkSuffix: -simnet
