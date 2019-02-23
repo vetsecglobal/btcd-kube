@@ -108,14 +108,14 @@ pipeline {
       steps {
         script {
 
-
+          sh 'echo  DEPLOY_PVC: ${DEPLOY_PVC}'
+          sh 'echo  DEPLOY_SIMNET: ${DEPLOY_SIMNET}'
+          sh 'echo  DEPLOY_TESTNET: ${DEPLOY_TESTNET}'
+          sh 'echo  DEPLOY_MAINNET: ${DEPLOY_MAINNET}'
 
 
           if (kubeEnv?.trim() == 'local') {
-            sh 'echo  DEPLOY_PVC: ${DEPLOY_PVC}'
-            sh 'echo  DEPLOY_SIMNET: ${DEPLOY_SIMNET}'
-            sh 'echo  DEPLOY_TESTNET: ${DEPLOY_TESTNET}'
-            sh 'echo  DEPLOY_MAINNET: ${DEPLOY_MAINNET}'
+
 
 
 //            # Expose mainnet ports (server, rpc)
