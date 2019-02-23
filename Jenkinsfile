@@ -10,7 +10,7 @@ pipeline {
     DEPLOY_PVC        = 'true'
     DEPLOY_SIMNET     = 'true'
     DEPLOY_TESTNET    = 'false'
-    DEPLOY_MAINNET    = 'true'
+    DEPLOY_MAINNET    = 'false'
   }
   stages {
 
@@ -242,14 +242,46 @@ def promote() {
 
   dir ('./charts/btcd-kube') {
 
-    container('go') {
-      sh 'jx step changelog --version v\$(cat ../../VERSION)'
-      // release the helm chart
-      sh 'jx step helm release'
-      // promote through all 'Auto' promotion Environments
+
+    if (DEPLOY_SIMNET == 'true') {
+      container('go') {
+        sh 'jx step changelog --version v\$(cat ../../VERSION)'
+        // release the helm chart
+        sh 'jx step helm release'
+        // promote through all 'Auto' promotion Environments
 //      sh 'jx promote --verbose -b --all-auto --timeout 1h --version \$(cat ../../VERSION)'
-      sh 'jx promote --verbose -b --env lightning-kube-mainnet --timeout 1h --version \$(cat ../../VERSION)'
+        sh 'jx promote --verbose -b --env lightning-kube-simnet --timeout 1h --version \$(cat ../../VERSION)'
+      }
     }
+    if (DEPLOY_TESTNET == 'true') {
+      container('go') {
+        sh 'jx step changelog --version v\$(cat ../../VERSION)'
+        // release the helm chart
+        sh 'jx step helm release'
+        // promote through all 'Auto' promotion Environments
+//      sh 'jx promote --verbose -b --all-auto --timeout 1h --version \$(cat ../../VERSION)'
+        sh 'jx promote --verbose -b --env lightning-kube-testnet --timeout 1h --version \$(cat ../../VERSION)'
+      }
+    }
+    if (DEPLOY_MAINNET == 'true') {
+      container('go') {
+        sh 'jx step changelog --version v\$(cat ../../VERSION)'
+        // release the helm chart
+        sh 'jx step helm release'
+        // promote through all 'Auto' promotion Environments
+//      sh 'jx promote --verbose -b --all-auto --timeout 1h --version \$(cat ../../VERSION)'
+        sh 'jx promote --verbose -b --env lightning-kube-mainnet --timeout 1h --version \$(cat ../../VERSION)'
+      }
+    }
+
+//    container('go') {
+//      sh 'jx step changelog --version v\$(cat ../../VERSION)'
+//      // release the helm chart
+//      sh 'jx step helm release'
+//      // promote through all 'Auto' promotion Environments
+////      sh 'jx promote --verbose -b --all-auto --timeout 1h --version \$(cat ../../VERSION)'
+//      sh 'jx promote --verbose -b --env lightning-kube-mainnet --timeout 1h --version \$(cat ../../VERSION)'
+//    }
   }
 
 }
