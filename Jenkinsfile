@@ -8,7 +8,7 @@ pipeline {
     APP_NAME          = 'btcd-kube'
     CHARTMUSEUM_CREDS = credentials('jenkins-x-chartmuseum')
     DEPLOY_PVC        = 'true'
-    DEPLOY_SIMNET     = 'false'
+    DEPLOY_SIMNET     = 'true'
     DEPLOY_TESTNET    = 'false'
     DEPLOY_MAINNET    = 'true'
   }
@@ -241,17 +241,14 @@ def release(branch) {
 def promote() {
 
   dir ('./charts/btcd-kube') {
+
     container('go') {
-
-//      sh 'jx version'
-
       sh 'jx step changelog --version v\$(cat ../../VERSION)'
-
       // release the helm chart
       sh 'jx step helm release'
-
       // promote through all 'Auto' promotion Environments
-      sh 'jx promote --verbose -b --all-auto --timeout 1h --version \$(cat ../../VERSION)'
+//      sh 'jx promote --verbose -b --all-auto --timeout 1h --version \$(cat ../../VERSION)'
+      sh 'jx promote --verbose -b --env lightning-kube-mainnet --timeout 1h --version \$(cat ../../VERSION)'
     }
   }
 
