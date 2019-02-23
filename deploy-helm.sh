@@ -75,12 +75,12 @@ fi
 
 kubectl create namespace ${namespace}${networkSuffix}
 
-if [[ ${deployPvc} == "true" ]]
-then
-    cd ./scripts
-    ./create-pv.sh  "${context}" "${namespace}${networkSuffix}" ${networkSuffix}
-    cd ..
-fi
+#if [[ ${deployPvc} == "true" ]]
+#then
+#    cd ./scripts
+#    ./create-pv.sh  "${context}" "${namespace}${networkSuffix}" ${networkSuffix} ${storage}
+#    cd ..
+#fi
 
 rpcPortArg=""
 if [[ ${rpcPort} != "" ]]

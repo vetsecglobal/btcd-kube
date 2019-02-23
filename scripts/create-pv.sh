@@ -3,12 +3,14 @@
 context=$1
 namespace=$2
 networkSuffix=$3
+storage=$4
 
 echo "create-pv.sh"
 
 echo "context: ${context}"
 echo "namespace: ${namespace}"
 echo "networkSuffix: ${networkSuffix}"
+echo "storage: ${storage}"
 
 kubeContextArg=""
 if [[ ${context} != "" ]]
@@ -31,7 +33,7 @@ fi
 
 #cat ./lightning-kube-pv.yaml | sed "s/\X_NETWORK_SUFFIX_X/${networkSuffix}/" | kubectl ${kubeContextArg} ${namespaceArg} create -f -
 
-cat ${pvYaml} | sed "s/\X_NETWORK_SUFFIX_X/${networkSuffix}/" | kubectl ${kubeContextArg} ${namespaceArg} create -f -
+cat ./lightning-kube-pv.yaml | sed "s/\X_NETWORK_SUFFIX_X/${networkSuffix}/" | sed "s/\X_STORAGE_X/${storage}/" | kubectl ${kubeContextArg} ${namespaceArg} create -f -
 
 cat ./lightning-kube-pvc.yaml | sed "s/\X_NETWORK_SUFFIX_X/${networkSuffix}/" | kubectl ${kubeContextArg} ${namespaceArg} create -f -
 

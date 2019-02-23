@@ -132,13 +132,28 @@ pipeline {
 
 
             if (DEPLOY_SIMNET == 'true') {
+
+              if (DEPLOY_PVC == 'true') {
+                container('go') {
+                  sh './scripts/create-pv.sh "" lightning-kube-simnet -simnet 5Gi'
+                }
+              }
+
               container('go') {
+
                 sh './undeploy-helm.sh "" lightning-kube simnet ${DEPLOY_PVC} || true'
                 sh './deploy-helm.sh "" lightning-kube \$(cat VERSION) btcd-kube-local LoadBalancer \
                     30080 simnet ${DEPLOY_PVC} 18555 18556'
               }
             }
             if (DEPLOY_TESTNET == 'true') {
+
+              if (DEPLOY_PVC == 'true') {
+                container('go') {
+                  sh './scripts/create-pv.sh "" lightning-kube-testnet -testnet 25Gi'
+                }
+              }
+
               container('go') {
                 sh './undeploy-helm.sh "" lightning-kube testnet ${DEPLOY_PVC} || true'
                 sh './deploy-helm.sh "" lightning-kube \$(cat VERSION) btcd-kube-local LoadBalancer \
@@ -146,6 +161,13 @@ pipeline {
               }
             }
             if (DEPLOY_MAINNET == 'true') {
+
+              if (DEPLOY_PVC == 'true') {
+                container('go') {
+                  sh './scripts/create-pv.sh "" lightning-kube-mainnet -mainnet 275Gi'
+                }
+              }
+
               container('go') {
                 sh './undeploy-helm.sh "" lightning-kube mainnet ${DEPLOY_PVC} || true'
                 sh './deploy-helm.sh "" lightning-kube \$(cat VERSION) btcd-kube-local LoadBalancer \
@@ -244,6 +266,13 @@ def promote() {
 
 
     if (DEPLOY_SIMNET == 'true') {
+
+      if (DEPLOY_PVC == 'true') {
+        container('go') {
+          sh './scripts/create-pv.sh "" lightning-kube-simnet -simnet 5Gi'
+        }
+      }
+
       container('go') {
         sh 'jx step changelog --version v\$(cat ../../VERSION)'
         // release the helm chart
@@ -254,6 +283,13 @@ def promote() {
       }
     }
     if (DEPLOY_TESTNET == 'true') {
+
+      if (DEPLOY_PVC == 'true') {
+        container('go') {
+          sh './scripts/create-pv.sh "" lightning-kube-testnet -testnet 25Gi'
+        }
+      }
+
       container('go') {
         sh 'jx step changelog --version v\$(cat ../../VERSION)'
         // release the helm chart
@@ -264,6 +300,13 @@ def promote() {
       }
     }
     if (DEPLOY_MAINNET == 'true') {
+
+      if (DEPLOY_PVC == 'true') {
+        container('go') {
+          sh './scripts/create-pv.sh "" lightning-kube-mainnet -mainnet 275Gi'
+        }
+      }
+
       container('go') {
         sh 'jx step changelog --version v\$(cat ../../VERSION)'
         // release the helm chart
