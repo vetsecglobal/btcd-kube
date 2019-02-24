@@ -282,8 +282,14 @@ def promote() {
 //        }
 //      }
 
+      if (kubeEnv?.trim() == 'local') {
+        container('go') {
+          sh 'jx step changelog --version v\$(cat ../../VERSION)'
+        }
+      }
+
       container('go') {
-        sh 'jx step changelog --version v\$(cat ../../VERSION)'
+//        sh 'jx step changelog --version v\$(cat ../../VERSION)'
         // release the helm chart
         sh 'jx step helm release'
         // promote through all 'Auto' promotion Environments
