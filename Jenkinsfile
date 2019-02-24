@@ -84,9 +84,9 @@ pipeline {
       }
       steps {
         script {
-//          if (kubeEnv?.trim() != 'local') {
+          if (kubeEnv?.trim() != 'local') {
             promote()
-//          }
+          }
         }
       }
     }
@@ -104,89 +104,90 @@ pipeline {
       }
     }
 
-//    stage('Deploy Local') {
-//      steps {
-//        script {
+    stage('Deploy Local') {
+      steps {
+        script {
+
+          sh 'echo  DEPLOY_PVC: ${DEPLOY_PVC}'
+          sh 'echo  DEPLOY_SIMNET: ${DEPLOY_SIMNET}'
+          sh 'echo  DEPLOY_TESTNET: ${DEPLOY_TESTNET}'
+          sh 'echo  DEPLOY_MAINNET: ${DEPLOY_MAINNET}'
+
+
+          if (kubeEnv?.trim() == 'local') {
+
+
+
+//            # Expose mainnet ports (server, rpc)
+//            EXPOSE 8333 8334
 //
-//          sh 'echo  DEPLOY_PVC: ${DEPLOY_PVC}'
-//          sh 'echo  DEPLOY_SIMNET: ${DEPLOY_SIMNET}'
-//          sh 'echo  DEPLOY_TESTNET: ${DEPLOY_TESTNET}'
-//          sh 'echo  DEPLOY_MAINNET: ${DEPLOY_MAINNET}'
+//            # Expose testnet ports (server, rpc)
+//            EXPOSE 18333 18334
 //
+//            # Expose simnet ports (server, rpc)
+//            EXPOSE 18555 18556
 //
-//          if (kubeEnv?.trim() == 'local') {
-//
-//
-//
-////            # Expose mainnet ports (server, rpc)
-////            EXPOSE 8333 8334
-////
-////            # Expose testnet ports (server, rpc)
-////            EXPOSE 18333 18334
-////
-////            # Expose simnet ports (server, rpc)
-////            EXPOSE 18555 18556
-////
-////            # Expose segnet ports (server, rpc)
-////            EXPOSE 28901 28902
-//
-//            dir ('./charts/btcd-kube') {
-//
-//              if (DEPLOY_SIMNET == 'true') {
-//
-//                container('go') {
-//                  sh 'jx step helm install -env lightning-kube-simnet'
-//                }
-//
-//                //              if (DEPLOY_PVC == 'true') {
-//                //                container('go') {
-//                //                  sh './scripts/create-pv.sh "" lightning-kube-simnet -simnet 5Gi'
-//                //                }
-//                //              }
-//                //
-//                //              container('go') {
-//                //
-//                //                sh './undeploy-helm.sh "" lightning-kube simnet ${DEPLOY_PVC} || true'
-//                //                sh './deploy-helm.sh "" lightning-kube \$(cat VERSION) btcd-kube-local LoadBalancer \
-//                //                    30080 simnet ${DEPLOY_PVC} 18555 18556'
-//                //              }
-//
-//              }
-//
-//              if (DEPLOY_TESTNET == 'true') {
-//
-//                if (DEPLOY_PVC == 'true') {
-//                  container('go') {
-//                    sh './scripts/create-pv.sh "" lightning-kube-testnet -testnet 25Gi'
-//                  }
-//                }
-//
-//                container('go') {
-//                  sh './undeploy-helm.sh "" lightning-kube testnet ${DEPLOY_PVC} || true'
-//                  sh './deploy-helm.sh "" lightning-kube \$(cat VERSION) btcd-kube-local LoadBalancer \
-//                      30080 testnet ${DEPLOY_PVC} 18333 18334'
-//                }
-//              }
-//              if (DEPLOY_MAINNET == 'true') {
-//
-//                if (DEPLOY_PVC == 'true') {
-//                  container('go') {
-//                    sh './scripts/create-pv.sh "" lightning-kube-mainnet -mainnet 275Gi'
-//                  }
-//                }
-//
-//                container('go') {
-//                  sh './undeploy-helm.sh "" lightning-kube mainnet ${DEPLOY_PVC} || true'
-//                  sh './deploy-helm.sh "" lightning-kube \$(cat VERSION) btcd-kube-local LoadBalancer \
-//                      30080 mainnet ${DEPLOY_PVC} 8333 8334'
-//                }
-//              }
-//
-//            }
-//          }
-//        }
-//      }
-//    }
+//            # Expose segnet ports (server, rpc)
+//            EXPOSE 28901 28902
+
+            dir ('./charts/btcd-kube') {
+
+              if (DEPLOY_SIMNET == 'true') {
+
+                container('go') {
+//                  sh 'jx step helm install --set-file ./values-simnet.yaml'
+                  sh 'jx step env apply --namespace lightning-kube-simnet'
+                }
+
+                //              if (DEPLOY_PVC == 'true') {
+                //                container('go') {
+                //                  sh './scripts/create-pv.sh "" lightning-kube-simnet -simnet 5Gi'
+                //                }
+                //              }
+                //
+                //              container('go') {
+                //
+                //                sh './undeploy-helm.sh "" lightning-kube simnet ${DEPLOY_PVC} || true'
+                //                sh './deploy-helm.sh "" lightning-kube \$(cat VERSION) btcd-kube-local LoadBalancer \
+                //                    30080 simnet ${DEPLOY_PVC} 18555 18556'
+                //              }
+
+              }
+
+              if (DEPLOY_TESTNET == 'true') {
+
+                if (DEPLOY_PVC == 'true') {
+                  container('go') {
+                    sh './scripts/create-pv.sh "" lightning-kube-testnet -testnet 25Gi'
+                  }
+                }
+
+                container('go') {
+                  sh './undeploy-helm.sh "" lightning-kube testnet ${DEPLOY_PVC} || true'
+                  sh './deploy-helm.sh "" lightning-kube \$(cat VERSION) btcd-kube-local LoadBalancer \
+                      30080 testnet ${DEPLOY_PVC} 18333 18334'
+                }
+              }
+              if (DEPLOY_MAINNET == 'true') {
+
+                if (DEPLOY_PVC == 'true') {
+                  container('go') {
+                    sh './scripts/create-pv.sh "" lightning-kube-mainnet -mainnet 275Gi'
+                  }
+                }
+
+                container('go') {
+                  sh './undeploy-helm.sh "" lightning-kube mainnet ${DEPLOY_PVC} || true'
+                  sh './deploy-helm.sh "" lightning-kube \$(cat VERSION) btcd-kube-local LoadBalancer \
+                      30080 mainnet ${DEPLOY_PVC} 8333 8334'
+                }
+              }
+
+            }
+          }
+        }
+      }
+    }
 
     stage('Push Local') {
       steps {
@@ -276,20 +277,14 @@ def promote() {
 
     if (DEPLOY_SIMNET == 'true') {
 
-//      if (DEPLOY_PVC == 'true') {
-//        container('go') {
-//          sh './scripts/create-pv.sh "" lightning-kube-simnet -simnet 5Gi'
-//        }
-//      }
-
-      if (kubeEnv?.trim() != 'local') {
+      if (DEPLOY_PVC == 'true') {
         container('go') {
-          sh 'jx step changelog --version v\$(cat ../../VERSION)'
+          sh './scripts/create-pv.sh "" lightning-kube-simnet -simnet 5Gi'
         }
       }
 
       container('go') {
-//        sh 'jx step changelog --version v\$(cat ../../VERSION)'
+        sh 'jx step changelog --version v\$(cat ../../VERSION)'
         // release the helm chart
         sh 'jx step helm release'
         // promote through all 'Auto' promotion Environments
