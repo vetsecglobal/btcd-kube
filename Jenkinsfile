@@ -113,16 +113,16 @@ pipeline {
 //      }
       steps {
         script {
-          if (kubeEnv?.trim() == 'local') {
-            if (DEPLOY_SIMNET == 'true') {
-              container('maven') {
-//                  sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-simnet'
-//                  sh 'cd environment-jx-lightning-kube-simnet'
-//                  sh 'jx step helm build'
-                  sh 'jx step helm apply'
-              }
-            }
-          }
+//          if (kubeEnv?.trim() == 'local') {
+//            if (DEPLOY_SIMNET == 'true') {
+//              container('maven') {
+////                  sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-simnet'
+////                  sh 'cd environment-jx-lightning-kube-simnet'
+////                  sh 'jx step helm build'
+//                  sh 'jx step helm apply'
+//              }
+//            }
+//          }
         }
       }
     }
