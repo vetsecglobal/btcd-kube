@@ -120,6 +120,7 @@ pipeline {
                 sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-simnet'
                 sh 'cd environment-jx-lightning-kube-simnet'
                 sh 'ls -al'
+                sh 'jx step helm build'
               }
             }
           }
