@@ -118,7 +118,7 @@ pipeline {
               container('go') {
                 sh 'ls -al'
                 sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-simnet'
-                sh 'cd environment-jx-lightning-kube-simnet'
+                sh 'cd environment-jx-lightning-kube-simnet/env'
                 sh 'ls -al'
                 sh 'jx step helm build'
               }
