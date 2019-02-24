@@ -113,8 +113,12 @@ pipeline {
       }
       steps {
         script {
-          container('go') {
-            sh 'ls -al'
+          if (kubeEnv?.trim() == 'local') {
+            if (DEPLOY_SIMNET == 'true') {
+              container('go') {
+                sh 'ls -al'
+              }
+            }
           }
 //          if (kubeEnv?.trim() == 'local') {
 //            if (DEPLOY_SIMNET == 'true') {
