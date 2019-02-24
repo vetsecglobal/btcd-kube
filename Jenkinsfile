@@ -234,14 +234,14 @@ def release(branch) {
   }
 
   dir ('./charts/btcd-kube') {
-//    if (kubeEnv?.trim() != 'local') {
+    if (kubeEnv?.trim() != 'local') {
       container('go') {
         sh "pwd"
         sh "ls -al"
 
         sh "make tag"
       }
-//    }
+    }
   }
 
   container('go') {
@@ -282,7 +282,7 @@ def promote() {
 //        }
 //      }
 
-      if (kubeEnv?.trim() == 'local') {
+      if (kubeEnv?.trim() != 'local') {
         container('go') {
           sh 'jx step changelog --version v\$(cat ../../VERSION)'
         }
