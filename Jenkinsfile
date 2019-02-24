@@ -105,23 +105,26 @@ pipeline {
     }
 
     stage('Validate and Update Environment') {
+      when {
+        branch 'feature-*'
+      }
       environment {
         DEPLOY_NAMESPACE = "lightning-kube-simnet"
       }
-//      steps {
-//        script {
-//          if (kubeEnv?.trim() == 'local') {
-//            if (DEPLOY_SIMNET == 'true') {
-//              container('maven') {
-//                  sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-simnet'
-//                  sh 'cd environment-jx-lightning-kube-simnet'
-//                  sh 'jx step helm build'
-//                  sh 'jx step helm apply'
-//              }
-//            }
-//          }
-//        }
-//      }
+      steps {
+        script {
+          if (kubeEnv?.trim() == 'local') {
+            if (DEPLOY_SIMNET == 'true') {
+              container('maven') {
+                  sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-simnet'
+                  sh 'cd environment-jx-lightning-kube-simnet'
+                  sh 'jx step helm build'
+                  sh 'jx step helm apply'
+              }
+            }
+          }
+        }
+      }
     }
 
 
