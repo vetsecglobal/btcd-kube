@@ -113,6 +113,9 @@ pipeline {
 //      }
       steps {
         script {
+          container('maven') {
+            sh 'ls -al'
+          }
 //          if (kubeEnv?.trim() == 'local') {
 //            if (DEPLOY_SIMNET == 'true') {
 //              container('maven') {
