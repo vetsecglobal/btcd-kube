@@ -116,6 +116,10 @@ pipeline {
           if (kubeEnv?.trim() == 'local') {
             if (DEPLOY_SIMNET == 'true') {
               container('go') {
+
+                sh 'jx step helm release'
+                sh 'jx promote --verbose -b --env lightning-kube-simnet --timeout 1h --version \$(cat ../../VERSION) --no-poll'
+
                 sh 'pwd'
                 sh 'ls -al'
                 sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-simnet'
