@@ -115,18 +115,22 @@ pipeline {
         script {
           if (kubeEnv?.trim() == 'local') {
             if (DEPLOY_SIMNET == 'true') {
-              container('go') {
 
-                sh 'jx step helm release'
-                sh 'jx promote --verbose -b --env lightning-kube-simnet --timeout 1h --version \$(cat ../../VERSION) --no-poll'
+              dir ('./charts/btcd-kube') {
 
-                sh 'pwd'
-                sh 'ls -al'
-                sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-simnet'
-                sh 'cd ./environment-jx-lightning-kube-simnet/env'
-                sh 'pwd'
-                sh 'ls -al'
-                sh 'jx step helm build --dir ./environment-jx-lightning-kube-simnet/env'
+                container('go') {
+                  sh 'jx step helm release'
+                  sh 'jx promote --verbose -b --env lightning-kube-simnet --timeout 1h --version \$(cat ../../VERSION) --no-poll'
+
+                  sh 'pwd'
+                  sh 'ls -al'
+                  sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-simnet'
+                  sh 'cd ./environment-jx-lightning-kube-simnet/env'
+                  sh 'pwd'
+                  sh 'ls -al'
+                  sh 'jx step helm build --dir ./environment-jx-lightning-kube-simnet/env'
+                }
+
               }
             }
           }
