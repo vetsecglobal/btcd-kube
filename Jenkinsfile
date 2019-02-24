@@ -113,7 +113,7 @@ pipeline {
 //      }
       steps {
         script {
-          container('maven') {
+          container('go') {
             sh 'ls -al'
           }
 //          if (kubeEnv?.trim() == 'local') {
