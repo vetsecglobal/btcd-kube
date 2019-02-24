@@ -119,7 +119,7 @@ pipeline {
               dir ('./charts/btcd-kube') {
 
                 container('go') {
-                  sh 'jx step helm list'
+//                  sh 'jx step helm list'
                   sh 'jx step helm delete btcd-kube --purge'
                   sh 'jx step helm release'
                   sh 'jx promote --verbose -b --env lightning-kube-simnet --timeout 1h --version \$(cat ../../VERSION) --no-poll'
