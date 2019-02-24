@@ -104,10 +104,10 @@ pipeline {
       }
     }
 
-//    stage('Validate and Update Environment') {
-//      environment {
-//        DEPLOY_NAMESPACE = "lightning-kube-simnet"
-//      }
+    stage('Validate and Update Environment') {
+      environment {
+        DEPLOY_NAMESPACE = "lightning-kube-simnet"
+      }
 //      steps {
 //        script {
 //          if (kubeEnv?.trim() == 'local') {
@@ -122,7 +122,7 @@ pipeline {
 //          }
 //        }
 //      }
-//    }
+    }
 
 
 
