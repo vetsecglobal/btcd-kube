@@ -122,7 +122,7 @@ pipeline {
                 sh 'cd ./environment-jx-lightning-kube-simnet/env'
                 sh 'pwd'
                 sh 'ls -al'
-                sh 'jx step helm build'
+                sh 'jx step helm build --dir ./environment-jx-lightning-kube-simnet/env'
               }
             }
           }
