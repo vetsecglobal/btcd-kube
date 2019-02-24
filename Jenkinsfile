@@ -136,11 +136,11 @@ pipeline {
 
                 container('go') {
 //                  sh 'jx step helm install --set-file ./values-simnet.yaml'
-                  sh 'cd ..'
+//                  sh 'cd ..'
                   sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-simnet'
                   sh 'cd environment-jx-lightning-kube-simnet'
-                  sh 'jx step env apply --namespace lightning-kube-simnet'
-                  sh 'cd btcd-kube'
+                  sh 'jx step env apply --namespace lightning-kube-simnet --dir environment-jx-lightning-kube-simnet'
+//                  sh 'cd btcd-kube'
                 }
 
                 //              if (DEPLOY_PVC == 'true') {
