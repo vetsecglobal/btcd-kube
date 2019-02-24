@@ -108,9 +108,9 @@ pipeline {
       when {
         branch 'feature-*'
       }
-      environment {
-        DEPLOY_NAMESPACE = "lightning-kube-simnet"
-      }
+//      environment {
+//        DEPLOY_NAMESPACE = "lightning-kube-simnet"
+//      }
       steps {
         script {
           if (kubeEnv?.trim() == 'local') {
