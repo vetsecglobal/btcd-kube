@@ -123,7 +123,7 @@ pipeline {
 
 //                  sh 'jx step helm delete lightning-kube-simnet --purge'
 //                  sh 'jx step helm release'
-                  sh 'helm upgrade lightning-kube-simnet --install --namespace lightning-kube-simnet --debug .'
+//                  sh 'helm upgrade lightning-kube-simnet --install --namespace lightning-kube-simnet --debug .'
                   sh 'jx promote --verbose -b --env lightning-kube-simnet --timeout 1h --version \$(cat ../../VERSION) --no-poll'
 
                   sh 'pwd'
@@ -187,7 +187,14 @@ pipeline {
               if (DEPLOY_SIMNET == 'true') {
 
 //                container('go') {
-//                  sh 'jx step helm install --set-file ./values-simnet.yaml'
+//
+//                  sh 'pwd'
+//                  sh 'ls -al'
+//                  sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-simnet'
+//                  sh 'pwd'
+//                  sh 'ls -al'
+//
+//                  sh 'jx step helm install --set-file ./environment-jx-lightning-kube-simnet/env/values.yaml'
 //                }
 
                 //              if (DEPLOY_PVC == 'true') {
@@ -328,20 +335,20 @@ def promote() {
 
     if (DEPLOY_SIMNET == 'true') {
 
-      if (DEPLOY_PVC == 'true') {
-        container('go') {
-          sh './scripts/create-pv.sh "" lightning-kube-simnet -simnet 5Gi'
-        }
-      }
-
-      container('go') {
-        sh 'jx step changelog --version v\$(cat ../../VERSION)'
-        // release the helm chart
-        sh 'jx step helm release'
-        // promote through all 'Auto' promotion Environments
-//      sh 'jx promote --verbose -b --all-auto --timeout 1h --version \$(cat ../../VERSION)'
-        sh 'jx promote --verbose -b --env lightning-kube-simnet --timeout 1h --version \$(cat ../../VERSION)'
-      }
+//      if (DEPLOY_PVC == 'true') {
+//        container('go') {
+//          sh './scripts/create-pv.sh "" lightning-kube-simnet -simnet 5Gi'
+//        }
+//      }
+//
+//      container('go') {
+//        sh 'jx step changelog --version v\$(cat ../../VERSION)'
+//        // release the helm chart
+//        sh 'jx step helm release'
+//        // promote through all 'Auto' promotion Environments
+////      sh 'jx promote --verbose -b --all-auto --timeout 1h --version \$(cat ../../VERSION)'
+//        sh 'jx promote --verbose -b --env lightning-kube-simnet --timeout 1h --version \$(cat ../../VERSION)'
+//      }
     }
     if (DEPLOY_TESTNET == 'true') {
 
