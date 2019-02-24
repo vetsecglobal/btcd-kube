@@ -134,7 +134,9 @@ pipeline {
 
               if (DEPLOY_SIMNET == 'true') {
 
-                sh 'jx helm install -env lightning-kube-simnet'
+                container('go') {
+                  sh 'jx helm install -env lightning-kube-simnet'
+                }
 
                 //              if (DEPLOY_PVC == 'true') {
                 //                container('go') {
@@ -148,7 +150,9 @@ pipeline {
                 //                sh './deploy-helm.sh "" lightning-kube \$(cat VERSION) btcd-kube-local LoadBalancer \
                 //                    30080 simnet ${DEPLOY_PVC} 18555 18556'
                 //              }
+
               }
+
               if (DEPLOY_TESTNET == 'true') {
 
                 if (DEPLOY_PVC == 'true') {
