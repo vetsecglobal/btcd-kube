@@ -135,7 +135,7 @@ pipeline {
               if (DEPLOY_SIMNET == 'true') {
 
                 container('go') {
-                  sh 'jx helm install -env lightning-kube-simnet'
+                  sh 'jx step helm install -env lightning-kube-simnet'
                 }
 
                 //              if (DEPLOY_PVC == 'true') {
