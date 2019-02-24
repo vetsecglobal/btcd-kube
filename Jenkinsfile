@@ -104,6 +104,28 @@ pipeline {
       }
     }
 
+    stage('Validate and Update Environment') {
+      environment {
+        DEPLOY_NAMESPACE = "lightning-kube-simnet"
+      }
+      steps {
+        if (kubeEnv?.trim() == 'local') {
+          if (DEPLOY_SIMNET == 'true') {
+            container('maven') {
+              dir('env') {
+                sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-simnet'
+                sh 'cd environment-jx-lightning-kube-simnet'
+                sh 'jx step helm build'
+                sh 'jx step helm apply'
+              }
+            }
+          }
+        }
+      }
+    }
+
+
+
     stage('Deploy Local') {
       steps {
         script {
@@ -116,39 +138,6 @@ pipeline {
 
           if (kubeEnv?.trim() == 'local') {
 
-            if (DEPLOY_SIMNET == 'true') {
-
-              environment {
-                DEPLOY_NAMESPACE = "lightning-kube-simnet"
-              }
-              stages {
-                stage('Validate and Update Environment') {
-                  steps {
-                    container('maven') {
-                      dir('env') {
-                        sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-simnet'
-                        sh 'cd environment-jx-lightning-kube-simnet'
-                        sh 'jx step helm build'
-                        sh 'jx step helm apply'
-                      }
-                    }
-                  }
-                }
-//                stage('Update Environment') {
-//                  when {
-//                    branch 'master'
-//                  }
-//                  steps {
-//                    container('maven') {
-//                      dir('env') {
-//                        sh 'jx step helm apply'
-//                      }
-//                    }
-//                  }
-//                }
-              }
-
-            }
 
 
 //            # Expose mainnet ports (server, rpc)
@@ -168,12 +157,7 @@ pipeline {
               if (DEPLOY_SIMNET == 'true') {
 
 //                container('go') {
-////                  sh 'jx step helm install --set-file ./values-simnet.yaml'
-////                  sh 'cd ..'
-//                  sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-simnet'
-//                  sh 'cd environment-jx-lightning-kube-simnet'
-//                  sh 'jx step env apply --namespace lightning-kube-simnet --dir environment-jx-lightning-kube-simnet'
-////                  sh 'cd btcd-kube'
+//                  sh 'jx step helm install --set-file ./values-simnet.yaml'
 //                }
 
                 //              if (DEPLOY_PVC == 'true') {
