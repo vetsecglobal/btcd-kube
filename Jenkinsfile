@@ -276,11 +276,11 @@ def promote() {
 
     if (DEPLOY_SIMNET == 'true') {
 
-      if (DEPLOY_PVC == 'true') {
-        container('go') {
-          sh './scripts/create-pv.sh "" lightning-kube-simnet -simnet 5Gi'
-        }
-      }
+//      if (DEPLOY_PVC == 'true') {
+//        container('go') {
+//          sh './scripts/create-pv.sh "" lightning-kube-simnet -simnet 5Gi'
+//        }
+//      }
 
       container('go') {
         sh 'jx step changelog --version v\$(cat ../../VERSION)'
