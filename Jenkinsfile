@@ -113,12 +113,10 @@ pipeline {
           if (kubeEnv?.trim() == 'local') {
             if (DEPLOY_SIMNET == 'true') {
               container('maven') {
-                dir('env') {
                   sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-simnet'
                   sh 'cd environment-jx-lightning-kube-simnet'
                   sh 'jx step helm build'
                   sh 'jx step helm apply'
-                }
               }
             }
           }
