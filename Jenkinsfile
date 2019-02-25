@@ -114,6 +114,14 @@ pipeline {
       }
       steps {
         script {
+
+          if (DEPLOY_PVC == 'true') {
+            container('go') {
+//                    sh './scripts/create-pv.sh "" lightning-kube-testnet -testnet 25Gi'
+              sh './scripts/setup-pv-templates.sh'
+            }
+          }
+
           if (DEPLOY_SIMNET == 'true') {
             sh 'pwd'
             sh 'ls -al'
@@ -169,11 +177,7 @@ pipeline {
 
               if (DEPLOY_TESTNET == 'true') {
 
-                if (DEPLOY_PVC == 'true') {
-                  container('go') {
-                    sh './scripts/create-pv.sh "" lightning-kube-testnet -testnet 25Gi'
-                  }
-                }
+
 
                 container('go') {
                   sh './undeploy-helm.sh "" lightning-kube testnet ${DEPLOY_PVC} || true'
