@@ -132,7 +132,10 @@ pipeline {
               container('go') {
 //                sh 'jx promote --verbose -b --env lightning-kube-simnet --timeout 1h --version \$(cat ../../VERSION) --no-poll'
 
-                sh 'jx step changelog --version v\$(cat ../../VERSION)'
+                sh 'pwd'
+                sh 'ls -al'
+
+                sh 'jx step changelog --version v\$(cat VERSION)'
                 sh 'jx step helm release'
 
                 sh 'pwd'
