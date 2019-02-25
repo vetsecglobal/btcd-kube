@@ -119,46 +119,41 @@ pipeline {
 
 
 
-              dir ('./charts/btcd-kube') {
-
-                container('go') {
-//                  sh 'jx step helm list'
-
-//                  sh 'jx step helm delete lightning-kube-simnet --purge'
-//                  sh 'jx step helm release'
-//                  sh 'helm upgrade lightning-kube-simnet --install --namespace lightning-kube-simnet --debug .'
-                  sh 'jx promote --verbose -b --env lightning-kube-simnet --timeout 1h --version \$(cat ../../VERSION) --no-poll'
-
-
-                }
-
-              }
+//              dir ('./charts/btcd-kube') {
+//                container('go') {
+////                  sh 'jx step helm list'
+////                  sh 'jx step helm delete lightning-kube-simnet --purge'
+////                  sh 'jx step helm release'
+////                  sh 'helm upgrade lightning-kube-simnet --install --namespace lightning-kube-simnet --debug .'
+//                  sh 'jx promote --verbose -b --env lightning-kube-simnet --timeout 1h --version \$(cat ../../VERSION) --no-poll'
+//                }
+//              }
 
               container('go') {
-
+                sh 'jx promote --verbose -b --env lightning-kube-simnet --timeout 1h --version \$(cat ../../VERSION) --no-poll'
                 sh 'pwd'
                 sh 'ls -al'
                 sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-simnet'
-//                  sh 'cd ./environment-jx-lightning-kube-simnet/env'
                 sh 'pwd'
                 sh 'ls -al'
+                sh 'jx step helm build --dir ./environment-jx-lightning-kube-simnet/env'
+                sh 'jx step helm apply --dir ./environment-jx-lightning-kube-simnet/env'
               }
 
-              dir ('./environment-jx-lightning-kube-simnet/env') {
-
-                container('go') {
-                  sh 'pwd'
-                  sh 'ls -al'
-//                  sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-simnet'
-//                  sh 'cd ./environment-jx-lightning-kube-simnet/env'
+//              dir ('./environment-jx-lightning-kube-simnet/env') {
+//                container('go') {
 //                  sh 'pwd'
 //                  sh 'ls -al'
-                  sh 'jx step helm build'
-                  sh 'jx step helm apply'
-//                  sh 'jx step helm build --dir ./environment-jx-lightning-kube-simnet/env'
-                }
+////                  sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-simnet'
+////                  sh 'cd ./environment-jx-lightning-kube-simnet/env'
+////                  sh 'pwd'
+////                  sh 'ls -al'
+//                  sh 'jx step helm build'
+//                  sh 'jx step helm apply'
+////                  sh 'jx step helm build --dir ./environment-jx-lightning-kube-simnet/env'
+//                }
+//              }
 
-              }
             }
           }
 //          if (kubeEnv?.trim() == 'local') {
