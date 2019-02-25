@@ -129,15 +129,19 @@ pipeline {
 //                  sh 'helm upgrade lightning-kube-simnet --install --namespace lightning-kube-simnet --debug .'
                   sh 'jx promote --verbose -b --env lightning-kube-simnet --timeout 1h --version \$(cat ../../VERSION) --no-poll'
 
-                  sh 'cd ../..'
-                  sh 'pwd'
-                  sh 'ls -al'
-                  sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-simnet'
-//                  sh 'cd ./environment-jx-lightning-kube-simnet/env'
-                  sh 'pwd'
-                  sh 'ls -al'
+
                 }
 
+              }
+
+              container('go') {
+
+                sh 'pwd'
+                sh 'ls -al'
+                sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-simnet'
+//                  sh 'cd ./environment-jx-lightning-kube-simnet/env'
+                sh 'pwd'
+                sh 'ls -al'
               }
 
               dir ('./environment-jx-lightning-kube-simnet/env') {
