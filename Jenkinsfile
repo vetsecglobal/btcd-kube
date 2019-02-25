@@ -129,6 +129,7 @@ pipeline {
 //                  sh 'helm upgrade lightning-kube-simnet --install --namespace lightning-kube-simnet --debug .'
                   sh 'jx promote --verbose -b --env lightning-kube-simnet --timeout 1h --version \$(cat ../../VERSION) --no-poll'
 
+                  sh 'cd ../..'
                   sh 'pwd'
                   sh 'ls -al'
                   sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-simnet'
