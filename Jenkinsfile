@@ -115,8 +115,6 @@ pipeline {
       steps {
         script {
 
-          deployPvc()
-
           if (DEPLOY_SIMNET == 'true') {
             sh 'pwd'
             sh 'ls -al'
@@ -229,6 +227,8 @@ Select Proceed or Abort to terminate the build pod"""
 }
 
 def release(branch) {
+
+  deployPvc()
 
   container('go') {
     // ensure we're not on a detached head
