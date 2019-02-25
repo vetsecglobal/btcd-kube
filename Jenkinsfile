@@ -125,7 +125,7 @@ pipeline {
           if (DEPLOY_SIMNET == 'true') {
             sh 'pwd'
             sh 'ls -al'
-            sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-simnet'
+            sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-simnet.git'
             sh 'pwd'
             sh 'ls -al'
 
