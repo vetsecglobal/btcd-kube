@@ -7,6 +7,7 @@ pipeline {
     ORG               = 'kevinstl'
     APP_NAME          = 'btcd-kube'
     CHARTMUSEUM_CREDS = credentials('jenkins-x-chartmuseum')
+    NEW_VERSION_LOCAL = 'false'
     DEPLOY_PVC        = 'true'
     DEPLOY_SIMNET     = 'true'
     DEPLOY_TESTNET    = 'false'
@@ -104,7 +105,7 @@ pipeline {
       }
     }
 
-    stage('Validate and Update Environment') {
+    stage('Deploy Local') {
       when {
         branch 'feature-*'
       }
@@ -114,93 +115,39 @@ pipeline {
       steps {
         script {
           if (DEPLOY_SIMNET == 'true') {
+            sh 'pwd'
+            sh 'ls -al'
+            sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-simnet'
+            sh 'pwd'
+            sh 'ls -al'
 
-                sh 'pwd'
-                sh 'ls -al'
-                sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-simnet'
-                sh 'pwd'
-                sh 'ls -al'
-
-//              dir ('./charts/btcd-kube') {
-//                container('go') {
-////                  sh 'jx step helm list'
-////                  sh 'jx step helm delete lightning-kube-simnet --purge'
-////                  sh 'jx step helm release'
-////                  sh 'helm upgrade lightning-kube-simnet --install --namespace lightning-kube-simnet --debug .'
-//                  sh 'jx promote --verbose -b --env lightning-kube-simnet --timeout 1h --version \$(cat ../../VERSION) --no-poll'
-//                }
-//              }
-
-            dir ('./charts/btcd-kube') {
-              container('go') {
-                sh 'pwd'
-                sh 'ls -al'
-                sh 'jx step helm release'
+            if (NEW_VERSION_LOCAL == 'true') {
+              dir('./charts/btcd-kube') {
+                container('go') {
+                  sh 'pwd'
+                  sh 'ls -al'
+                  sh 'jx step helm release'
+                }
               }
             }
 
-//              container('go') {
-////                sh 'jx promote --verbose -b --env lightning-kube-simnet --timeout 1h --version \$(cat ../../VERSION) --no-poll'
-////                sh 'jx step changelog --version v\$(cat VERSION)'
-////                sh 'jx step helm release --dir ./charts/btcd-kube'
-//                sh 'pwd'
-//                sh 'ls -al'
-//                sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-simnet'
-//                sh 'pwd'
-//                sh 'ls -al'
-////                sh 'jx step helm build --dir ./environment-jx-lightning-kube-simnet/env'
-////                sh 'jx step helm apply --dir ./environment-jx-lightning-kube-simnet/env'
-//              }
-
             dir ('./environment-jx-lightning-kube-simnet/env') {
               container('go') {
-                //                sh 'jx promote --verbose -b --env lightning-kube-simnet --timeout 1h --version \$(cat ../../VERSION) --no-poll'
-                //                sh 'jx step changelog --version v\$(cat VERSION)'
-                //                sh 'jx step helm release --dir ./charts/btcd-kube'
-                //                sh 'pwd'
-                //                sh 'ls -al'
-                //                sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-simnet'
                 sh 'pwd'
                 sh 'ls -al'
                 sh 'jx step helm build'
                 sh 'jx step helm apply'
               }
             }
-
-//              dir ('./environment-jx-lightning-kube-simnet/env') {
-//                container('go') {
-//                  sh 'pwd'
-//                  sh 'ls -al'
-////                  sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-simnet'
-////                  sh 'cd ./environment-jx-lightning-kube-simnet/env'
-////                  sh 'pwd'
-////                  sh 'ls -al'
-//                  sh 'jx step helm build'
-//                  sh 'jx step helm apply'
-////                  sh 'jx step helm build --dir ./environment-jx-lightning-kube-simnet/env'
-//                }
-//              }
-
           }
-          if (kubeEnv?.trim() == 'local') {
-          }
-//          if (kubeEnv?.trim() == 'local') {
-//            if (DEPLOY_SIMNET == 'true') {
-//              container('maven') {
-////                  sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-simnet'
-////                  sh 'cd environment-jx-lightning-kube-simnet'
-////                  sh 'jx step helm build'
-//                  sh 'jx step helm apply'
-//              }
-//            }
-//          }
+
         }
       }
     }
 
 
 
-    stage('Deploy Local') {
+    stage('Deploy Local Old') {
       steps {
         script {
 
@@ -212,47 +159,11 @@ pipeline {
 
           if (kubeEnv?.trim() == 'local') {
 
-
-
-//            # Expose mainnet ports (server, rpc)
-//            EXPOSE 8333 8334
-//
-//            # Expose testnet ports (server, rpc)
-//            EXPOSE 18333 18334
-//
-//            # Expose simnet ports (server, rpc)
-//            EXPOSE 18555 18556
-//
-//            # Expose segnet ports (server, rpc)
-//            EXPOSE 28901 28902
-
             dir ('./charts/btcd-kube') {
 
               if (DEPLOY_SIMNET == 'true') {
 
-//                container('go') {
-//
-//                  sh 'pwd'
-//                  sh 'ls -al'
-//                  sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-simnet'
-//                  sh 'pwd'
-//                  sh 'ls -al'
-//
-//                  sh 'jx step helm install --set-file ./environment-jx-lightning-kube-simnet/env/values.yaml'
-//                }
 
-                //              if (DEPLOY_PVC == 'true') {
-                //                container('go') {
-                //                  sh './scripts/create-pv.sh "" lightning-kube-simnet -simnet 5Gi'
-                //                }
-                //              }
-                //
-                //              container('go') {
-                //
-                //                sh './undeploy-helm.sh "" lightning-kube simnet ${DEPLOY_PVC} || true'
-                //                sh './deploy-helm.sh "" lightning-kube \$(cat VERSION) btcd-kube-local LoadBalancer \
-                //                    30080 simnet ${DEPLOY_PVC} 18555 18556'
-                //              }
 
               }
 
@@ -337,14 +248,13 @@ def release(branch) {
   }
 
   dir ('./charts/btcd-kube') {
-//    if (kubeEnv?.trim() != 'local') {
+    if (kubeEnv?.trim() != 'local' || NEW_VERSION_LOCAL == 'true') {
       container('go') {
         sh "pwd"
         sh "ls -al"
-
         sh "make tag"
       }
-//    }
+    }
   }
 
   container('go') {

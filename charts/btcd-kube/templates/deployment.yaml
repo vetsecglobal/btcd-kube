@@ -19,11 +19,9 @@ spec:
 {{- end }}
     spec:
 
-
 #      securityContext:
 #        privileged: true
 #        runAsUser: 501
-
 
       containers:
       - name: {{ .Chart.Name }}
