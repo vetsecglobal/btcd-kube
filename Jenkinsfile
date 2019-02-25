@@ -113,11 +113,13 @@ pipeline {
       }
       steps {
         script {
-          if (kubeEnv?.trim() == 'local') {
-            if (DEPLOY_SIMNET == 'true') {
+          if (DEPLOY_SIMNET == 'true') {
 
-
-
+                sh 'pwd'
+                sh 'ls -al'
+                sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-simnet'
+                sh 'pwd'
+                sh 'ls -al'
 
 //              dir ('./charts/btcd-kube') {
 //                container('go') {
@@ -129,41 +131,41 @@ pipeline {
 //                }
 //              }
 
-              dir ('./charts/btcd-kube') {
-                container('go') {
-                  sh 'pwd'
-                  sh 'ls -al'
-                  sh 'jx step helm release'
-                }
-              }
-
+            dir ('./charts/btcd-kube') {
               container('go') {
-//                sh 'jx promote --verbose -b --env lightning-kube-simnet --timeout 1h --version \$(cat ../../VERSION) --no-poll'
-//                sh 'jx step changelog --version v\$(cat VERSION)'
-//                sh 'jx step helm release --dir ./charts/btcd-kube'
                 sh 'pwd'
                 sh 'ls -al'
-                sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-simnet'
-                sh 'pwd'
-                sh 'ls -al'
-//                sh 'jx step helm build --dir ./environment-jx-lightning-kube-simnet/env'
-//                sh 'jx step helm apply --dir ./environment-jx-lightning-kube-simnet/env'
+                sh 'jx step helm release'
               }
+            }
 
-              dir ('./environment-jx-lightning-kube-simnet/env') {
-                container('go') {
-                  //                sh 'jx promote --verbose -b --env lightning-kube-simnet --timeout 1h --version \$(cat ../../VERSION) --no-poll'
-                  //                sh 'jx step changelog --version v\$(cat VERSION)'
-                  //                sh 'jx step helm release --dir ./charts/btcd-kube'
-                  //                sh 'pwd'
-                  //                sh 'ls -al'
-                  //                sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-simnet'
-                  sh 'pwd'
-                  sh 'ls -al'
-                  sh 'jx step helm build'
-                  sh 'jx step helm apply'
-                }
+//              container('go') {
+////                sh 'jx promote --verbose -b --env lightning-kube-simnet --timeout 1h --version \$(cat ../../VERSION) --no-poll'
+////                sh 'jx step changelog --version v\$(cat VERSION)'
+////                sh 'jx step helm release --dir ./charts/btcd-kube'
+//                sh 'pwd'
+//                sh 'ls -al'
+//                sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-simnet'
+//                sh 'pwd'
+//                sh 'ls -al'
+////                sh 'jx step helm build --dir ./environment-jx-lightning-kube-simnet/env'
+////                sh 'jx step helm apply --dir ./environment-jx-lightning-kube-simnet/env'
+//              }
+
+            dir ('./environment-jx-lightning-kube-simnet/env') {
+              container('go') {
+                //                sh 'jx promote --verbose -b --env lightning-kube-simnet --timeout 1h --version \$(cat ../../VERSION) --no-poll'
+                //                sh 'jx step changelog --version v\$(cat VERSION)'
+                //                sh 'jx step helm release --dir ./charts/btcd-kube'
+                //                sh 'pwd'
+                //                sh 'ls -al'
+                //                sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-simnet'
+                sh 'pwd'
+                sh 'ls -al'
+                sh 'jx step helm build'
+                sh 'jx step helm apply'
               }
+            }
 
 //              dir ('./environment-jx-lightning-kube-simnet/env') {
 //                container('go') {
@@ -179,7 +181,8 @@ pipeline {
 //                }
 //              }
 
-            }
+          }
+          if (kubeEnv?.trim() == 'local') {
           }
 //          if (kubeEnv?.trim() == 'local') {
 //            if (DEPLOY_SIMNET == 'true') {
