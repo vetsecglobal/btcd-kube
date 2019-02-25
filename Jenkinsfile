@@ -7,7 +7,7 @@ pipeline {
     ORG               = 'kevinstl'
     APP_NAME          = 'btcd-kube'
     CHARTMUSEUM_CREDS = credentials('jenkins-x-chartmuseum')
-    NEW_VERSION_LOCAL = 'false'
+    NEW_VERSION_LOCAL = 'true'
     DEPLOY_PVC        = 'true'
     DEPLOY_SIMNET     = 'true'
     DEPLOY_TESTNET    = 'false'
@@ -115,12 +115,7 @@ pipeline {
       steps {
         script {
 
-          if (DEPLOY_PVC == 'true') {
-            container('go') {
-//                    sh './scripts/create-pv.sh "" lightning-kube-testnet -testnet 25Gi'
-              sh './scripts/setup-pv-templates.sh'
-            }
-          }
+          deployPvc()
 
           if (DEPLOY_SIMNET == 'true') {
             sh 'pwd'
@@ -363,4 +358,13 @@ def postBuild() {
   }
 }
 
+
+def deployPvc() {
+  if (DEPLOY_PVC == 'true') {
+    container('go') {
+//                    sh './scripts/create-pv.sh "" lightning-kube-testnet -testnet 25Gi'
+      sh './scripts/setup-pv-templates.sh'
+    }
+  }
+}
 
