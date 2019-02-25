@@ -136,7 +136,7 @@ pipeline {
                 sh 'ls -al'
 
 //                sh 'jx step changelog --version v\$(cat VERSION)'
-                sh 'jx step helm release'
+                sh 'jx step helm release --dir ./charts/btcd-kube'
 
                 sh 'pwd'
                 sh 'ls -al'
