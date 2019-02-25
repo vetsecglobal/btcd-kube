@@ -129,14 +129,21 @@ pipeline {
 //                }
 //              }
 
+              dir ('./charts/btcd-kube') {
+                container('go') {
+                  sh 'pwd'
+                  sh 'ls -al'
+                  sh 'jx step helm release'
+                }
+              }
+
               container('go') {
 //                sh 'jx promote --verbose -b --env lightning-kube-simnet --timeout 1h --version \$(cat ../../VERSION) --no-poll'
 
-                sh 'pwd'
-                sh 'ls -al'
+
 
 //                sh 'jx step changelog --version v\$(cat VERSION)'
-                sh 'jx step helm release --dir ./charts/btcd-kube'
+//                sh 'jx step helm release --dir ./charts/btcd-kube'
 
                 sh 'pwd'
                 sh 'ls -al'
