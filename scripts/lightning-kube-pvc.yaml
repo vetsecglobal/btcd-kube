@@ -1,0 +1,17 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: lightning-kube-pvcX_NETWORK_SUFFIX_X
+#  name: lightning-kube-pvc{{ .Values.project.networkSuffix }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  resources:
+    requests:
+#      storage: 25Gi
+#      storage: {{ .Values.project.storage }}
+      storage: X_STORAGE_X
+  storageClassName: standard
+  volumeName: lightning-kube-pvX_NETWORK_SUFFIX_X
+#  volumeName: lightning-kube-pv{{ .Values.project.networkSuffix }}

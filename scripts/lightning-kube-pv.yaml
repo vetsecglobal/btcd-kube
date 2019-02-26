@@ -1,15 +1,15 @@
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-#  name: lightning-kube-pvX_NETWORK_SUFFIX_X
-  name: lightning-kube-pv{{ .Values.project.networkSuffix }}
+  name: lightning-kube-pvX_NETWORK_SUFFIX_X
+#  name: lightning-kube-pv{{ .Values.project.networkSuffix }}
   labels:
     type: local
 spec:
   storageClassName: standard
   capacity:
-#    storage: X_STORAGE_X
-    storage: {{ .Values.project.storage }}
+    storage: X_STORAGE_X
+#    storage: {{ .Values.project.storage }}
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
