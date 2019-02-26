@@ -13,6 +13,14 @@ service:
   externalPort: 18334
 #  internalPort: 18556
   internalPort: 18334
+
+  http:
+    externalPort: 18555
+    internalPort: 18555
+  rpc:
+    externalPort: 18556
+    internalPort: 18556
+
   annotations:
     fabric8.io/expose: "true"
     fabric8.io/ingress.annotations: "kubernetes.io/ingress.class: nginx"

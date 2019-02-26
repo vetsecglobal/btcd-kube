@@ -18,14 +18,14 @@ spec:
   ports:
 #  - port: 18555
 #    targetPort: 18555
-  - port: 18333
-    targetPort: 18333
+  - port: {{ .Values.service.http.externalPort }}
+    targetPort: {{ .Values.service.http.internalPort }}
     protocol: TCP
     name: http
 #  - port: 18556
 #    targetPort: 18556
-  - port: 18334
-    targetPort: 18334
+  - port: {{ .Values.service.rpc.externalPort }}
+    targetPort: {{ .Values.service.rpc.internalPort }}
     protocol: TCP
     name: rpc
   selector:
