@@ -298,20 +298,20 @@ def promote() {
 
     if (DEPLOY_SIMNET == 'true') {
 
-//      if (DEPLOY_PVC == 'true') {
-//        container('go') {
-//          sh './scripts/create-pv.sh "" lightning-kube-simnet -simnet 5Gi'
-//        }
-//      }
-//
-//      container('go') {
-//        sh 'jx step changelog --version v\$(cat ../../VERSION)'
-//        // release the helm chart
-//        sh 'jx step helm release'
-//        // promote through all 'Auto' promotion Environments
-////      sh 'jx promote --verbose -b --all-auto --timeout 1h --version \$(cat ../../VERSION)'
-//        sh 'jx promote --verbose -b --env lightning-kube-simnet --timeout 1h --version \$(cat ../../VERSION)'
-//      }
+      if (DEPLOY_PVC == 'true') {
+        container('go') {
+          sh './scripts/create-pv.sh "" lightning-kube-simnet -simnet 5Gi'
+        }
+      }
+
+      container('go') {
+        sh 'jx step changelog --version v\$(cat ../../VERSION)'
+        // release the helm chart
+        sh 'jx step helm release'
+        // promote through all 'Auto' promotion Environments
+//      sh 'jx promote --verbose -b --all-auto --timeout 1h --version \$(cat ../../VERSION)'
+        sh 'jx promote --verbose -b --env lightning-kube-simnet --timeout 1h --version \$(cat ../../VERSION)'
+      }
     }
     if (DEPLOY_TESTNET == 'true') {
 
