@@ -15,6 +15,8 @@ RUN git clone https://github.com/btcsuite/btcd.git . \
 # Start a new image
 #FROM alpine as final
 
+WORKDIR /
+
 # Expose mainnet ports (server, rpc)
 EXPOSE 8333 8334
 
@@ -78,10 +80,7 @@ VOLUME ["/rpc"]
 #USER btcd
 
 
-
-
-#ENTRYPOINT ["/start-btcd.sh"]
-ENTRYPOINT ["/stuff.sh"]
+ENTRYPOINT ["/start-btcd.sh"]
 
 
 
