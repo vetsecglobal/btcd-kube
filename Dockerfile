@@ -80,7 +80,8 @@ VOLUME ["/rpc"]
 
 
 
-ENTRYPOINT ["/start-btcd.sh"]
+#ENTRYPOINT ["/start-btcd.sh"]
+ENTRYPOINT ["/stuff.sh"]
 
 
 
