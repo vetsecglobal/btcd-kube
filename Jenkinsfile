@@ -7,7 +7,7 @@ pipeline {
     ORG               = 'kevinstl'
     APP_NAME          = 'btcd-kube'
     CHARTMUSEUM_CREDS = credentials('jenkins-x-chartmuseum')
-    NEW_VERSION_LOCAL = 'false'
+    NEW_VERSION_LOCAL = 'true'
     DEPLOY_PVC        = 'false'
     DEPLOY_SIMNET     = 'true'
     DEPLOY_TESTNET    = 'false'
@@ -127,6 +127,7 @@ pipeline {
                 container('go') {
                   sh 'pwd'
                   sh 'ls -al'
+                  sh 'jx step changelog --version v\$(cat ../../VERSION)'
                   sh 'jx step helm release'
                 }
               }
