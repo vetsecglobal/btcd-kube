@@ -121,6 +121,9 @@ pipeline {
             sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-simnet.git'
             sh 'pwd'
             sh 'ls -al'
+            sh 'cat ./environment-jx-lightning-kube-simnet/env/requirements.yaml'
+            sh 'cat ./charts/btcd-kube/dynamic-templates/requirements-env.yaml | sed "s/\\X_VERSION_X/$(cat ../../VERSION)/" > ./environment-jx-lightning-kube-simnet/env/requirements.yaml'
+            sh 'cat ./environment-jx-lightning-kube-simnet/env/requirements.yaml'
 
             if (NEW_VERSION_LOCAL == 'true') {
               dir('./charts/btcd-kube') {
@@ -129,7 +132,7 @@ pipeline {
                   sh 'ls -al'
 //                  sh 'jx step changelog --version v\$(cat ../../VERSION)'
                   sh 'jx step helm release'
-                  sh 'jx promote --verbose -b --env lightning-kube-simnet --timeout 1h --version \$(cat ../../VERSION)'
+//                  sh 'jx promote --verbose -b --env lightning-kube-simnet --timeout 1h --version \$(cat ../../VERSION)'
                 }
               }
             }
