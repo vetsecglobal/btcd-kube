@@ -142,7 +142,7 @@ pipeline {
                 sh 'pwd'
                 sh 'ls -al'
                 sh 'jx step helm build'
-                sh 'jx step helm apply --force false'
+                sh 'jx step helm apply --force=false'
               }
             }
           }
