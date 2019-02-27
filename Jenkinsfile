@@ -209,56 +209,56 @@ pipeline {
 
 
 
-    stage('Deploy Local Old') {
-      steps {
-        script {
-
-          sh 'echo  DEPLOY_PVC: ${DEPLOY_PVC}'
-          sh 'echo  DEPLOY_SIMNET: ${DEPLOY_SIMNET}'
-          sh 'echo  DEPLOY_TESTNET: ${DEPLOY_TESTNET}'
-          sh 'echo  DEPLOY_MAINNET: ${DEPLOY_MAINNET}'
-
-
-          if (kubeEnv?.trim() == 'local') {
-
-            dir ('./charts/btcd-kube') {
-
-              if (DEPLOY_SIMNET == 'true') {
-
-
-
-              }
-
-              if (DEPLOY_TESTNET == 'true') {
-
-
-
-                container('go') {
-                  sh './undeploy-helm.sh "" lightning-kube testnet ${DEPLOY_PVC} || true'
-                  sh './deploy-helm.sh "" lightning-kube \$(cat VERSION) btcd-kube-local LoadBalancer \
-                      30080 testnet ${DEPLOY_PVC} 18333 18334'
-                }
-              }
-              if (DEPLOY_MAINNET == 'true') {
-
-                if (DEPLOY_PVC == 'true') {
-                  container('go') {
-                    sh './scripts/create-pv.sh "" lightning-kube-mainnet -mainnet 275Gi'
-                  }
-                }
-
-                container('go') {
-                  sh './undeploy-helm.sh "" lightning-kube mainnet ${DEPLOY_PVC} || true'
-                  sh './deploy-helm.sh "" lightning-kube \$(cat VERSION) btcd-kube-local LoadBalancer \
-                      30080 mainnet ${DEPLOY_PVC} 8333 8334'
-                }
-              }
-
-            }
-          }
-        }
-      }
-    }
+//    stage('Deploy Local Old') {
+//      steps {
+//        script {
+//
+//          sh 'echo  DEPLOY_PVC: ${DEPLOY_PVC}'
+//          sh 'echo  DEPLOY_SIMNET: ${DEPLOY_SIMNET}'
+//          sh 'echo  DEPLOY_TESTNET: ${DEPLOY_TESTNET}'
+//          sh 'echo  DEPLOY_MAINNET: ${DEPLOY_MAINNET}'
+//
+//
+//          if (kubeEnv?.trim() == 'local') {
+//
+//            dir ('./charts/btcd-kube') {
+//
+//              if (DEPLOY_SIMNET == 'true') {
+//
+//
+//
+//              }
+//
+//              if (DEPLOY_TESTNET == 'true') {
+//
+//
+//
+//                container('go') {
+//                  sh './undeploy-helm.sh "" lightning-kube testnet ${DEPLOY_PVC} || true'
+//                  sh './deploy-helm.sh "" lightning-kube \$(cat VERSION) btcd-kube-local LoadBalancer \
+//                      30080 testnet ${DEPLOY_PVC} 18333 18334'
+//                }
+//              }
+//              if (DEPLOY_MAINNET == 'true') {
+//
+//                if (DEPLOY_PVC == 'true') {
+//                  container('go') {
+//                    sh './scripts/create-pv.sh "" lightning-kube-mainnet -mainnet 275Gi'
+//                  }
+//                }
+//
+//                container('go') {
+//                  sh './undeploy-helm.sh "" lightning-kube mainnet ${DEPLOY_PVC} || true'
+//                  sh './deploy-helm.sh "" lightning-kube \$(cat VERSION) btcd-kube-local LoadBalancer \
+//                      30080 mainnet ${DEPLOY_PVC} 8333 8334'
+//                }
+//              }
+//
+//            }
+//          }
+//        }
+//      }
+//    }
 
     stage('Push Local') {
       steps {
