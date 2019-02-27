@@ -1,12 +1,10 @@
 #!/bin/bash
 
-context=$1
-namespace=$2
-networkSuffix=$3
+namespace=$1
+networkSuffix=$2
 
 echo "delete-pv.sh"
 
-echo "context: ${context}"
 echo "namespace: ${namespace}"
 echo "networkSuffix: ${networkSuffix}"
 
@@ -33,3 +31,6 @@ cat ./lightning-kube-pvc.yaml | sed "s/\X_NETWORK_SUFFIX_X/${networkSuffix}/" | 
 #cat ./lightning-kube-pv.yaml | sed "s/\X_NETWORK_SUFFIX_X/${networkSuffix}/" | kubectl ${kubeContextArg} ${namespaceArg} delete -f -
 
 cat ${pvYaml} | sed "s/\X_NETWORK_SUFFIX_X/${networkSuffix}/" | kubectl ${kubeContextArg} ${namespaceArg} delete -f -
+
+
+# ./delete-pv.sh lightning-kube-simnet -simnet

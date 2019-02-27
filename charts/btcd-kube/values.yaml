@@ -7,7 +7,7 @@ image:
   tag: 0.0.4
   pullPolicy: IfNotPresent
 service:
-  name: lightning-kube-btcd
+  name: btcd-kube
   type: LoadBalancer
 #  externalPort: 18556
   externalPort: 18334
