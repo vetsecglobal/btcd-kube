@@ -9,9 +9,9 @@ pipeline {
     CHARTMUSEUM_CREDS = credentials('jenkins-x-chartmuseum')
     NEW_VERSION_LOCAL = 'true'
     DEPLOY_PVC        = 'false'
-    DEPLOY_SIMNET     = 'true'
+    DEPLOY_SIMNET     = 'false'
     DEPLOY_TESTNET    = 'false'
-    DEPLOY_MAINNET    = 'false'
+    DEPLOY_MAINNET    = 'true'
   }
   stages {
 
@@ -105,7 +105,7 @@ pipeline {
       }
     }
 
-    stage('Deploy Local') {
+    stage('Deploy Local Simnet') {
       when {
         branch 'feature-*'
       }
@@ -140,6 +140,57 @@ pipeline {
               }
 
               dir('./environment-jx-lightning-kube-simnet/env') {
+                container('go') {
+                  sh 'pwd'
+                  sh 'ls -al'
+                  sh 'jx step helm build'
+                  //                sh 'jx step helm apply --force=false'
+                  sh 'jx step helm apply --wait=false'
+                }
+              }
+
+            }
+
+          }
+        }
+      }
+    }
+
+    stage('Deploy Local Mainnet') {
+      when {
+        branch 'feature-*'
+      }
+      environment {
+        DEPLOY_NAMESPACE = "lightning-kube-mainnet"
+      }
+      steps {
+        script {
+
+          if (kubeEnv?.trim() == 'local') {
+
+            if (DEPLOY_MAINNET == 'true') {
+              sh 'pwd'
+              sh 'ls -al'
+              sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-mainnet.git'
+              sh 'pwd'
+              sh 'ls -al'
+              sh 'cat ./environment-jx-lightning-kube-mainnet/env/requirements.yaml'
+              sh 'cat ./charts/btcd-kube/dynamic-templates/requirements-env.yaml | sed "s/\\X_VERSION_X/$(cat ./VERSION)/" > ./environment-jx-lightning-kube-mainnet/env/requirements.yaml'
+              sh 'cat ./environment-jx-lightning-kube-mainnet/env/requirements.yaml'
+
+              if (NEW_VERSION_LOCAL == 'true') {
+                dir('./charts/btcd-kube') {
+                  container('go') {
+                    sh 'pwd'
+                    sh 'ls -al'
+                    //                  sh 'jx step changelog --version v\$(cat ../../VERSION)'
+                    sh 'jx step helm release'
+                    //                  sh 'jx promote --verbose -b --env lightning-kube-mainnet --timeout 1h --version \$(cat ../../VERSION)'
+                  }
+                }
+              }
+
+              dir('./environment-jx-lightning-kube-mainnet/env') {
                 container('go') {
                   sh 'pwd'
                   sh 'ls -al'
