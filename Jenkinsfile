@@ -119,7 +119,13 @@ pipeline {
 
             if (DEPLOY_SIMNET == 'true') {
 
-              sh 'sleep 1h'
+              dir('../lnd-kube/charts/lnd-kube') {
+                container('go') {
+                  sh 'jx step version'
+                }
+              }
+
+//              sh 'sleep 1h'
 
               sh 'pwd'
               sh 'ls -al'
