@@ -7,11 +7,11 @@ pipeline {
     ORG               = 'kevinstl'
     APP_NAME          = 'btcd-kube'
     CHARTMUSEUM_CREDS = credentials('jenkins-x-chartmuseum')
-    NEW_VERSION_LOCAL = 'true'
+//    NEW_VERSION_LOCAL = 'true'
     DEPLOY_PVC        = 'false'
-    DEPLOY_SIMNET     = 'false'
+    DEPLOY_SIMNET     = 'true'
     DEPLOY_TESTNET    = 'false'
-    DEPLOY_MAINNET    = 'true'
+    DEPLOY_MAINNET    = 'false'
   }
   stages {
 
@@ -118,6 +118,9 @@ pipeline {
           if (kubeEnv?.trim() == 'local') {
 
             if (DEPLOY_SIMNET == 'true') {
+
+              sh 'sleep 1h'
+
               sh 'pwd'
               sh 'ls -al'
               sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-simnet.git'
