@@ -142,7 +142,7 @@ pipeline {
                   sh 'ls -al'
 ////              sh 'jx release version -gh-repository https://github.com/kevinstl/lnd-kube.git'
 ////                sh 'cd /host-home/Developer/projects/lnd-kube/'
-                  sh 'echo \$(jx-release-version) > /tmp/LND_VERSION'
+                  sh 'echo \$(jx-release-version) > /../LND_VERSION'
 ////                sh 'jx-release-version'
                 }
               }
@@ -155,7 +155,7 @@ pipeline {
               sh 'pwd'
               sh 'ls -al'
               sh 'cat ./environment-jx-lightning-kube-simnet/env/requirements.yaml'
-              sh 'cat ./charts/btcd-kube/dynamic-templates/requirements-env.yaml | sed "s/\\X_BTCD_VERSION_X/$(cat ./VERSION)/"  | sed "s/\\X_LND_VERSION_X/$(cat /tmp/LND_VERSION)/" > ./environment-jx-lightning-kube-simnet/env/requirements.yaml'
+              sh 'cat ./charts/btcd-kube/dynamic-templates/requirements-env.yaml | sed "s/\\X_BTCD_VERSION_X/$(cat ./VERSION)/"  | sed "s/\\X_LND_VERSION_X/$(cat ./LND_VERSION)/" > ./environment-jx-lightning-kube-simnet/env/requirements.yaml'
               sh 'cat ./environment-jx-lightning-kube-simnet/env/requirements.yaml'
 
               sh 'sleep 1h'
