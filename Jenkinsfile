@@ -121,7 +121,7 @@ pipeline {
 
               sh 'pwd'
               sh 'ls -al'
-              sh 'jx release version -gh-repository https://github.com/kevinstl/lnd-kube.git'
+//              sh 'jx release version -gh-repository https://github.com/kevinstl/lnd-kube.git'
 
 //              sh 'sleep 1h'
 
