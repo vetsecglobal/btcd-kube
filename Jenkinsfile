@@ -158,7 +158,7 @@ pipeline {
               sh 'cat ./charts/btcd-kube/dynamic-templates/requirements-env.yaml | sed "s/\\X_BTCD_VERSION_X/$(cat ./VERSION)/"  | sed "s/\\X_LND_VERSION_X/$(cat ./LND_VERSION)/" > ./environment-jx-lightning-kube-simnet/env/requirements.yaml'
               sh 'cat ./environment-jx-lightning-kube-simnet/env/requirements.yaml'
 
-              sh 'sleep 1h'
+//              sh 'sleep 1h'
 
               if (NEW_VERSION_LOCAL == 'true') {
                 dir('./charts/btcd-kube') {
