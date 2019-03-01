@@ -142,7 +142,7 @@ pipeline {
                   sh 'ls -al'
 ////              sh 'jx release version -gh-repository https://github.com/kevinstl/lnd-kube.git'
 ////                sh 'cd /host-home/Developer/projects/lnd-kube/'
-                  sh 'echo \$(jx-release-version) > /../LND_VERSION'
+                  sh 'echo \$(jx-release-version) > ../LND_VERSION'
 ////                sh 'jx-release-version'
                 }
               }
