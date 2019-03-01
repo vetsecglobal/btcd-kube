@@ -1,7 +1,10 @@
 dependencies:
 - name: btcd-kube
   repository: http://jenkins-x-chartmuseum:8080
-  version: X_VERSION_X
+  version: X_BTCD_VERSION_X
+- name: lnd-kube
+  repository: http://jenkins-x-chartmuseum:8080
+  version: X_LND_VERSION_X
 - alias: expose
   name: exposecontroller
   repository: http://chartmuseum.jenkins-x.io
