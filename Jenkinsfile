@@ -133,7 +133,7 @@ pipeline {
               sh 'ls -al'
               sh 'git clone https://github.com/kevinstl/lnd-kube.git'
 
-              sh "git checkout ${env.BRANCH_NAME}"
+
 
               sh 'pwd'
               sh 'ls -al'
@@ -143,6 +143,7 @@ pipeline {
                 container('go') {
                   sh 'pwd'
                   sh 'ls -al'
+                  sh "git checkout ${env.BRANCH_NAME}"
 ////              sh 'jx release version -gh-repository https://github.com/kevinstl/lnd-kube.git'
 ////                sh 'cd /host-home/Developer/projects/lnd-kube/'
                   sh 'echo \$(jx-release-version) > ../LND_VERSION'
