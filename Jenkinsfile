@@ -126,12 +126,13 @@ pipeline {
 //              sh "git config --global credential.helper store"
 //              sh "jx step git credentials"
 
-              sh 'pwd'
-              sh 'ls -al'
+              container('go') {
+                sh 'pwd'
+                sh 'ls -al'
 //              sh 'jx release version -gh-repository https://github.com/kevinstl/lnd-kube.git'
-              sh 'jx-release-version'
-
-              sh 'sleep 1h'
+                sh 'jx-release-version'
+                sh 'sleep 1h'
+              }
 
               sh 'pwd'
               sh 'ls -al'
