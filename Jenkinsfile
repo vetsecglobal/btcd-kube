@@ -7,7 +7,7 @@ pipeline {
     ORG               = 'kevinstl'
     APP_NAME          = 'btcd-kube'
     CHARTMUSEUM_CREDS = credentials('jenkins-x-chartmuseum')
-//    NEW_VERSION_LOCAL = 'true'
+    NEW_VERSION_LOCAL = 'false'
     DEPLOY_PVC        = 'false'
     DEPLOY_SIMNET     = 'true'
     DEPLOY_TESTNET    = 'false'
@@ -121,9 +121,9 @@ pipeline {
 
               sh 'pwd'
               sh 'ls -al'
-//              sh 'jx release version -gh-repository https://github.com/kevinstl/lnd-kube.git'
+              sh 'jx release version -gh-repository https://github.com/kevinstl/lnd-kube.git'
 
-//              sh 'sleep 1h'
+              sh 'sleep 1h'
 
               sh 'pwd'
               sh 'ls -al'
