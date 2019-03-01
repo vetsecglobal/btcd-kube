@@ -133,7 +133,7 @@ pipeline {
               sh 'ls -al'
               sh 'git clone https://github.com/kevinstl/lnd-kube.git'
 
-              sh "git checkout $branch"
+              sh "git checkout ${env.BRANCH_NAME}"
 
               sh 'pwd'
               sh 'ls -al'
