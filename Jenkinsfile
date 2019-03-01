@@ -119,11 +119,9 @@ pipeline {
 
             if (DEPLOY_SIMNET == 'true') {
 
-              dir('../lnd-kube/charts/lnd-kube') {
-                container('go') {
-                  sh 'jx step version'
-                }
-              }
+              sh 'pwd'
+              sh 'ls -al'
+              sh 'jx release version -gh-repository https://github.com/kevinstl/lnd-kube.git'
 
 //              sh 'sleep 1h'
 
