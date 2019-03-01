@@ -126,16 +126,16 @@ pipeline {
 //              sh "git config --global credential.helper store"
 //              sh "jx step git credentials"
 
-              dir('/host-home/Developer/projects/lnd-kube') {
-                container('go') {
-                  sh 'pwd'
-                  sh 'ls -al'
-//              sh 'jx release version -gh-repository https://github.com/kevinstl/lnd-kube.git'
-//                sh 'cd /host-home/Developer/projects/lnd-kube/'
-//                  sh 'echo \$(jx-release-version) > /tmp/LND_VERSION'
-//                sh 'jx-release-version'
-                }
-              }
+//              dir('/host-home/Developer/projects/lnd-kube') {
+//                container('go') {
+//                  sh 'pwd'
+//                  sh 'ls -al'
+////              sh 'jx release version -gh-repository https://github.com/kevinstl/lnd-kube.git'
+////                sh 'cd /host-home/Developer/projects/lnd-kube/'
+////                  sh 'echo \$(jx-release-version) > /tmp/LND_VERSION'
+////                sh 'jx-release-version'
+//                }
+//              }
 
               sh 'pwd'
               sh 'ls -al'
