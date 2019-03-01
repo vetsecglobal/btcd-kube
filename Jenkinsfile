@@ -129,38 +129,33 @@ pipeline {
 
 
 
-              sh 'pwd'
-              sh 'ls -al'
-              sh 'git clone https://github.com/kevinstl/lnd-kube.git'
+//              sh 'pwd'
+//              sh 'ls -al'
+//              sh 'git clone https://github.com/kevinstl/lnd-kube.git'
+//
+//              sh 'pwd'
+//              sh 'ls -al'
+
+
+//              dir('./lnd-kube') {
+//                container('go') {
+//                  sh 'pwd'
+//                  sh 'ls -al'
+//                  sh "git checkout ${env.BRANCH_NAME}"
+//////              sh 'jx release version -gh-repository https://github.com/kevinstl/lnd-kube.git'
+//////                sh 'cd /host-home/Developer/projects/lnd-kube/'
+//                  sh 'echo \$(jx-release-version) > ../LND_VERSION'
+//////                sh 'jx-release-version'
+//                }
+//              }
 
 
 
-              sh 'pwd'
-              sh 'ls -al'
 
 
-              dir('./lnd-kube') {
-                container('go') {
-                  sh 'pwd'
-                  sh 'ls -al'
-                  sh "git checkout ${env.BRANCH_NAME}"
-////              sh 'jx release version -gh-repository https://github.com/kevinstl/lnd-kube.git'
-////                sh 'cd /host-home/Developer/projects/lnd-kube/'
-                  sh 'echo \$(jx-release-version) > ../LND_VERSION'
-////                sh 'jx-release-version'
-                }
-              }
-
-
-
-              sh 'pwd'
-              sh 'ls -al'
-              sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-simnet.git'
-              sh 'pwd'
-              sh 'ls -al'
-              sh 'cat ./environment-jx-lightning-kube-simnet/env/requirements.yaml'
-              sh 'cat ./charts/btcd-kube/dynamic-templates/requirements-env.yaml | sed "s/\\X_BTCD_VERSION_X/$(cat ./VERSION)/"  | sed "s/\\X_LND_VERSION_X/$(cat ./LND_VERSION)/" > ./environment-jx-lightning-kube-simnet/env/requirements.yaml'
-              sh 'cat ./environment-jx-lightning-kube-simnet/env/requirements.yaml'
+//              sh 'cat ./environment-jx-lightning-kube-simnet/env/requirements.yaml'
+//              sh 'cat ./charts/btcd-kube/dynamic-templates/requirements-env.yaml | sed "s/\\X_BTCD_VERSION_X/$(cat ./VERSION)/"  | sed "s/\\X_LND_VERSION_X/$(cat ./LND_VERSION)/" > ./environment-jx-lightning-kube-simnet/env/requirements.yaml'
+//              sh 'cat ./environment-jx-lightning-kube-simnet/env/requirements.yaml'
 
 //              sh 'sleep 1h'
 
@@ -176,10 +171,23 @@ pipeline {
                 }
               }
 
+              sh 'pwd'
+              sh 'ls -al'
+              sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-simnet.git'
+              sh 'pwd'
+              sh 'ls -al'
+
+              dir('./environment-jx-lightning-kube-simnet') {
+                container('go') {
+                  sh "git checkout local"
+                }
+              }
+
               dir('./environment-jx-lightning-kube-simnet/env') {
                 container('go') {
                   sh 'pwd'
                   sh 'ls -al'
+                  sh 'cat ./requirements.yaml'
                   sh 'jx step helm build'
                   //                sh 'jx step helm apply --force=false'
                   sh 'jx step helm apply --wait=false'
