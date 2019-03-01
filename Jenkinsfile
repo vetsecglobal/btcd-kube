@@ -119,9 +119,17 @@ pipeline {
 
             if (DEPLOY_SIMNET == 'true') {
 
+//              if (branch?.trim()) {
+//                sh "git checkout $branch"
+//              }
+
+//              sh "git config --global credential.helper store"
+//              sh "jx step git credentials"
+
               sh 'pwd'
               sh 'ls -al'
-              sh 'jx release version -gh-repository https://github.com/kevinstl/lnd-kube.git'
+//              sh 'jx release version -gh-repository https://github.com/kevinstl/lnd-kube.git'
+              sh 'jx-release-version'
 
               sh 'sleep 1h'
 
