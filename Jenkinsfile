@@ -180,7 +180,7 @@ pipeline {
               dir('./environment-jx-lightning-kube-simnet') {
                 container('go') {
                   sh "git checkout local"
-                  sh "./replace-version.sh ../env/requirements.yaml \"btcd-kube\" \"  \$(cat ./VERSION)\""
+                  sh "./replace-version.sh ../env/requirements.yaml \"btcd-kube\" \"  \$(cat ../VERSION)\""
                 }
               }
 
