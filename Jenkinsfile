@@ -179,8 +179,11 @@ pipeline {
 
               dir('./environment-jx-lightning-kube-simnet') {
                 container('go') {
+                  sh 'cat ./env/requirements.yaml'
                   sh "git checkout local"
-                  sh "./replace-version.sh ../env/requirements.yaml \"btcd-kube\" \"  \$(cat ../VERSION)\""
+                  sh 'cat ./env/requirements.yaml'
+                  sh "./scripts/replace-version.sh ../env/requirements.yaml \"btcd-kube\" \"  \$(cat ../VERSION)\""
+                  sh 'cat ./env/requirements.yaml'
                 }
               }
 
