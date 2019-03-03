@@ -109,7 +109,12 @@ pipeline {
       when {
         branch 'feature-*'
       }
-      deployLocal()
+      environment {
+        DEPLOY_NAMESPACE = "lightning-kube-simnet"
+      }
+      steps {
+        deployLocal()
+      }
     }
 
     stage('Deploy Local Mainnet') {
@@ -391,10 +396,7 @@ def deployPvc() {
 def deployLocal() {
 
 
-  environment {
-    DEPLOY_NAMESPACE = "lightning-kube-simnet"
-  }
-  steps {
+
     script {
 
       if (kubeEnv?.trim() == 'local') {
@@ -435,7 +437,7 @@ def deployLocal() {
         }
       }
     }
-  }
+
 
 }
 
