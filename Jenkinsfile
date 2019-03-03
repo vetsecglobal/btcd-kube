@@ -111,10 +111,21 @@ pipeline {
       }
       environment {
         DEPLOY_NAMESPACE = "lightning-kube-simnet"
-//        NETWORK = "simnet"
       }
       steps {
         deployLocal("simnet")
+      }
+    }
+
+    stage('Deploy Local Testnet') {
+      when {
+        branch 'feature-*'
+      }
+      environment {
+        DEPLOY_NAMESPACE = "lightning-kube-testnet"
+      }
+      steps {
+        deployLocal("testnet")
       }
     }
 
@@ -126,46 +137,7 @@ pipeline {
         DEPLOY_NAMESPACE = "lightning-kube-mainnet"
       }
       steps {
-        script {
-
-          if (kubeEnv?.trim() == 'local') {
-
-            if (DEPLOY_MAINNET == 'true') {
-              sh 'pwd'
-              sh 'ls -al'
-              sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-mainnet.git'
-              sh 'pwd'
-              sh 'ls -al'
-              sh 'cat ./environment-jx-lightning-kube-mainnet/env/requirements.yaml'
-              sh 'cat ./charts/btcd-kube/dynamic-templates/requirements-env.yaml | sed "s/\\X_VERSION_X/$(cat ./VERSION)/" > ./environment-jx-lightning-kube-mainnet/env/requirements.yaml'
-              sh 'cat ./environment-jx-lightning-kube-mainnet/env/requirements.yaml'
-
-              if (NEW_VERSION_LOCAL == 'true') {
-                dir('./charts/btcd-kube') {
-                  container('go') {
-                    sh 'pwd'
-                    sh 'ls -al'
-                    //                  sh 'jx step changelog --version v\$(cat ../../VERSION)'
-                    sh 'jx step helm release'
-                    //                  sh 'jx promote --verbose -b --env lightning-kube-mainnet --timeout 1h --version \$(cat ../../VERSION)'
-                  }
-                }
-              }
-
-              dir('./environment-jx-lightning-kube-mainnet/env') {
-                container('go') {
-                  sh 'pwd'
-                  sh 'ls -al'
-                  sh 'jx step helm build'
-                  //                sh 'jx step helm apply --force=false'
-                  sh 'jx step helm apply --wait=false'
-                }
-              }
-
-            }
-
-          }
-        }
+        deployLocal("mainnet")
       }
     }
 
@@ -251,53 +223,76 @@ def promote() {
 
     if (DEPLOY_SIMNET == 'true') {
 
-      if (DEPLOY_PVC == 'true') {
-        container('go') {
-          sh './scripts/create-pv.sh "" lightning-kube-simnet -simnet 5Gi'
-        }
-      }
+      def network = "simnet"
+      def storage = "5Gi"
 
-      container('go') {
-        sh 'jx step changelog --version v\$(cat ../../VERSION)'
-        // release the helm chart
-        sh 'jx step helm release'
-        // promote through all 'Auto' promotion Environments
-        sh 'jx promote --verbose -b --env lightning-kube-simnet --timeout 1h --version \$(cat ../../VERSION)'
-      }
+//      if (DEPLOY_PVC == 'true') {
+//        container('go') {
+//          sh './scripts/create-pv.sh "" lightning-kube-simnet -simnet 5Gi'
+//        }
+//      }
+//
+//      container('go') {
+//        sh 'jx step changelog --version v\$(cat ../../VERSION)'
+//        // release the helm chart
+//        sh 'jx step helm release'
+//        // promote through all 'Auto' promotion Environments
+//        sh 'jx promote --verbose -b --env lightning-kube-simnet --timeout 1h --version \$(cat ../../VERSION)'
+//      }
     }
     if (DEPLOY_TESTNET == 'true') {
 
-      if (DEPLOY_PVC == 'true') {
-        container('go') {
-          sh './scripts/create-pv.sh "" lightning-kube-testnet -testnet 25Gi'
-        }
-      }
+      def network = "testnet"
+      def storage = "25Gi"
 
-      container('go') {
-        sh 'jx step changelog --version v\$(cat ../../VERSION)'
-        // release the helm chart
-        sh 'jx step helm release'
-        // promote through all 'Auto' promotion Environments
-//      sh 'jx promote --verbose -b --all-auto --timeout 1h --version \$(cat ../../VERSION)'
-        sh 'jx promote --verbose -b --env lightning-kube-testnet --timeout 1h --version \$(cat ../../VERSION)'
-      }
+//      if (DEPLOY_PVC == 'true') {
+//        container('go') {
+//          sh './scripts/create-pv.sh "" lightning-kube-testnet -testnet 25Gi'
+//        }
+//      }
+//
+//      container('go') {
+//        sh 'jx step changelog --version v\$(cat ../../VERSION)'
+//        // release the helm chart
+//        sh 'jx step helm release'
+//        // promote through all 'Auto' promotion Environments
+////      sh 'jx promote --verbose -b --all-auto --timeout 1h --version \$(cat ../../VERSION)'
+//        sh 'jx promote --verbose -b --env lightning-kube-testnet --timeout 1h --version \$(cat ../../VERSION)'
+//      }
     }
     if (DEPLOY_MAINNET == 'true') {
 
-      if (DEPLOY_PVC == 'true') {
-        container('go') {
-          sh './scripts/create-pv.sh "" lightning-kube-mainnet -mainnet 275Gi'
-        }
-      }
+      def network = "mainnet"
+      def storage = "275Gi"
 
+//      if (DEPLOY_PVC == 'true') {
+//        container('go') {
+//          sh './scripts/create-pv.sh "" lightning-kube-mainnet -mainnet 275Gi'
+//        }
+//      }
+//
+//      container('go') {
+//        sh 'jx step changelog --version v\$(cat ../../VERSION)'
+//        // release the helm chart
+//        sh 'jx step helm release'
+//        // promote through all 'Auto' promotion Environments
+////      sh 'jx promote --verbose -b --all-auto --timeout 1h --version \$(cat ../../VERSION)'
+//        sh 'jx promote --verbose -b --env lightning-kube-mainnet --timeout 1h --version \$(cat ../../VERSION)'
+//      }
+    }
+
+    if (DEPLOY_PVC == 'true') {
       container('go') {
-        sh 'jx step changelog --version v\$(cat ../../VERSION)'
-        // release the helm chart
-        sh 'jx step helm release'
-        // promote through all 'Auto' promotion Environments
-//      sh 'jx promote --verbose -b --all-auto --timeout 1h --version \$(cat ../../VERSION)'
-        sh 'jx promote --verbose -b --env lightning-kube-mainnet --timeout 1h --version \$(cat ../../VERSION)'
+        sh "./scripts/create-pv.sh "" lightning-kube-${network} -${network} ${storage}"
       }
+    }
+
+    container('go') {
+      sh 'jx step changelog --version v\$(cat ../../VERSION)'
+      // release the helm chart
+      sh 'jx step helm release'
+      // promote through all 'Auto' promotion Environments
+      sh 'jx promote --verbose -b --env lightning-kube-${network} --timeout 1h --version \$(cat ../../VERSION)'
     }
 
   }
