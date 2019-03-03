@@ -352,7 +352,10 @@ def release(branch) {
     sh "jx step git credentials"
 
     // so we can retrieve the version in later steps
-    sh "echo \$(jx-release-version) > VERSION"
+
+    if (kubeEnv?.trim() != 'local' || NEW_VERSION_LOCAL == 'true') {
+      sh "echo \$(jx-release-version) > VERSION"
+    }
 //    sh "mvn versions:set -DnewVersion=\$(cat VERSION)"
   }
 
