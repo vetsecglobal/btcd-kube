@@ -182,7 +182,7 @@ pipeline {
                   sh 'cat ./env/requirements.yaml'
                   sh "git checkout local"
                   sh 'cat ./env/requirements.yaml'
-                  sh "./scripts/replace-version.sh ./env/requirements.yaml \"btcd-kube\" \"  \$(cat ../VERSION)\""
+                  sh "./scripts/replace-version.sh ./env/requirements.yaml \"btcd-kube\" \"  version: \$(cat ../VERSION)\""
                   sh 'cat ./env/requirements.yaml'
                 }
               }
