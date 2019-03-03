@@ -111,7 +111,7 @@ pipeline {
       }
       environment {
         DEPLOY_NAMESPACE = "lightning-kube-simnet"
-        NETWORK = "lightning-kube-simnet"
+        NETWORK = "simnet"
       }
       steps {
         deployLocal('simnet')
