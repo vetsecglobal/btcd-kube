@@ -331,13 +331,10 @@ def deployLocal(network) {
 
         sh 'pwd'
         sh 'ls -al'
-//        sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-simnet.git'
         sh "git clone https://github.com/kevinstl/environment-jx-lightning-kube-${network}.git"
 
-        def envDir = "./environment-jx-lightning-kube-${network}";
-//        dir('./environment-jx-lightning-kube-simnet') {
-//        dir("./environment-jx-lightning-kube-${NETWORK}") {
-        dir(envDir) {
+        def envProjectDir = "./environment-jx-lightning-kube-${network}"
+        dir(envProjectDir) {
           container('go') {
             sh 'cat ./env/requirements.yaml'
             sh "git checkout local"
@@ -348,8 +345,8 @@ def deployLocal(network) {
           }
         }
 
-        dir('./environment-jx-lightning-kube-simnet/env') {
-//        dir("./environment-jx-lightning-kube-${NETWORK}/env") {
+        def envProjectSubDir = "./environment-jx-lightning-kube-${network}/env"
+        dir(envProjectSubDir) {
           container('go') {
             sh 'pwd'
             sh 'ls -al'
