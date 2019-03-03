@@ -106,108 +106,7 @@ pipeline {
     }
 
     stage('Deploy Local Simnet') {
-      when {
-        branch 'feature-*'
-      }
-      environment {
-        DEPLOY_NAMESPACE = "lightning-kube-simnet"
-      }
-      steps {
-        script {
-
-          if (kubeEnv?.trim() == 'local') {
-
-            if (DEPLOY_SIMNET == 'true') {
-
-//              if (branch?.trim()) {
-//                sh "git checkout $branch"
-//              }
-
-//              sh "git config --global credential.helper store"
-//              sh "jx step git credentials"
-
-
-
-
-//              sh 'pwd'
-//              sh 'ls -al'
-//              sh 'git clone https://github.com/kevinstl/lnd-kube.git'
-//
-//              sh 'pwd'
-//              sh 'ls -al'
-
-
-//              dir('./lnd-kube') {
-//                container('go') {
-//                  sh 'pwd'
-//                  sh 'ls -al'
-//                  sh "git checkout ${env.BRANCH_NAME}"
-//////              sh 'jx release version -gh-repository https://github.com/kevinstl/lnd-kube.git'
-//////                sh 'cd /host-home/Developer/projects/lnd-kube/'
-//                  sh 'echo \$(jx-release-version) > ../LND_VERSION'
-//////                sh 'jx-release-version'
-//                }
-//              }
-
-
-
-
-
-//              sh 'cat ./environment-jx-lightning-kube-simnet/env/requirements.yaml'
-//              sh 'cat ./charts/btcd-kube/dynamic-templates/requirements-env.yaml | sed "s/\\X_BTCD_VERSION_X/$(cat ./VERSION)/"  | sed "s/\\X_LND_VERSION_X/$(cat ./LND_VERSION)/" > ./environment-jx-lightning-kube-simnet/env/requirements.yaml'
-//              sh 'cat ./environment-jx-lightning-kube-simnet/env/requirements.yaml'
-
-//              sh 'sleep 1h'
-
-              if (NEW_VERSION_LOCAL == 'true') {
-                dir('./charts/btcd-kube') {
-                  container('go') {
-                    sh 'pwd'
-                    sh 'ls -al'
-                    //                  sh 'jx step changelog --version v\$(cat ../../VERSION)'
-                    sh 'jx step helm release'
-                    //                  sh 'jx promote --verbose -b --env lightning-kube-simnet --timeout 1h --version \$(cat ../../VERSION)'
-                  }
-                }
-              }
-
-              sh 'pwd'
-              sh 'ls -al'
-              sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-simnet.git'
-              sh 'pwd'
-              sh 'ls -al'
-
-              dir('./environment-jx-lightning-kube-simnet') {
-                container('go') {
-                  sh 'cat ./env/requirements.yaml'
-                  sh "git checkout local"
-                  sh 'cat ./env/requirements.yaml'
-                  sh "./scripts/replace-version.sh ./env/requirements.yaml \"btcd-kube\" \"  version: \$(cat ../VERSION)\""
-                  sh 'cat ./env/requirements.yaml'
-
-                  sh 'git add .'
-                  sh 'git commit -m \"release \$(cat ../VERSION)\"'
-                  sh 'git push -u origin local'
-
-                }
-              }
-
-              dir('./environment-jx-lightning-kube-simnet/env') {
-                container('go') {
-                  sh 'pwd'
-                  sh 'ls -al'
-                  sh 'cat ./requirements.yaml'
-                  sh 'jx step helm build'
-                  //                sh 'jx step helm apply --force=false'
-                  sh 'jx step helm apply --wait=false'
-                }
-              }
-
-            }
-
-          }
-        }
-      }
+      deployLocal()
     }
 
     stage('Deploy Local Mainnet') {
@@ -484,5 +383,58 @@ def deployPvc() {
 //      sh './scripts/setup-pv-templates.sh'
     }
   }
+}
+
+def deployLocal() {
+
+  when {
+    branch 'feature-*'
+  }
+  environment {
+    DEPLOY_NAMESPACE = "lightning-kube-simnet"
+  }
+  steps {
+    script {
+
+      if (kubeEnv?.trim() == 'local') {
+        if (DEPLOY_SIMNET == 'true') {
+
+          if (NEW_VERSION_LOCAL == 'true') {
+            dir('./charts/btcd-kube') {
+              container('go') {
+                sh 'jx step helm release'
+              }
+            }
+          }
+
+          sh 'pwd'
+          sh 'ls -al'
+          sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-simnet.git'
+
+          dir('./environment-jx-lightning-kube-simnet') {
+            container('go') {
+              sh 'cat ./env/requirements.yaml'
+              sh "git checkout local"
+              sh "./scripts/replace-version.sh ./env/requirements.yaml \"btcd-kube\" \"  version: \$(cat ../VERSION)\""
+              sh 'git add .'
+              sh 'git commit -m \"release \$(cat ../VERSION)\"'
+              sh 'git push -u origin local'
+            }
+          }
+
+          dir('./environment-jx-lightning-kube-simnet/env') {
+            container('go') {
+              sh 'pwd'
+              sh 'ls -al'
+              sh 'cat ./requirements.yaml'
+              sh 'jx step helm build'
+              sh 'jx step helm apply --wait=false'
+            }
+          }
+        }
+      }
+    }
+  }
+
 }
 
