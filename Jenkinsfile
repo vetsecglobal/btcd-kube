@@ -185,6 +185,7 @@ pipeline {
                   sh "./scripts/replace-version.sh ./env/requirements.yaml \"btcd-kube\" \"  version: \$(cat ../VERSION)\""
                   sh 'cat ./env/requirements.yaml'
 
+                  sh 'git commit -m \"release \$(cat ../VERSION)\"'
                   sh 'git push -u origin local'
 
                 }
