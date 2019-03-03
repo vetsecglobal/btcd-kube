@@ -111,10 +111,10 @@ pipeline {
       }
       environment {
         DEPLOY_NAMESPACE = "lightning-kube-simnet"
-        NETWORK = "simnet"
+//        NETWORK = "simnet"
       }
       steps {
-        deployLocal()
+        deployLocal("simnet")
       }
     }
 
@@ -314,7 +314,7 @@ def deployPvc() {
   }
 }
 
-def deployLocal() {
+def deployLocal(network) {
 
   script {
 
@@ -332,9 +332,9 @@ def deployLocal() {
         sh 'pwd'
         sh 'ls -al'
 //        sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-simnet.git'
-        sh "git clone https://github.com/kevinstl/environment-jx-lightning-kube-${NETWORK}.git"
+        sh "git clone https://github.com/kevinstl/environment-jx-lightning-kube-${network}.git"
 
-        def envDir = "./environment-jx-lightning-kube-${NETWORK}";
+        def envDir = "./environment-jx-lightning-kube-${network}";
 //        dir('./environment-jx-lightning-kube-simnet') {
 //        dir("./environment-jx-lightning-kube-${NETWORK}") {
         dir(envDir) {
