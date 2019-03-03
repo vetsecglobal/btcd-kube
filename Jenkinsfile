@@ -114,7 +114,7 @@ pipeline {
         NETWORK = "simnet"
       }
       steps {
-        deployLocal('simnet')
+        deployLocal()
       }
     }
 
@@ -314,7 +314,7 @@ def deployPvc() {
   }
 }
 
-def deployLocal(repo, dir) {
+def deployLocal() {
 
   script {
 
