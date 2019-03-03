@@ -113,9 +113,11 @@ pipeline {
         DEPLOY_NAMESPACE = "lightning-kube-simnet"
       }
       steps {
-        if (kubeEnv?.trim() == 'local') {
-          if (DEPLOY_SIMNET == 'true') {
-            deployLocal("simnet")
+        script {
+          if (kubeEnv?.trim() == 'local') {
+            if (DEPLOY_SIMNET == 'true') {
+              deployLocal("simnet")
+            }
           }
         }
       }
@@ -129,9 +131,11 @@ pipeline {
         DEPLOY_NAMESPACE = "lightning-kube-testnet"
       }
       steps {
-        if (kubeEnv?.trim() == 'local') {
-          if (DEPLOY_SIMNET == 'true') {
-            deployLocal("testnet")
+        script {
+          if (kubeEnv?.trim() == 'local') {
+            if (DEPLOY_TESTNET == 'true') {
+              deployLocal("testnet")
+            }
           }
         }
       }
@@ -145,9 +149,11 @@ pipeline {
         DEPLOY_NAMESPACE = "lightning-kube-mainnet"
       }
       steps {
-        if (kubeEnv?.trim() == 'local') {
-          if (DEPLOY_SIMNET == 'true') {
-            deployLocal("mainnet")
+        script {
+          if (kubeEnv?.trim() == 'local') {
+            if (DEPLOY_MAINNET == 'true') {
+              deployLocal("mainnet")
+            }
           }
         }
       }
