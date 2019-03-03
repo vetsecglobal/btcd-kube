@@ -331,7 +331,7 @@ def deployLocal(network) {
         sh 'pwd'
         sh 'ls -al'
 //        sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-simnet.git'
-        sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-${network}.git'
+        sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-'${network}'.git'
 
 //        dir('./environment-jx-lightning-kube-simnet') {
         dir('./environment-jx-lightning-kube-${network}') {
