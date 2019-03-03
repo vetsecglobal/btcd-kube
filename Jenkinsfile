@@ -334,8 +334,10 @@ def deployLocal() {
 //        sh 'git clone https://github.com/kevinstl/environment-jx-lightning-kube-simnet.git'
         sh "git clone https://github.com/kevinstl/environment-jx-lightning-kube-${NETWORK}.git"
 
-        dir('./environment-jx-lightning-kube-simnet') {
+        def envDir = "./environment-jx-lightning-kube-${NETWORK}";
+//        dir('./environment-jx-lightning-kube-simnet') {
 //        dir("./environment-jx-lightning-kube-${NETWORK}") {
+        dir(envDir) {
           container('go') {
             sh 'cat ./env/requirements.yaml'
             sh "git checkout local"
