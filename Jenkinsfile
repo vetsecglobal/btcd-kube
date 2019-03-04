@@ -310,7 +310,7 @@ def promote() {
       // release the helm chart
       sh 'jx step helm release'
       // promote through all 'Auto' promotion Environments
-      sh 'jx promote --verbose -b --env lightning-kube-${network} --timeout 1h --version \$(cat ../../VERSION)'
+      sh "jx promote --verbose -b --env lightning-kube-${network} --timeout 1h --version \$(cat ../../VERSION)"
     }
 
   }
