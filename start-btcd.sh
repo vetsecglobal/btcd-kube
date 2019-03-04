@@ -94,29 +94,21 @@ btcdServiceIp=`ping ${btcdHostName} -c1 | head -1 | grep -Eo '[0-9.]{4,}'`
 
 echo "btcdServiceIp: ${btcdServiceIp}"
 
-#mkdir -p ${baseRpcDir}
 
-
-#umask 000
 
 echo "whoami: `whoami`"
 
-#ls -Ral /mnt/lk
-#sudo chmod -R 777 /mnt/lk
-#ls -Ral /mnt/lk
-#sudo chown -R root:root /mnt/lk
-#chown -R root:root /mnt/lk
+
 
 ls -Ral /mnt
-
 /bin/gencerts --host="*" --host="${btcdServiceIp}" --host="${btcdHostName}" --directory="${baseRpcDir}" --force
 ls -Ral /mnt
 
 
-#sleep 100000
+
 
 # Print command and start bitcoin node.
 echo "Command: btcd $PARAMS"
-exec btcd $PARAMS
+#exec btcd $PARAMS
+timeout 2h btcd $PARAMS
 
-#sleep 100000
