@@ -301,7 +301,7 @@ def promote() {
 
     if (DEPLOY_PVC == 'true') {
       container('go') {
-        sh "./scripts/create-pv.sh "" lightning-kube-${network} -${network} ${storage}"
+        sh "./scripts/create-pv.sh \"\" lightning-kube-${network} -${network} ${storage}"
       }
     }
 
