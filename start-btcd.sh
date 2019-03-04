@@ -110,5 +110,5 @@ ls -Ral /mnt
 # Print command and start bitcoin node.
 echo "Command: btcd $PARAMS"
 #exec btcd $PARAMS
-timeout 2h btcd $PARAMS
+timeout -t 20 btcd $PARAMS
 
