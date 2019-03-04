@@ -197,7 +197,6 @@ def release(branch) {
     //sh "git checkout master"
 
     if (branch?.trim()) {
-      sh 'git fetch'
       sh "git checkout $branch"
     }
 
@@ -348,6 +347,7 @@ def deployLocal(network) {
     dir(envProjectDir) {
       container('go') {
         sh 'cat ./env/requirements.yaml'
+        sh 'git fetch'
         sh "git checkout local"
         sh "./scripts/replace-version.sh ./env/requirements.yaml \"btcd-kube\" \"  version: \$(cat ../VERSION)\""
         sh 'git add .'
