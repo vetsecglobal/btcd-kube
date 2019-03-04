@@ -9,9 +9,9 @@ pipeline {
     CHARTMUSEUM_CREDS = credentials('jenkins-x-chartmuseum')
     NEW_VERSION_LOCAL = 'true'
     DEPLOY_PVC        = 'false'
-    DEPLOY_SIMNET     = 'true'
+    DEPLOY_SIMNET     = 'false'
     DEPLOY_TESTNET    = 'false'
-    DEPLOY_MAINNET    = 'false'
+    DEPLOY_MAINNET    = 'true'
   }
   stages {
 
