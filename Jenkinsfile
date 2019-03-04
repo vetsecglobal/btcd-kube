@@ -79,35 +79,10 @@ pipeline {
       }
     }
 
-    stage('Promote to Environments Feature') {
-      when {
-        branch 'feature-*'
-      }
-      steps {
-        script {
-          if (kubeEnv?.trim() != 'local') {
-            promote()
-          }
-        }
-      }
-    }
-
-    stage('Promote to Environments Master') {
-      when {
-        branch 'master'
-      }
-      steps {
-        script {
-          if (kubeEnv?.trim() != 'local') {
-            promote()
-          }
-        }
-      }
-    }
-
     stage('Deploy Local Simnet') {
       when {
-        branch 'feature-*'
+//        branch 'feature-*'
+        anyOf { branch 'master'; branch 'feature-*' }
       }
       environment {
         DEPLOY_NAMESPACE = "lightning-kube-simnet"
@@ -125,7 +100,8 @@ pipeline {
 
     stage('Deploy Local Testnet') {
       when {
-        branch 'feature-*'
+//        branch 'feature-*'
+        anyOf { branch 'master'; branch 'feature-*' }
       }
       environment {
         DEPLOY_NAMESPACE = "lightning-kube-testnet"
@@ -143,7 +119,8 @@ pipeline {
 
     stage('Deploy Local Mainnet') {
       when {
-        branch 'feature-*'
+//        branch 'feature-*'
+        anyOf { branch 'master'; branch 'feature-*' }
       }
       environment {
         DEPLOY_NAMESPACE = "lightning-kube-mainnet"
@@ -158,6 +135,35 @@ pipeline {
         }
       }
     }
+
+
+    stage('Promote to Environments Feature') {
+      when {
+//        branch 'feature-*'
+        anyOf { branch 'master'; branch 'feature-*' }
+      }
+      steps {
+        script {
+          if (kubeEnv?.trim() != 'local') {
+            promote()
+          }
+        }
+      }
+    }
+
+//    stage('Promote to Environments Master') {
+//      when {
+//        branch 'master'
+//      }
+//      steps {
+//        script {
+//          if (kubeEnv?.trim() != 'local') {
+//            promote()
+//          }
+//        }
+//      }
+//    }
+
 
 
 
@@ -240,81 +246,36 @@ def promote() {
   dir ('./charts/btcd-kube') {
 
     if (DEPLOY_SIMNET == 'true') {
-
-      def network = "simnet"
-      def storage = "5Gi"
-
-//      if (DEPLOY_PVC == 'true') {
-//        container('go') {
-//          sh './scripts/create-pv.sh "" lightning-kube-simnet -simnet 5Gi'
-//        }
-//      }
-//
-//      container('go') {
-//        sh 'jx step changelog --version v\$(cat ../../VERSION)'
-//        // release the helm chart
-//        sh 'jx step helm release'
-//        // promote through all 'Auto' promotion Environments
-//        sh 'jx promote --verbose -b --env lightning-kube-simnet --timeout 1h --version \$(cat ../../VERSION)'
-//      }
+      promoteNetwork("simnet", "5Gi")
     }
+
     if (DEPLOY_TESTNET == 'true') {
-
-      def network = "testnet"
-      def storage = "25Gi"
-
-//      if (DEPLOY_PVC == 'true') {
-//        container('go') {
-//          sh './scripts/create-pv.sh "" lightning-kube-testnet -testnet 25Gi'
-//        }
-//      }
-//
-//      container('go') {
-//        sh 'jx step changelog --version v\$(cat ../../VERSION)'
-//        // release the helm chart
-//        sh 'jx step helm release'
-//        // promote through all 'Auto' promotion Environments
-////      sh 'jx promote --verbose -b --all-auto --timeout 1h --version \$(cat ../../VERSION)'
-//        sh 'jx promote --verbose -b --env lightning-kube-testnet --timeout 1h --version \$(cat ../../VERSION)'
-//      }
+      promoteNetwork("testnet", "25Gi")
     }
+
     if (DEPLOY_MAINNET == 'true') {
-
-      def network = "mainnet"
-      def storage = "275Gi"
-
-//      if (DEPLOY_PVC == 'true') {
-//        container('go') {
-//          sh './scripts/create-pv.sh "" lightning-kube-mainnet -mainnet 275Gi'
-//        }
-//      }
-//
-//      container('go') {
-//        sh 'jx step changelog --version v\$(cat ../../VERSION)'
-//        // release the helm chart
-//        sh 'jx step helm release'
-//        // promote through all 'Auto' promotion Environments
-////      sh 'jx promote --verbose -b --all-auto --timeout 1h --version \$(cat ../../VERSION)'
-//        sh 'jx promote --verbose -b --env lightning-kube-mainnet --timeout 1h --version \$(cat ../../VERSION)'
-//      }
+      promoteNetwork("mainnet", "275Gi")
     }
-
-    if (DEPLOY_PVC == 'true') {
-      container('go') {
-        sh "./scripts/create-pv.sh \"\" lightning-kube-${network} -${network} ${storage}"
-      }
-    }
-
-    container('go') {
-      sh 'jx step changelog --version v\$(cat ../../VERSION)'
-      // release the helm chart
-      sh 'jx step helm release'
-      // promote through all 'Auto' promotion Environments
-      sh "jx promote --verbose -b --env lightning-kube-${network} --timeout 1h --version \$(cat ../../VERSION)"
-    }
-
   }
 
+}
+
+def promoteNetwork(network, storage) {
+  if (DEPLOY_PVC == 'true') {
+    container('go') {
+      sh "./scripts/create-pv.sh \"\" lightning-kube-${network} -${network} ${storage}"
+    }
+  }
+
+  container('go') {
+    sh 'jx step changelog --version v\$(cat ../../VERSION)'
+    // release the helm chart
+    sh 'jx step helm release'
+    // promote through all 'Auto' promotion Environments
+    def promoteCommand = "jx promote --verbose -b --env lightning-kube-${network} --timeout 1h --version \$(cat ../../VERSION)"
+//    sh "jx promote --verbose -b --env lightning-kube-${network} --timeout 1h --version \$(cat ../../VERSION)"
+    sh "${promoteCommand}"
+  }
 }
 
 
