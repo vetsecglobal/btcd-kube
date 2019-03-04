@@ -197,6 +197,7 @@ def release(branch) {
     //sh "git checkout master"
 
     if (branch?.trim()) {
+      sh 'git fetch'
       sh "git checkout $branch"
     }
 
