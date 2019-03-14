@@ -7,6 +7,7 @@ echo "delete-pv.sh"
 
 echo "namespace: ${namespace}"
 echo "networkSuffix: ${networkSuffix}"
+echo "deployEnv: ${deployEnv}"
 
 kubeContextArg=""
 if [[ ${context} != "" ]]

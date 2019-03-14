@@ -100,7 +100,6 @@ pipeline {
 
     stage('Deploy Local Testnet') {
       when {
-//        branch 'feature-*'
         anyOf { branch 'master'; branch 'feature-*' }
       }
       environment {
@@ -119,7 +118,6 @@ pipeline {
 
     stage('Deploy Local Mainnet') {
       when {
-//        branch 'feature-*'
         anyOf { branch 'master'; branch 'feature-*' }
       }
       environment {
@@ -137,9 +135,8 @@ pipeline {
     }
 
 
-    stage('Promote to Environments Feature') {
+    stage('Promote to Environments') {
       when {
-//        branch 'feature-*'
         anyOf { branch 'master'; branch 'feature-*' }
       }
       steps {
@@ -150,21 +147,6 @@ pipeline {
         }
       }
     }
-
-//    stage('Promote to Environments Master') {
-//      when {
-//        branch 'master'
-//      }
-//      steps {
-//        script {
-//          if (kubeEnv?.trim() != 'local') {
-//            promote()
-//          }
-//        }
-//      }
-//    }
-
-
 
 
     stage('Push Local') {
@@ -327,9 +309,6 @@ def deployLocal(network) {
         sh 'jx step helm apply --wait=false'
       }
     }
-
   }
-
-
 }
 
