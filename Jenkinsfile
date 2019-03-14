@@ -5,6 +5,8 @@ pipeline {
   }
   environment {
     ORG               = 'kevinstl'
+    GITHUB_ADDRESS    = 'https://github.com/kevinstl'
+    ENV_REPO_PREFIX   = 'environment-jx-lightning-kube-'
     APP_NAME          = 'btcd-kube'
     CHARTMUSEUM_CREDS = credentials('jenkins-x-chartmuseum')
     NEW_VERSION_LOCAL = 'true'
@@ -284,7 +286,7 @@ def deployLocal(network) {
 
     sh 'pwd'
     sh 'ls -al'
-    sh "git clone https://github.com/kevinstl/environment-jx-lightning-kube-${network}.git"
+    sh "git clone ${GITHUB_ADDRESS}/${ENV_REPO_PREFIX}${network}.git"
 
     def envProjectDir = "./environment-jx-lightning-kube-${network}"
     dir(envProjectDir) {
