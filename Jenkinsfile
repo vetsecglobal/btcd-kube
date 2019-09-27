@@ -4,9 +4,9 @@ pipeline {
     label "jenkins-go"
   }
   environment {
-    ORG               = 'kevinstl'
+    ORG               = 'vetsecglobal'
     APP_NAME          = 'btcd-kube'
-    GITHUB_ADDRESS    = 'https://github.com/kevinstl'
+    GITHUB_ADDRESS    = 'https://github.com/vetsecglobal'
     ENV_REPO_PREFIX   = 'environment-jx-lightning-kube-'
     CHARTMUSEUM_CREDS = credentials('jenkins-x-chartmuseum')
     NEW_VERSION_LOCAL = 'true'
