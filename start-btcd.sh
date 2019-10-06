@@ -90,7 +90,7 @@ echo "debug3"
 PARAMS="$PARAMS $@"
 
 btcdHostName="btcd-kube.lightning-kube-$NETWORK"
-btcdServiceIp=`ping ${btcdHostName} -c1 | head -1 | grep -Eo '[0-9.]{4,}'`
+#btcdServiceIp=`ping ${btcdHostName} -c1 | head -1 | grep -Eo '[0-9.]{4,}'`
 
 echo "btcdServiceIp: ${btcdServiceIp}"
 
