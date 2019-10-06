@@ -26,7 +26,7 @@ then
     namespaceArg="--namespace ${namespace}"
 fi
 
-pvYaml="./lightning-kube-pvc.yaml"
+pvYaml="./lightning-kube-pvc-gke.yaml"
 if [[ ${deployEnv} == "gke" ]]
 then
     pvYaml="./lightning-kube-pvc-gke.yaml"
