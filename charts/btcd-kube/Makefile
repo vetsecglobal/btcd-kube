@@ -1,4 +1,4 @@
-CHART_REPO := http://jenkins-x-chartmuseum:8080
+CHART_REPO := http://chartmuseum-jx.34.89.115.67.nip.io/
 CURRENT=$(pwd)
 NAME := btcd-kube
 OS := $(shell uname)
